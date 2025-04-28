@@ -26,10 +26,10 @@ public class MatChange_Only : MonoBehaviour
         if (other.gameObject.tag != "Player") { return; }
 
         Renderer playerren = other.GetComponent<Renderer>();
-        Player player = other.GetComponent<Player>();
+        //Player player = other.GetComponent<Player>();
 
         // î•ñ‚ª‚È‚¢‚È‚çˆ—‚ğ‚µ‚È‚¢
-        if (playerren == null || player == null) { return; }
+        if (playerren == null) { return; }
 
         // Player‚Ìƒ}ƒeƒŠƒAƒ‹‚ğ•Ï‚¦‚é
         playerren.material = ChangeMaterial;
