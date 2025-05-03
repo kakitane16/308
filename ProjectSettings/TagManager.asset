@@ -10,6 +10,7 @@ TagManager:
   - Gimmick
   - Plate
   - fan
+  - syari
   layers:
   - Default
   - TransparentFX

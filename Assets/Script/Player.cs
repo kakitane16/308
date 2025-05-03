@@ -6,127 +6,66 @@ using System.Runtime.CompilerServices;
 
 public class Player : MonoBehaviour
 {
-    public float bounceDamping; // 跳ね返り時の減衰率
     public float MoveX;
-    public float MoveY;
+    public float RotateY;
+    public float jumpPower;
     private bool isShot;
-    private int counter = 0; //打ち出す方向を簡単に数値で保持する
+    public float forceStrength; // 前方向への飛ぶ力
     Rigidbody    rb;
-    private Vector3 velocity;
         
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        MoveX  = -15.0f;
-        MoveY  = 10.0f;
         isShot = false;
+        rb.useGravity = false;
     }
     // Update is called once per frame
     private void Update()
     {
-
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        //タグWallに当たったら跳ね返る
-        if (other.gameObject.CompareTag("Wall"))
+        //打ち出すまでの間だけ入る
+        if (!isShot)
         {
-            Vector3 velocityNext = Vector3.Reflect(velocity, other.contacts[0].normal);
-            Debug.Log("velocty"+ velocity);
-            rb.velocity = velocityNext;
-            velocity = rb.velocity * bounceDamping;//速さなどを減衰させていく
+            ShotAngle();
+            Shot();
         }
     }
-
-    private void FixedUpdate()
+     
+    private void ShotAngle()
     {
-        Shot();
+        //角度指定
+        if (Keyboard.current.aKey.isPressed)
+        {
+            transform.Rotate(new Vector3(0, -RotateY, 0));
+            Debug.Log("Aキーが押されているよ");
+        }
+        if (Keyboard.current.dKey.isPressed)
+        {
+            transform.Rotate(new Vector3(0, RotateY, 0));
+            Debug.Log("Dキーが押されているよ");
+        }
     }
 
     private void Shot()
     {
-        //一度だけ打つ
-        if (isShot)
+        //打つ時のでかさを貯める
+        if (Keyboard.current.spaceKey.isPressed)
         {
-            return;
-        }
-
-        ShotAngle();
-        WaitShot();
-    }
-
-    private void ShotAngle()
-    {
-        /*一次方程式
-        　(MoveX,MoveY)の表ができる*/
-
-        //最初のif文で何で入力しているか判定する　
-        //ゲームパッド
-        if (Gamepad.current != null)
-        {
-            var gamepad = Gamepad.current; //ゲームパッドの今の情報を渡す
-            //float verticalInput = Gamepad.current.leftStick.y;
-
-            // 上に向いている場合
-            //if (verticalInput > 0.5f)
-            //{
-            //    counter++;
-            //    Debug.Log($"Counter: {counter} (Added)");
-            //}
-            //// 下に向いている場合
-            //else if (verticalInput < -0.5f)
-            //{
-            //    counter--;
-            //    Debug.Log($"Counter: {counter} (Subtracted)");
-            //}
-        }
-        //キーボード
-        if (Keyboard.current != null)
-        {
-            if (MoveX >= -20)
+            Debug.Log("スペースキーが押されているよ");
+            if (forceStrength <= 20.0f)
             {
-                if (Input.GetKey(KeyCode.W))
-                {
-                    MoveX -= 2;
-                    MoveY += 1;
-                }
-            }
-            if (MoveX <= 15)
-            {
-                if (Input.GetKey(KeyCode.S))
-                {
-                    MoveX += 2;
-                    MoveY -= 1;
-                }
+                forceStrength += 0.01f;
             }
         }
-       
-        //角度指定
-        velocity = new Vector3(MoveX, MoveY, 0.0f);
-    }
-
-    private void WaitShot()
-    {
-        //最初のif文で何で入力しているか判定する
-        //ゲームパッド
-        if (Gamepad.current != null)
+        //打ち出し
+        if (Keyboard.current.spaceKey.wasReleasedThisFrame)
         {
-            if(Gamepad.current.bButton.isPressed)
-            {
-                rb.velocity = velocity;
-                isShot = true;
-            }
-        }
-        //キーボード
-        if (Keyboard.current != null)
-        {
-            if (Input.GetKey(KeyCode.Space))
-            {
-                rb.velocity = velocity;
-                isShot = true;
-            }
+            Debug.Log("スペースキーが離されました");
+            rb.useGravity = true;
+            isShot = true;
+            // **前方+上方向へ飛ばす(オブジェクトの質量と関係しているためUnity側で計算させている)**
+            Vector3 launchForce = transform.forward * forceStrength + Vector3.up * jumpPower;
+            rb.AddForce(launchForce, ForceMode.Impulse);
         }
     }
 }
