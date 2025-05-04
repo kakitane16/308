@@ -9,11 +9,10 @@ public class Goal : MonoBehaviour
     public Transform goal;
     public float maxScore = 100f;
     private int score;
-    private float Level;
+    public float Level;
 
     private void Start()
     {
-        Level = 20f;
     }
 
     private void OnCollisionEnter(Collision gl)

@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public float RotateY;
     public float jumpPower;
     private bool isShot;
+    public float shotpower;
     public float forceStrength; // 前方向への飛ぶ力
     Rigidbody    rb;
         
@@ -54,7 +55,7 @@ public class Player : MonoBehaviour
             Debug.Log("スペースキーが押されているよ");
             if (forceStrength <= 20.0f)
             {
-                forceStrength += 0.01f;
+                forceStrength += shotpower;
             }
         }
         //打ち出し
