@@ -29,25 +29,21 @@ public class Goal : MonoBehaviour
         }
 
         //判定基準　bad <= 20  Nomal <= 40 Good <= 60  Great <= 80   81 <= Perfect <= 100 
-        if(score <= 20)
+        if(score <= 10)
         {
-            Debug.Log("Bad");
+            Debug.Log("全然ダメ");
         }
-        else if(score <= 40)
+        else if(score <= 70)
         {
-            Debug.Log("Nomal");
+            Debug.Log("平凡");
         }
-        else if(score <= 60)
+        else if(score <= 100)
         {
-            Debug.Log("Good");
+            Debug.Log("完璧");
         }
-        else if(score <= 80)
+        else if(score <= 100)
         {
-            Debug.Log("Great");
-        }
-        else
-        {
-            Debug.Log("Perfect");
+            Debug.Log("マーベラス");
         }
     }
 }
