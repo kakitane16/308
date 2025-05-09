@@ -8,8 +8,15 @@ using UnityEngine.SceneManagement;
 public class ScenChangeResult : MonoBehaviour
 {
     //クリックするとゲームシーンへ移動
-    public void ClickButtonChangeSceneGame()
+    public void ClickButtonChangeGame()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Game");
+    }
+
+    //クリックするとタイトルシーンへ移動（現状の仮で）
+    public void ClickButtonChangeTitle()
+    {
+        SceneManager.LoadScene("Title");
     }
 }
+
