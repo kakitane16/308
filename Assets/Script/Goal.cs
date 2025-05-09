@@ -8,8 +8,9 @@ public class Goal : MonoBehaviour
 {
     public Transform goal;
     public float maxScore = 100f;
-    private int score;
+    public int score;
     public float Level;
+    public UI_R_Manager ui_manager;
 
     private void Start()
     {
@@ -28,22 +29,26 @@ public class Goal : MonoBehaviour
             Debug.Log("ゴールに触れた！ スコア: " + score);
         }
 
-        //判定基準　bad <= 20  Nomal <= 40 Good <= 60  Great <= 80   81 <= Perfect <= 100 
+        //判定基準　bad <= 20  Nomal <= 40 Good <= 60  81 <= Perfect <= 100 
         if(score <= 10)
         {
             Debug.Log("全然ダメ");
+            ui_manager.Num = (int)review.Bad;
         }
-        else if(score <= 70)
+        else if(score <= 60)
         {
             Debug.Log("平凡");
+            ui_manager.Num = (int)review.Nomal;
         }
-        else if(score <= 100)
+        else if(score <= 80)
         {
             Debug.Log("完璧");
+            ui_manager.Num = (int)review.Good;
         }
         else if(score <= 100)
         {
             Debug.Log("マーベラス");
+            ui_manager.Num = (int)review.Perfect;
         }
     }
 }

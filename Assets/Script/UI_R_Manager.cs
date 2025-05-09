@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine;
 
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 //===============================================
 //リザルトのUI表示をマネジメントするプログラム
@@ -18,6 +19,15 @@ using UnityEngine.UI;
 //5月9日  秋山遥音
 //-------------------------------------------------------------------
 
+
+//評価指数
+public enum review
+{
+    Bad = 0,
+    Nomal,
+    Good,
+    Perfect 
+}
 
 
 public class UI_R_Manager : MonoBehaviour
@@ -35,8 +45,6 @@ public class UI_R_Manager : MonoBehaviour
     {
         //最初は表示しないようにキャンバスの表示をオフ
         canvas.enabled = false;
-
-
     }
 
     void Update()
@@ -57,13 +65,20 @@ public class UI_R_Manager : MonoBehaviour
         }
 
         //評価によって演出を変える
-        if (Num == 0)
+        switch (Num)
         {
+        case (int)review.Bad:
+            break;
 
-        }
-        if (Num == 1)
-        {
+        case (int)review.Nomal:
+                break;
 
+        case (int)review.Good:
+                break;
+
+        case (int)review.Perfect:
+                break;
         }
+
     }
 }
