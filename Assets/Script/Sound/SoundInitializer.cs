@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BGMInitializer : MonoBehaviour
+public class SoundInitializer : MonoBehaviour
 {
     void Awake()
     {
@@ -10,6 +10,11 @@ public class BGMInitializer : MonoBehaviour
         {
             GameObject bgmObject = new GameObject("BGMManager");
             bgmObject.AddComponent<BGMManager>();
+        }
+        if (SEManager.Instance == null)
+        {
+            GameObject seObject = new GameObject("SEManager");
+            seObject.AddComponent<SEManager>();
         }
     }
 }
