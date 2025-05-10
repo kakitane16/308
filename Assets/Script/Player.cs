@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using System.Runtime.CompilerServices;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    // ゲージ関連
+    public Image GaugeImage; // ゲージ画像アタッチ
+    public float MaxPower = 50f;
+
     public float MoveX;
     public float RotateY;
     public float jumpPower;
@@ -13,7 +18,9 @@ public class Player : MonoBehaviour
     public float shotpower;
     public float forceStrength; // 前方向への飛ぶ力
     Rigidbody    rb;
-        
+
+    public Vector3 velocity;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +36,7 @@ public class Player : MonoBehaviour
         {
             ShotAngle();
             Shot();
+            UpdateGauge();
         }
     }
      
@@ -53,7 +61,7 @@ public class Player : MonoBehaviour
         if (Keyboard.current.spaceKey.isPressed)
         {
             Debug.Log("スペースキーが押されているよ");
-            if (forceStrength <= 20.0f)
+            if (forceStrength < MaxPower)
             {
                 forceStrength += shotpower;
             }
@@ -67,6 +75,15 @@ public class Player : MonoBehaviour
             // **前方+上方向へ飛ばす(オブジェクトの質量と関係しているためUnity側で計算させている)**
             Vector3 launchForce = transform.forward * forceStrength + Vector3.up * jumpPower;
             rb.AddForce(launchForce, ForceMode.Impulse);
+
+            isShot = true;
+            forceStrength = 0f; // 溜めリセット
         }
+    }
+    public void UpdateGauge()
+    {
+        // ゲージ割合
+        float GaugeAmount = Mathf.Clamp01(forceStrength / MaxPower);
+        GaugeImage.fillAmount = GaugeAmount;
     }
 }
