@@ -37,6 +37,14 @@ public class PlayerCamera : MonoBehaviour
         switch (state)
         {
             case n_CameraState.Idle:
+
+                Transform Camera = this.transform;
+                Camera.position = g_Target.TransformPoint(g_Offset); // ÉlÉ^ÇÃå„ï˚Ç÷
+               // Camera.LookAt(g_Target);
+                Camera.rotation = g_Target.rotation;
+                    /*Quaternion.Lerp(
+                    transform.rotation, g_Target.rotation, Time.deltaTime * g_CameraSpeed);*/
+
                 if (movement.magnitude > g_MovementThreshold) //ìÆÇ¢ÇΩÇÁ
                 {
                     state = n_CameraState.Focusing; // èÛë‘ëJà⁄
@@ -56,7 +64,7 @@ public class PlayerCamera : MonoBehaviour
             case n_CameraState.Following:
                 Vector3 desiredPosition = g_Target.position + g_Offset;
                 transform.position = Vector3.Lerp(transform.position,
-                                     desiredPosition, Time.deltaTime * g_FollowSpeed); //Ç‰Ç¡Ç≠ÇËÇ∆
+                                     desiredPosition, Time.deltaTime * g_FollowSpeed); //ääÇÁÇ©Ç…
                 transform.LookAt(g_Target);
                 break;
         }
