@@ -38,12 +38,12 @@ public class PlayerCamera : MonoBehaviour
         {
             case n_CameraState.Idle:
 
-                Transform Camera = this.transform;
-                Camera.position = g_Target.TransformPoint(g_Offset); // ネタの後方へ
-               // Camera.LookAt(g_Target);
-                Camera.rotation = g_Target.rotation;
-                    /*Quaternion.Lerp(
-                    transform.rotation, g_Target.rotation, Time.deltaTime * g_CameraSpeed);*/
+               // Transform Camera = this.transform;
+               // Camera.position = g_Target.TransformPoint(g_Offset); // ネタの後方へ
+               //// Camera.LookAt(g_Target);
+               // Camera.rotation = g_Target.rotation;
+               //     /*Quaternion.Lerp(
+               //     transform.rotation, g_Target.rotation, Time.deltaTime * g_CameraSpeed);*/
 
                 if (movement.magnitude > g_MovementThreshold) //動いたら
                 {
