@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     public float shotpower;
     public float forceStrength; // 前方向への飛ぶ力
     Rigidbody    rb;
-
+    private bool sceneJustChanged = true;
     public Vector3 velocity;
 
     // Start is called before the first frame update
@@ -31,6 +31,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        //シーン切り替えの初回動作防止
+        if(sceneJustChanged)
+        {
+            return;
+        }
         //打ち出すまでの間だけ入る
         if (!isShot)
         {
@@ -85,5 +90,9 @@ public class Player : MonoBehaviour
         // ゲージ割合
         float GaugeAmount = Mathf.Clamp01(forceStrength / MaxPower);
         GaugeImage.fillAmount = GaugeAmount;
+    }
+    public void ResetSceneFlag()
+    {
+        sceneJustChanged = false;
     }
 }
