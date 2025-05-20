@@ -9,13 +9,14 @@ public class Player : MonoBehaviour
 {
     // ゲージ関連
     public Image GaugeImage; // ゲージ画像アタッチ
-    public float MaxPower = 50f;
+    private float MaxPower = 10f;
 
     public float MoveX;
     public float RotateY;
     public float jumpPower;
     private bool isShot;
     public float shotpower;
+    private float SAngleY;
     public float forceStrength; // 前方向への飛ぶ力
     Rigidbody    rb;
     private bool sceneJustChanged = true;
@@ -27,6 +28,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         isShot = false;
         rb.useGravity = false;
+        SAngleY = 0;
     }
     // Update is called once per frame
     private void Update()
@@ -48,15 +50,21 @@ public class Player : MonoBehaviour
     private void ShotAngle()
     {
         //角度指定
-        if (Keyboard.current.aKey.isPressed)
+        if (Keyboard.current.wKey.isPressed)
         {
-            transform.Rotate(new Vector3(0, -RotateY, 0));
-            Debug.Log("Aキーが押されているよ");
+            if (SAngleY < 10)
+            {
+                SAngleY += 0.1f;
+                Debug.Log("Wキーが押されているよ");
+            }
         }
-        if (Keyboard.current.dKey.isPressed)
+        if (Keyboard.current.sKey.isPressed)
         {
-            transform.Rotate(new Vector3(0, RotateY, 0));
-            Debug.Log("Dキーが押されているよ");
+            if (SAngleY > 0)
+            {
+                SAngleY -= 0.1f;
+                Debug.Log("Sキーが押されているよ");
+            }
         }
     }
 
@@ -78,7 +86,7 @@ public class Player : MonoBehaviour
             rb.useGravity = true;
             isShot = true;
             // **前方+上方向へ飛ばす(オブジェクトの質量と関係しているためUnity側で計算させている)**
-            Vector3 launchForce = transform.forward * forceStrength + Vector3.up * jumpPower;
+            Vector3 launchForce = transform.forward * forceStrength + Vector3.up * SAngleY;
             rb.AddForce(launchForce, ForceMode.Impulse);
 
             isShot = true;
