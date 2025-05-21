@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 {
     // ゲージ関連
     public Image GaugeImage; // ゲージ画像アタッチ
+    public Arrow arw;
     private float MaxPower = 10f;
 
     public float MoveX;
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
     Rigidbody    rb;
     private bool sceneJustChanged = true;
     public Vector3 velocity;
+    float rotateAgl;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +57,7 @@ public class Player : MonoBehaviour
             if (SAngleY < 10)
             {
                 SAngleY += 0.5f;
+                rotateAgl -= 0.1f;
                 Debug.Log("Wキーが押されているよ");
             }
         }
@@ -63,9 +66,11 @@ public class Player : MonoBehaviour
             if (SAngleY > 0)
             {
                 SAngleY -= 0.5f;
+                rotateAgl += 0.1f;
                 Debug.Log("Sキーが押されているよ");
             }
         }
+        UpdateArrow(rotateAgl);
     }
 
     private void Shot()
@@ -98,6 +103,11 @@ public class Player : MonoBehaviour
         // ゲージ割合
         float GaugeAmount = Mathf.Clamp01(forceStrength / MaxPower);
         GaugeImage.fillAmount = GaugeAmount;
+    }
+
+    public void UpdateArrow(float rotatez)
+    {
+        arw.transform.rotation = Quaternion.Euler(0, 0, rotatez);
     }
     public void ResetSceneFlag()
     {
