@@ -7,7 +7,7 @@ public class PlayerCamera : MonoBehaviour
     // グローバル変数
     public Transform g_Target;      // 追従対象
     public Transform g_FocusObject; // 注視対象
-    public Vector3 g_Offset = new Vector3(0, 5, -10);  // カメラ相対位置
+    public Vector3 g_Offset = new Vector3(0, -5, -10);  // カメラ相対位置
     public float g_FollowSpeed = 2.0f;  // 追従対象に戻るまでの時間
     public float g_MovementThreshold = 0.01f; // 処理を行うために必要な追従対象の移動量
     public float g_FocusDuration = 2.0f;   // 注視時間（秒）

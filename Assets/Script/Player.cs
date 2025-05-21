@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     public float jumpPower;
     private bool isShot;
     public float shotpower;
-    private float SAngleY;
+    public float SAngleY;
     public float forceStrength; // 前方向への飛ぶ力
     Rigidbody    rb;
     private bool sceneJustChanged = true;
@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
         {
             if (SAngleY < 10)
             {
-                SAngleY += 0.1f;
+                SAngleY += 0.5f;
                 Debug.Log("Wキーが押されているよ");
             }
         }
@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
         {
             if (SAngleY > 0)
             {
-                SAngleY -= 0.1f;
+                SAngleY -= 0.5f;
                 Debug.Log("Sキーが押されているよ");
             }
         }
