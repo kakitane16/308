@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     // ゲージ関連
     public Image GaugeImage; // ゲージ画像アタッチ
     public Arrow arw;
-    private float MaxPower = 10f;
+    private float MaxPower = 20f;
 
     public float MoveX;
     public float RotateY;
@@ -95,6 +95,8 @@ public class Player : MonoBehaviour
             rb.AddForce(launchForce, ForceMode.Impulse);
 
             isShot = true;
+            // アローを非表示にする
+            arw.gameObject.SetActive(false);
             forceStrength = 0f; // 溜めリセット
         }
     }
