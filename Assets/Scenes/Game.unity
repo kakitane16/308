@@ -719,6 +719,7 @@ GameObject:
   - component: {fileID: 440473218}
   - component: {fileID: 440473217}
   - component: {fileID: 440473216}
+  - component: {fileID: 440473220}
   m_Layer: 0
   m_Name: Plate
   m_TagString: Plate
@@ -804,6 +805,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &440473220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440473215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f79f324b942224cab43cdcab6742f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goal: {fileID: 1612819569}
+  maxScore: 100
+  score: 0
+  Level: 100
+  ui_manager: {fileID: 0}
 --- !u!1 &578269280
 GameObject:
   m_ObjectHideFlags: 0

@@ -67,18 +67,23 @@ public class UI_R_Manager : MonoBehaviour
         //•]‰¿‚É‚æ‚Á‚Ä‰‰o‚ğ•Ï‚¦‚é
         switch (Num)
         {
-        case (int)review.Bad:
-            break;
-
-        case (int)review.Nomal:
+            case (int)review.Bad:
                 break;
 
-        case (int)review.Good:
+            case (int)review.Nomal:
                 break;
 
-        case (int)review.Perfect:
+            case (int)review.Good:
+                break;
+
+            case (int)review.Perfect:
                 break;
         }
 
+    }
+   
+    public void GetNum(int Point)
+    {
+        Num = Point;
     }
 }

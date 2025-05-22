@@ -3,23 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class TitleChange : MonoBehaviour
 {
+
     public void ClickStartButton()
     {
         SceneManager.LoadScene("Game");
     }
 
 
+
     //// Start is called before the first frame update
     //void Start()
     //{
-        
+
     //}
 
     //// Update is called once per frame
     //void Update()
     //{
-        
+
     //}
 }

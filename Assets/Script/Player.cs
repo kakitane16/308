@@ -35,11 +35,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        //ƒV[ƒ“Ø‚è‘Ö‚¦‚Ì‰‰ñ“®ì–h~
-        //if(sceneJustChanged)
-        //{
-        //    return;
-        //}
         //‘Å‚¿o‚·‚Ü‚Å‚ÌŠÔ‚¾‚¯“ü‚é
         if (!isShot)
         {
