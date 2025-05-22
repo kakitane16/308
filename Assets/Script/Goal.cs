@@ -33,25 +33,25 @@ public class Goal : MonoBehaviour
         //”»’èŠî€@bad <= 20  Nomal <= 40 Good <= 60  81 <= Perfect <= 100 
         if (score <= 10)
         {
-            ui_manager.GetNum((int)review.Bad);
+            //ui_manager.GetNum((int)review.Bad);
             Debug.Log("bad");
         }
         else if (score <= 60)
         {
-            ui_manager.GetNum((int)review.Nomal);
+            //ui_manager.GetNum((int)review.Nomal);
             Debug.Log("nomal");
         }
         else if (score <= 80)
         {
-            ui_manager.GetNum((int)review.Good);
+           // ui_manager.GetNum((int)review.Good);
             Debug.Log("good");
         }
         else if (score <= 100)
         {
-            ui_manager.GetNum((int)review.Perfect);
+           // ui_manager.GetNum((int)review.Perfect);
             Debug.Log("parfect");
         }
 
-        SceneManager.LoadScene("Result Scene");
+        SceneManager.LoadScene(2);
     }
 }
