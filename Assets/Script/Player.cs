@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
 
     public float MoveX;
     public float RotateY;
+    public float RotateSpeed;
     public float jumpPower;
     private bool isShot;
     public float shotpower;
@@ -52,7 +53,7 @@ public class Player : MonoBehaviour
             if (SAngleY < 10)
             {
                 SAngleY += 0.5f;
-                rotateAgl -= 0.1f;
+                rotateAgl += RotateSpeed;
                 Debug.Log("Wキーが押されているよ");
             }
         }
@@ -61,11 +62,11 @@ public class Player : MonoBehaviour
             if (SAngleY > 0)
             {
                 SAngleY -= 0.5f;
-                rotateAgl += 0.1f;
+                rotateAgl -= RotateSpeed;
                 Debug.Log("Sキーが押されているよ");
             }
         }
-        UpdateArrow(rotateAgl);
+        UpdateArrow();
     }
 
     private void Shot()
@@ -102,9 +103,9 @@ public class Player : MonoBehaviour
         GaugeImage.fillAmount = GaugeAmount;
     }
 
-    public void UpdateArrow(float rotatez)
+    public void UpdateArrow()
     {
-        arw.transform.rotation = Quaternion.Euler(0, 0, rotatez);
+        arw.transform.rotation = Quaternion.Euler(0, 0, rotateAgl); 
     }
     public void ResetSceneFlag()
     {
