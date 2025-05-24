@@ -9,17 +9,21 @@ public class Player : MonoBehaviour
 {
     // ゲージ関連
     public Image GaugeImage; // ゲージ画像アタッチ
-    public float MaxPower = 50f;
+    public Arrow arw;
+    private float MaxPower = 20f;
 
     public float MoveX;
     public float RotateY;
+    public float RotateSpeed;
     public float jumpPower;
     private bool isShot;
     public float shotpower;
+    public float SAngleY;
     public float forceStrength; // 前方向への飛ぶ力
     Rigidbody    rb;
-
+    private bool sceneJustChanged = true;
     public Vector3 velocity;
+    float rotateAgl;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +31,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         isShot = false;
         rb.useGravity = false;
+        SAngleY = 0;
     }
     // Update is called once per frame
     private void Update()
@@ -43,16 +48,25 @@ public class Player : MonoBehaviour
     private void ShotAngle()
     {
         //角度指定
-        if (Keyboard.current.aKey.isPressed)
+        if (Keyboard.current.wKey.isPressed)
         {
-            transform.Rotate(new Vector3(0, -RotateY, 0));
-            Debug.Log("Aキーが押されているよ");
+            if (SAngleY < 10)
+            {
+                SAngleY += 0.5f;
+                rotateAgl += RotateSpeed;
+                Debug.Log("Wキーが押されているよ");
+            }
         }
-        if (Keyboard.current.dKey.isPressed)
+        if (Keyboard.current.sKey.isPressed)
         {
-            transform.Rotate(new Vector3(0, RotateY, 0));
-            Debug.Log("Dキーが押されているよ");
+            if (SAngleY > 0)
+            {
+                SAngleY -= 0.5f;
+                rotateAgl -= RotateSpeed;
+                Debug.Log("Sキーが押されているよ");
+            }
         }
+        UpdateArrow();
     }
 
     private void Shot()
@@ -73,10 +87,12 @@ public class Player : MonoBehaviour
             rb.useGravity = true;
             isShot = true;
             // **前方+上方向へ飛ばす(オブジェクトの質量と関係しているためUnity側で計算させている)**
-            Vector3 launchForce = transform.forward * forceStrength + Vector3.up * jumpPower;
+            Vector3 launchForce = transform.forward * forceStrength + Vector3.up * SAngleY;
             rb.AddForce(launchForce, ForceMode.Impulse);
 
             isShot = true;
+            // アローを非表示にする
+            arw.gameObject.SetActive(false);
             forceStrength = 0f; // 溜めリセット
         }
     }
@@ -85,5 +101,14 @@ public class Player : MonoBehaviour
         // ゲージ割合
         float GaugeAmount = Mathf.Clamp01(forceStrength / MaxPower);
         GaugeImage.fillAmount = GaugeAmount;
+    }
+
+    public void UpdateArrow()
+    {
+        arw.transform.rotation = Quaternion.Euler(0, 0, rotateAgl); 
+    }
+    public void ResetSceneFlag()
+    {
+        sceneJustChanged = false;
     }
 }

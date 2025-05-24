@@ -7,7 +7,9 @@ public class PlayerCamera : MonoBehaviour
     // グローバル変数
     public Transform g_Target;      // 追従対象
     public Transform g_FocusObject; // 注視対象
-    public Vector3 g_Offset = new Vector3(0, 5, -10);  // カメラ相対位置
+    public Vector3 g_Offset = new Vector3(0, -5, -10);  // カメラ相対位置
+    public Vector3 g_Position = new Vector3(0.0f, 20.0f, -85.0f);  // カメラ位置
+    public Quaternion g_Rotation = Quaternion.Euler(22.0f, 0.0f, 0.0f);  // カメラ回転
     public float g_FollowSpeed = 2.0f;  // 追従対象に戻るまでの時間
     public float g_MovementThreshold = 0.01f; // 処理を行うために必要な追従対象の移動量
     public float g_FocusDuration = 2.0f;   // 注視時間（秒）
@@ -24,6 +26,8 @@ public class PlayerCamera : MonoBehaviour
         {   // Targetのtransform情報をlastに代入
             lasttargetpos = g_Target.position;
         }
+        this.transform.position = g_Position;
+        this.transform.rotation = g_Rotation;
     }
 
     // 全ての処理がおわった後に処理を行いたいので

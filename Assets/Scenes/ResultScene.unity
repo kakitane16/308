@@ -350,7 +350,7 @@ Transform:
   m_Children:
   - {fileID: 181290357}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &548689580
 PrefabInstance:
@@ -635,7 +635,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1331183005
 GameObject:
@@ -729,7 +729,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1450246042
 GameObject:
@@ -813,7 +813,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1592943472
 GameObject:
@@ -963,6 +963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f449f6a4602ac7b41a24ad44db5d0e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pr: {fileID: 0}
 --- !u!95 &1592943478
 Animator:
   serializedVersion: 5
@@ -1177,6 +1178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f449f6a4602ac7b41a24ad44db5d0e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pr: {fileID: 0}
 --- !u!114 &1998278115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1282,6 +1284,7 @@ GameObject:
   - component: {fileID: 2071764583}
   - component: {fileID: 2071764585}
   - component: {fileID: 2071764584}
+  - component: {fileID: 2071764586}
   m_Layer: 5
   m_Name: StageName
   m_TagString: Untagged
@@ -1351,3 +1354,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2071764582}
   m_CullTransparentMesh: 1
+--- !u!114 &2071764586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071764582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3613e81f1fa8c684da92ae657401262b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Num: 0
+  StageNumber: 0
+  stage_object: {fileID: 1998278111}
+  canvas: {fileID: 181290356}
