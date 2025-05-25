@@ -51,7 +51,5 @@ public class Goal : MonoBehaviour
            // ui_manager.GetNum((int)review.Perfect);
             Debug.Log("parfect");
         }
-
-        SceneManager.LoadScene(2);
     }
 }
