@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCamera : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class PlayerCamera : MonoBehaviour
     public float g_FollowSpeed = 2.0f;  // ’Ç]‘ÎÛ‚É–ß‚é‚Ü‚Å‚ÌŠÔ
     public float g_MovementThreshold = 0.01f; // ˆ—‚ğs‚¤‚½‚ß‚É•K—v‚È’Ç]‘ÎÛ‚ÌˆÚ“®—Ê
     public float g_FocusDuration = 2.0f;   // ’‹ŠÔi•bj
-
+    private float g_WaitTime = 5.0f;         // ‘Ò‚¿ŠÔi•bj
+    private float g_Timer = 0.0f;            // Œo‰ßŠÔ
     private Vector3 lasttargetpos;
     private enum n_CameraState { Idle, Focusing, Following } // ƒJƒƒ‰‚Ìó‘Ô
     private n_CameraState state = n_CameraState.Idle;
@@ -70,7 +72,16 @@ public class PlayerCamera : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position,
                                      desiredPosition, Time.deltaTime * g_FollowSpeed); //ŠŠ‚ç‚©‚É
                 transform.LookAt(g_Target);
-                break;
+                if (movement.magnitude < g_MovementThreshold) //~‚Ü‚Á‚½‚ç
+                {
+                    // 3•b‘Ò‚Â
+                    g_Timer += Time.deltaTime;
+                    if (g_Timer >= g_WaitTime)
+                    {
+                        SceneManager.LoadScene(2);
+                    }
+                }
+                    break;
         }
         lasttargetpos = g_Target.position;
     }

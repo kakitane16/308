@@ -52,6 +52,6 @@ public class Goal : MonoBehaviour
             Debug.Log("parfect");
         }
 
-        SceneManager.LoadScene(2);
+       // SceneManager.LoadScene(2);
     }
 }
