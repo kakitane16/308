@@ -7,23 +7,21 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    // ゲージ関連
+    Rigidbody rb;
     public Image GaugeImage; // ゲージ画像アタッチ
     public Arrow arw;
+    public Vector3 velocity;
     private float MaxPower = 20f;
-
-    public float MoveX;
-    public float RotateY;
     public float RotateSpeed;
-    public float jumpPower;
     private bool isShot;
     public float shotpower;
     public float SAngleY;
-    public float forceStrength; // 前方向への飛ぶ力
-    Rigidbody    rb;
-    private bool sceneJustChanged = true;
-    public Vector3 velocity;
-    float rotateAgl;
+    public float forceStrength;            // 前方向への飛ぶ力
+    private bool sceneJustChanged = true;  //後で使うから消さないで
+    public float rotateAgl;
+    private float Vertical;   //UIの高さを変更
+    private float Horizontal; //UIの横の移動値を変更
+    private float Move;       //UIの横と高さの値変更幅
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +30,9 @@ public class Player : MonoBehaviour
         isShot = false;
         rb.useGravity = false;
         SAngleY = 0;
+        Vertical = 0.0f;
+        Horizontal = 0.0f;
+        Move = 0.1f;
     }
     // Update is called once per frame
     private void Update()
@@ -52,21 +53,33 @@ public class Player : MonoBehaviour
         {
             if (SAngleY < 10)
             {
-                SAngleY += 0.5f;
-                rotateAgl += RotateSpeed;
+                SAngleY    += 0.5f;
+                rotateAgl  += RotateSpeed; 
+                Vertical    = -Move;
+                Horizontal  = Move;
                 Debug.Log("Wキーが押されているよ");
+
+                UpdateArrow();
             }
         }
         if (Keyboard.current.sKey.isPressed)
         {
             if (SAngleY > 0)
             {
-                SAngleY -= 0.5f;
-                rotateAgl -= RotateSpeed;
+                SAngleY    -= 0.5f;
+                rotateAgl  -= RotateSpeed;
+                Vertical    = Move;
+                Horizontal  = -Move;
                 Debug.Log("Sキーが押されているよ");
+
+                UpdateArrow();
             }
         }
-        UpdateArrow();
+        if(Keyboard.current.sKey.wasReleasedThisFrame || Keyboard.current.sKey.wasReleasedThisFrame)
+        {
+            Vertical   = 0.0f;
+            Horizontal = 0.0f;
+        }
     }
 
     private void Shot()
@@ -105,7 +118,10 @@ public class Player : MonoBehaviour
 
     public void UpdateArrow()
     {
-        arw.transform.rotation = Quaternion.Euler(0, 0, rotateAgl); 
+        Vector2 currentPosition = arw.GetComponent<RectTransform>().anchoredPosition;  // 現在の位置を取得
+        Vector2 offset = new Vector2(Vertical, Horizontal);                            // 追加したいオフセット値
+        arw.GetComponent<RectTransform>().anchoredPosition = currentPosition + offset; // 位置を更新
+        arw.transform.rotation = Quaternion.Euler(0, 0, rotateAgl); //UIの回転
     }
     public void ResetSceneFlag()
     {

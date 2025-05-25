@@ -14,7 +14,7 @@ public class Arrow : MonoBehaviour
         //***UIの初期座標をプレイヤー（ネタ側）のよこに置く***
         //　　　ネタは毎回同じ場所から始まらないから
         //playerの座標を取得
-        Vector3 playerPos = T_player.position + new Vector3(-9,7,0);
+        Vector3 playerPos = T_player.position + new Vector3(-8,7,0);
         //playerの座標と被るため少しずらす
         ArrowUI.transform.position = playerPos;
     }
