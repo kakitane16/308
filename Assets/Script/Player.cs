@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
         Vector2 currentPosition = arw.GetComponent<RectTransform>().anchoredPosition;  // 現在の位置を取得
         Vector2 offset = new Vector2(Vertical, Horizontal);                            // 追加したいオフセット値
         arw.GetComponent<RectTransform>().anchoredPosition = currentPosition + offset; // 位置を更新
-        arw.transform.rotation = Quaternion.Euler(0, 0, rotateAgl); //UIの回転
+        arw.transform.rotation = Quaternion.Euler(0, 0, rotateAgl);                    //UIの回転
     }
     public void ResetSceneFlag()
     {
