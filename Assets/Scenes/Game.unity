@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1715,7 +1715,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c72f97abb71babb4d9a407007f237161, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.57
+      value: -2.91
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c72f97abb71babb4d9a407007f237161, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2364,14 +2364,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GaugeImage: {fileID: 115246903}
   arw: {fileID: 1574056135}
-  MoveX: -15
-  RotateY: 0.5
+  velocity: {x: 0, y: 0, z: 0}
   RotateSpeed: 2
-  jumpPower: 10
   shotpower: 0.05
   SAngleY: 0
   forceStrength: 0
-  velocity: {x: 0, y: 0, z: 0}
+  rotateAgl: 0
 --- !u!54 &1612819571
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2521,12 +2519,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604bbb68b9321d043b86504a868c2638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LargeMat: {fileID: 2100000, guid: 9e877c227c82e5d4a89423e6ef09e973, type: 2}
-  MediumMat: {fileID: 2100000, guid: 17caa994b4af5264ab542ee70dffae35, type: 2}
-  SmallMat: {fileID: 2100000, guid: 7dfb2f239b0b3b3408dc7d3f552173cb, type: 2}
-  LargeMesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
-  MediumMesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
-  SmallMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  Sushi: {fileID: 2100000, guid: f4df619947b22a640aba182bd5f7236f, type: 2}
+  SushiMesh: {fileID: 1733002559190041388, guid: bf6835c0455ae8b47bb5820db5170c96, type: 3}
 --- !u!54 &1643081997
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2614,7 +2608,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1643081995}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.76, y: 1.35704, z: -1.8937988}
+  m_LocalPosition: {x: -18.76, y: 10.29, z: -1.8937988}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
