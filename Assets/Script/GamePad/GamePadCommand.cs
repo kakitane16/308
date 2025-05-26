@@ -19,6 +19,7 @@ public class GamePadCommand : MonoBehaviour
     //レフトスティックが上向きに働いているとき　キーボードならｗキー
     public bool UpAction(int ipt)
     {
+        
         switch (ipt)
         {
         case (int)InputObject.GamePad:

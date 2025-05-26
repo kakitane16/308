@@ -2371,6 +2371,7 @@ MonoBehaviour:
   shotpower: 0.05
   SAngleY: 0
   rotateAgl: 0
+  GetInputOB: 1
 --- !u!54 &1612819571
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -24,6 +24,9 @@ public class Player : MonoBehaviour
     private float Horizontal; //UIの横の移動値を変更
     private float Move;       //UIの横と高さの値変更幅
 
+    public int GetInputOB;    //使う物を取得　今調整段階なため最初にここに数値を入れれば変わる
+                              //ない　０　ゲームパッド　１　キーボード　２
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +39,7 @@ public class Player : MonoBehaviour
         Horizontal = 0.0f;
         Move = 0.1f;
         forceStrength = 0.0f;
+        Debug.Log(GetInputOB);
     }
     // Update is called once per frame
     private void Update()
@@ -52,7 +56,7 @@ public class Player : MonoBehaviour
     private void ShotAngle()
     {
         //角度指定
-        if (command.UpAction(1))
+        if (command.UpAction(GetInputOB))
         {
             if (SAngleY < 10)
             {
@@ -65,7 +69,7 @@ public class Player : MonoBehaviour
                 UpdateArrow();
             }
         }
-        if (command.DownAction(1))
+        if (command.DownAction(GetInputOB))
         {
             if (SAngleY > 0)
             {
@@ -78,7 +82,7 @@ public class Player : MonoBehaviour
                 UpdateArrow();
             }
         }
-        if (!command.UpAction(1) && !command.DownAction(1))
+        if (!command.UpAction(GetInputOB) && !command.DownAction(GetInputOB))
         {
             Vertical = 0.0f;
             Horizontal = 0.0f;
@@ -88,7 +92,7 @@ public class Player : MonoBehaviour
     private void Shot()
     {
         //打つ時のでかさを貯める
-        if (command.IsBbutton(1))
+        if (command.IsBbutton(GetInputOB))
         {
             Debug.Log("スペースキーが押されているよ");
             if (forceStrength < MaxPower)
@@ -97,7 +101,7 @@ public class Player : MonoBehaviour
             }
         }
         //打ち出し
-        if (command.WasBbutton(1))
+        if (command.WasBbutton(GetInputOB))
         {
             PowerShoting();
         }

@@ -2276,14 +2276,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GaugeImage: {fileID: 0}
   arw: {fileID: 0}
-  MoveX: 0
-  RotateY: 0
+  command: {fileID: 0}
+  velocity: {x: 0, y: 0, z: 0}
   RotateSpeed: 0
-  jumpPower: 0
   shotpower: 0
   SAngleY: 0
-  forceStrength: 0
-  velocity: {x: 0, y: 0, z: 0}
+  rotateAgl: 0
 --- !u!114 &1955858318
 MonoBehaviour:
   m_ObjectHideFlags: 0
