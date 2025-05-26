@@ -10,13 +10,14 @@ public class Player : MonoBehaviour
     Rigidbody rb;
     public Image GaugeImage; // ゲージ画像アタッチ
     public Arrow arw;
+    public GamePadCommand command;
     public Vector3 velocity;
     private float MaxPower = 20f;
     public float RotateSpeed;
     private bool isShot;
     public float shotpower;
     public float SAngleY;
-    public float forceStrength;            // 前方向への飛ぶ力
+    private float forceStrength;            // 前方向への飛ぶ力
     private bool sceneJustChanged = true;  //後で使うから消さないで
     public float rotateAgl;
     private float Vertical;   //UIの高さを変更
@@ -27,12 +28,14 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        command = new GamePadCommand();
         isShot = false;
         rb.useGravity = false;
         SAngleY = 0;
         Vertical = 0.0f;
         Horizontal = 0.0f;
         Move = 0.1f;
+        forceStrength = 0.0f;
     }
     // Update is called once per frame
     private void Update()
@@ -49,7 +52,7 @@ public class Player : MonoBehaviour
     private void ShotAngle()
     {
         //角度指定
-        if (Keyboard.current.wKey.isPressed)
+        if (command.UpAction(1))
         {
             if (SAngleY < 10)
             {
@@ -62,7 +65,7 @@ public class Player : MonoBehaviour
                 UpdateArrow();
             }
         }
-        if (Keyboard.current.sKey.isPressed)
+        if (command.DownAction(1))
         {
             if (SAngleY > 0)
             {
@@ -75,9 +78,9 @@ public class Player : MonoBehaviour
                 UpdateArrow();
             }
         }
-        if(Keyboard.current.sKey.wasReleasedThisFrame || Keyboard.current.sKey.wasReleasedThisFrame)
+        if (!command.UpAction(1) && !command.DownAction(1))
         {
-            Vertical   = 0.0f;
+            Vertical = 0.0f;
             Horizontal = 0.0f;
         }
     }
@@ -85,7 +88,7 @@ public class Player : MonoBehaviour
     private void Shot()
     {
         //打つ時のでかさを貯める
-        if (Keyboard.current.spaceKey.isPressed)
+        if (command.IsBbutton(1))
         {
             Debug.Log("スペースキーが押されているよ");
             if (forceStrength < MaxPower)
@@ -94,21 +97,12 @@ public class Player : MonoBehaviour
             }
         }
         //打ち出し
-        if (Keyboard.current.spaceKey.wasReleasedThisFrame)
+        if (command.WasBbutton(1))
         {
-            Debug.Log("スペースキーが離されました");
-            rb.useGravity = true;
-            isShot = true;
-            // **前方+上方向へ飛ばす(オブジェクトの質量と関係しているためUnity側で計算させている)**
-            Vector3 launchForce = transform.forward * forceStrength + Vector3.up * SAngleY;
-            rb.AddForce(launchForce, ForceMode.Impulse);
-
-            isShot = true;
-            // アローを非表示にする
-            arw.gameObject.SetActive(false);
-            forceStrength = 0f; // 溜めリセット
+            PowerShoting();
         }
     }
+
     public void UpdateGauge()
     {
         // ゲージ割合
@@ -123,6 +117,23 @@ public class Player : MonoBehaviour
         arw.GetComponent<RectTransform>().anchoredPosition = currentPosition + offset; // 位置を更新
         arw.transform.rotation = Quaternion.Euler(0, 0, rotateAgl);                    //UIの回転
     }
+
+    //打ち出された時の大きさの計算
+    private void PowerShoting()
+    {
+        Debug.Log("スペースキー or gamepad.b が離されました");
+        rb.useGravity = true;
+        isShot = true;
+        // **前方+上方向へ飛ばす(オブジェクトの質量と関係しているためUnity側で計算させている)**
+        Vector3 launchForce = transform.forward * forceStrength + Vector3.up * SAngleY;
+        rb.AddForce(launchForce, ForceMode.Impulse);
+
+        isShot = true;
+        // アローを非表示にする
+        arw.gameObject.SetActive(false);
+        forceStrength = 0f; // 溜めリセット
+    }
+
     public void ResetSceneFlag()
     {
         sceneJustChanged = false;

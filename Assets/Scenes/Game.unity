@@ -2264,6 +2264,7 @@ GameObject:
   - component: {fileID: 1612819571}
   - component: {fileID: 1612819572}
   - component: {fileID: 1612819573}
+  - component: {fileID: 1612819574}
   m_Layer: 0
   m_Name: neta
   m_TagString: Player
@@ -2364,11 +2365,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GaugeImage: {fileID: 115246903}
   arw: {fileID: 1574056135}
+  command: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
   RotateSpeed: 2
   shotpower: 0.05
   SAngleY: 0
-  forceStrength: 0
   rotateAgl: 0
 --- !u!54 &1612819571
 Rigidbody:
@@ -2417,6 +2418,18 @@ MonoBehaviour:
   seList:
   - key: test
     clip: {fileID: 8300000, guid: 6bb667acb55cff9498dfbb7ec6e36768, type: 3}
+--- !u!114 &1612819574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612819565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8beb9a589b9ea4fabd40f9bbb49377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1621269372
 PrefabInstance:
   m_ObjectHideFlags: 0
