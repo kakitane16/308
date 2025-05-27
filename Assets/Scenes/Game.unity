@@ -2646,9 +2646,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc1a757875e280845a424f28e7d82814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wasabiPrefab: {fileID: 1643081995}
+  wasabiPrefab: {fileID: 6805720455319592475, guid: 6244c676fc4a7bc4f976f5762cc52de9, type: 3}
   spawnPoint: {fileID: 1646669917}
-  offset: {x: 0.5, y: -3, z: 0}
+  offset: {x: 0.55, y: -3, z: 0}
+  offset_rotate: {x: 90, y: 0, z: 0}
   lifeTime: 3
 --- !u!4 &1646669917 stripped
 Transform:

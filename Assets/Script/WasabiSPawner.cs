@@ -13,6 +13,7 @@ public class WasabiSPawner : MonoBehaviour
     //そこに「吐き出し位置を示す空の GameObject」をアサイン
     public Transform spawnPoint;
     public Vector3 offset = new Vector3();
+    public Vector3 offset_rotate = new Vector3();
 
     [Header("ワサビが落下してから消えるまでの時間 (秒)")]
     //「ワサビが生まれてから自動で消えるまでの秒数」を表す
@@ -29,11 +30,17 @@ public class WasabiSPawner : MonoBehaviour
     {
         while (true)
         {
+            // ログ：何秒時点で吐き出し始めるか
+            Debug.Log($"[WasabiSpawner] SpawnLoop: Spawning wasabi at time {Time.time:F2}");
             //ワサビを吐き出し
+
+            Quaternion rot = Quaternion.Euler(spawnPoint.rotation.eulerAngles + offset_rotate);
             //Instantiate → ワサビ生成
             GameObject w = Instantiate(wasabiPrefab
                                        , spawnPoint.position + offset
-                                       , spawnPoint.rotation);
+                                       , rot);
+            // ログ：生成されたインスタンス名
+            Debug.Log($"[WasabiSpawner] Spawned: {w.name}");
             //lifeTime数秒に自動で消す
             Destroy(w, lifeTime);
 
