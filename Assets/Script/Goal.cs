@@ -34,6 +34,7 @@ public class Goal : MonoBehaviour
         if (score <= 10)
         {
             //ui_manager.GetNum((int)review.Bad);
+            SceneManager.LoadScene(2);
             Debug.Log("bad");
         }
         else if (score <= 60)
