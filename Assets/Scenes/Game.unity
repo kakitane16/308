@@ -2545,10 +2545,10 @@ MonoBehaviour:
   command: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
   RotateSpeed: 2
-  shotpower: 0.05
+  shotpower: 0.01
   SAngleY: 0
   rotateAgl: 0
-  GetInputOB: 1
+  GetInputOB: 2
 --- !u!54 &1612819571
 Rigidbody:
   m_ObjectHideFlags: 0
