@@ -8,6 +8,7 @@ public class PlayerCamera : MonoBehaviour
     // グローバル変数
     public Transform g_Target;      // 追従対象
     public Transform g_FocusObject; // 注視対象
+    public string g_TargetTag = "Player"; // 追従対象のタグ
     public Vector3 g_Offset = new Vector3(0, -5, -10);  // カメラ相対位置
     public Vector3 g_Position = new Vector3(0.0f, 20.0f, -85.0f);  // カメラ位置
     public Quaternion g_Rotation = Quaternion.Euler(22.0f, 0.0f, 0.0f);  // カメラ回転
@@ -24,6 +25,19 @@ public class PlayerCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (g_Target == null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag(g_TargetTag);
+            if (player != null)
+            {
+                g_Target = player.transform;
+            }
+            else
+            {
+                Debug.LogWarning("オブジェクトが見つかりませんでした");
+            }
+        }
+
         if (g_Target != null)
         {   // Targetのtransform情報をlastに代入
             lasttargetpos = g_Target.position;

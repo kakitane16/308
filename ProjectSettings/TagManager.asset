@@ -11,6 +11,7 @@ TagManager:
   - Plate
   - fan
   - syari
+  - Arrow
   layers:
   - Default
   - TransparentFX

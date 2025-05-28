@@ -1,0 +1,159 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.InputSystem;
+using UnityEngine;
+using System.Runtime.CompilerServices;
+using UnityEngine.UI;
+
+public class Player : MonoBehaviour
+{
+    Rigidbody rb;
+    public Image GaugeImage; // ゲージ画像アタッチ
+    public Arrow arw;
+    public string PlayerTag = "Player"; // ターゲットのタグ
+    public GamePadCommand command;
+    public Vector3 velocity;
+    private float MaxPower = 20f;
+    public float RotateSpeed;
+    private bool isShot;
+    public float shotpower;
+    public float SAngleY;
+    private float forceStrength;            // 前方向への飛ぶ力
+    private bool sceneJustChanged = true;  //後で使うから消さないで
+    public float rotateAgl;
+    private float Vertical;   //UIの高さを変更
+    private float Horizontal; //UIの横の移動値を変更
+    private float Move;       //UIの横と高さの値変更幅
+
+    public int GetInputOB;    //使う物を取得　今調整段階なため最初にここに数値を入れれば変わる
+                              //ない　０　ゲームパッド　１　キーボード　２
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        command = new GamePadCommand();
+        isShot = false;
+        rb.useGravity = false;
+        SAngleY = 0;
+        Vertical = 0.0f;
+        Horizontal = 0.0f;
+        Move = 0.1f;
+        forceStrength = 0.0f;
+        Debug.Log(GetInputOB);
+
+        if (arw == null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag(PlayerTag);
+            if (player != null)
+            {
+                arw = player.GetComponent<Arrow>();
+            }
+            else
+            {
+                Debug.LogWarning("オブジェクトが見つかりませんでした");
+            }
+        }
+    }
+    // Update is called once per frame
+    private void Update()
+    {
+        //打ち出すまでの間だけ入る
+        if (!isShot)
+        {
+            ShotAngle();
+            Shot();
+            UpdateGauge();
+        }
+    }
+     
+    private void ShotAngle()
+    {
+        //角度指定
+        if (command.UpAction(GetInputOB))
+        {
+            if (SAngleY < 10)
+            {
+                SAngleY    += 0.5f;
+                rotateAgl  += RotateSpeed; 
+                Vertical    = -Move;
+                Horizontal  = Move;
+                Debug.Log("Wキーが押されているよ");
+
+                UpdateArrow();
+            }
+        }
+        if (command.DownAction(GetInputOB))
+        {
+            if (SAngleY > 0)
+            {
+                SAngleY    -= 0.5f;
+                rotateAgl  -= RotateSpeed;
+                Vertical    = Move;
+                Horizontal  = -Move;
+                Debug.Log("Sキーが押されているよ");
+
+                UpdateArrow();
+            }
+        }
+        if (!command.UpAction(GetInputOB) && !command.DownAction(GetInputOB))
+        {
+            Vertical = 0.0f;
+            Horizontal = 0.0f;
+        }
+    }
+
+    private void Shot()
+    {
+        //打つ時のでかさを貯める
+        if (command.IsBbutton(GetInputOB))
+        {
+            Debug.Log("スペースキーが押されているよ");
+            if (forceStrength < MaxPower)
+            {
+                forceStrength += shotpower;
+            }
+        }
+        //打ち出し
+        if (command.WasBbutton(GetInputOB))
+        {
+            PowerShoting();
+        }
+    }
+
+    public void UpdateGauge()
+    {
+        // ゲージ割合
+        float GaugeAmount = Mathf.Clamp01(forceStrength / MaxPower);
+        GaugeImage.fillAmount = GaugeAmount;
+    }
+
+    public void UpdateArrow()
+    {
+        Vector2 currentPosition = arw.GetComponent<RectTransform>().anchoredPosition;  // 現在の位置を取得
+        Vector2 offset = new Vector2(Vertical, Horizontal);                            // 追加したいオフセット値
+        arw.GetComponent<RectTransform>().anchoredPosition = currentPosition + offset; // 位置を更新
+        arw.transform.rotation = Quaternion.Euler(0, 0, rotateAgl);                    //UIの回転
+    }
+
+    //打ち出された時の大きさの計算
+    private void PowerShoting()
+    {
+        Debug.Log("スペースキー or gamepad.b が離されました");
+        rb.useGravity = true;
+        isShot = true;
+        // **前方+上方向へ飛ばす(オブジェクトの質量と関係しているためUnity側で計算させている)**
+        Vector3 launchForce = transform.forward * forceStrength + Vector3.up * SAngleY;
+        rb.AddForce(launchForce, ForceMode.Impulse);
+
+        isShot = true;
+        // アローを非表示にする
+        arw.gameObject.SetActive(false);
+        forceStrength = 0f; // 溜めリセット
+    }
+
+    public void ResetSceneFlag()
+    {
+        sceneJustChanged = false;
+    }
+}
