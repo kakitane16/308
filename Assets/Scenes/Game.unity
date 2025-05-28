@@ -2545,8 +2545,9 @@ MonoBehaviour:
   command: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
   RotateSpeed: 2
-  shotpower: 0.01
+  shotpower: 0.03
   SAngleY: 0
+  forceStrength: 0
   rotateAgl: 0
   GetInputOB: 2
 --- !u!54 &1612819571

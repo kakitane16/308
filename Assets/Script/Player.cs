@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     private bool isShot;
     public float shotpower;
     public float SAngleY;
-    private float forceStrength;            // 前方向への飛ぶ力
+    public float forceStrength;            // 前方向への飛ぶ力
     private bool sceneJustChanged = true;  //後で使うから消さないで
     public float rotateAgl;
     private float Vertical;   //UIの高さを変更
@@ -102,24 +102,25 @@ public class Player : MonoBehaviour
         {
             Debug.Log("スペースキーが押されているよ");
             //最大値まで戻る場合
-            if (forceStrength <= MaxPower && !IsReturn)
+            if (forceStrength < MaxPower/* && !IsReturn*/)
             {
                 forceStrength += shotpower;
             }
-            else if(forceStrength ==  MaxPower)
+            else if(forceStrength >=  MaxPower/* && !IsReturn*/)
             {
                 //最大値に達した
                 IsReturn = true;
+                forceStrength = 0.0f;
             }
             //最小値まで戻る場合
-            if(forceStrength >= MinPower && IsReturn)
-            {
-                forceStrength -= shotpower;
-            }
-            else if (forceStrength == MinPower)
-            {
-                IsReturn = true;
-            }
+            //if(forceStrength > MinPower && IsReturn)
+            //{
+            //    forceStrength -= shotpower;
+            //}
+            //else if (forceStrength <= MinPower)
+            //{
+            //    IsReturn = false;
+            //}
         }
         //打ち出し
         if (command.WasBbutton(GetInputOB))
