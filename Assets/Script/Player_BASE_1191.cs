@@ -10,16 +10,14 @@ public class Player : MonoBehaviour
     Rigidbody rb;
     public Image GaugeImage; // ゲージ画像アタッチ
     public Arrow arw;
-    public string PlayerTag = "Player"; // ターゲットのタグ
     public GamePadCommand command;
     public Vector3 velocity;
     private float MaxPower = 20f;
-    private float MinPower = 0.0f;
     public float RotateSpeed;
     private bool isShot;
     public float shotpower;
     public float SAngleY;
-    public float forceStrength;            // 前方向への飛ぶ力
+    private float forceStrength;            // 前方向への飛ぶ力
     private bool sceneJustChanged = true;  //後で使うから消さないで
     public float rotateAgl;
     private float Vertical;   //UIの高さを変更
@@ -28,8 +26,6 @@ public class Player : MonoBehaviour
 
     public int GetInputOB;    //使う物を取得　今調整段階なため最初にここに数値を入れれば変わる
                               //ない　０　ゲームパッド　１　キーボード　２
-
-    private bool IsReturn;
 
     // Start is called before the first frame update
     void Start()
@@ -44,20 +40,6 @@ public class Player : MonoBehaviour
         Move = 0.1f;
         forceStrength = 0.0f;
         Debug.Log(GetInputOB);
-
-        if (arw == null)
-        {
-            GameObject player = GameObject.FindGameObjectWithTag(PlayerTag);
-            if (player != null)
-            {
-                arw = player.GetComponent<Arrow>();
-            }
-            else
-            {
-                Debug.LogWarning("オブジェクトが見つかりませんでした");
-            }
-        }
-        IsReturn = false;
     }
     // Update is called once per frame
     private void Update()
@@ -107,34 +89,16 @@ public class Player : MonoBehaviour
         }
     }
 
-
-    //***** 打つでかさを保持し、ボタンが離されたら打てる状態になったことをPowerShotingに伝える *****
     private void Shot()
     {
         //打つ時のでかさを貯める
         if (command.IsBbutton(GetInputOB))
         {
             Debug.Log("スペースキーが押されているよ");
-            //最大値まで戻る場合
-            if (forceStrength < MaxPower/* && !IsReturn*/)
+            if (forceStrength < MaxPower)
             {
                 forceStrength += shotpower;
             }
-            else if(forceStrength >=  MaxPower/* && !IsReturn*/)
-            {
-                //最大値に達した
-                IsReturn = true;
-                forceStrength = 0.0f;
-            }
-            //最小値まで戻る場合
-            //if(forceStrength > MinPower && IsReturn)
-            //{
-            //    forceStrength -= shotpower;
-            //}
-            //else if (forceStrength <= MinPower)
-            //{
-            //    IsReturn = false;
-            //}
         }
         //打ち出し
         if (command.WasBbutton(GetInputOB))
@@ -143,7 +107,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    //打ち出されるの大きさの可視化（ゲージ）
     public void UpdateGauge()
     {
         // ゲージ割合
@@ -151,7 +114,6 @@ public class Player : MonoBehaviour
         GaugeImage.fillAmount = GaugeAmount;
     }
 
-    //打ち出される角度の可視化（魚のアロー）
     public void UpdateArrow()
     {
         Vector2 currentPosition = arw.GetComponent<RectTransform>().anchoredPosition;  // 現在の位置を取得
@@ -160,8 +122,7 @@ public class Player : MonoBehaviour
         arw.transform.rotation = Quaternion.Euler(0, 0, rotateAgl);                    //UIの回転
     }
 
-
-    //全てを加味し打ち出された時の大きさの計算
+    //打ち出された時の大きさの計算
     private void PowerShoting()
     {
         Debug.Log("スペースキー or gamepad.b が離されました");
@@ -177,7 +138,6 @@ public class Player : MonoBehaviour
         forceStrength = 0f; // 溜めリセット
     }
 
-    //タイトルから出た瞬間に打ち出されるためどうにかしたい
     public void ResetSceneFlag()
     {
         sceneJustChanged = false;

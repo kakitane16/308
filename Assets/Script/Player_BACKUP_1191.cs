@@ -44,6 +44,9 @@ public class Player : MonoBehaviour
         Move = 0.1f;
         forceStrength = 0.0f;
         Debug.Log(GetInputOB);
+<<<<<<< HEAD
+        IsReturn = false;
+=======
 
         if (arw == null)
         {
@@ -57,7 +60,7 @@ public class Player : MonoBehaviour
                 Debug.LogWarning("オブジェクトが見つかりませんでした");
             }
         }
-        IsReturn = false;
+>>>>>>> CSV
     }
     // Update is called once per frame
     private void Update()

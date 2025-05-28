@@ -8,6 +8,7 @@ using UnityEngine.SocialPlatforms.Impl;
 public class Goal : MonoBehaviour
 {
     public Transform goal;
+    public string goalTag = "Player"; // ターゲットのタグ
     public float maxScore = 100f;
     public int score;
     public float Level;
@@ -16,11 +17,26 @@ public class Goal : MonoBehaviour
     private void Start()
     {
         ui_manager = FindObjectOfType<UI_R_Manager>();
+
+        // goal（ターゲットTransform）が未設定なら探す
+        if (goal == null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag(goalTag);
+            if (player != null)
+            {
+                goal = player.transform;
+            }
+            else
+            {
+                Debug.LogWarning("オブジェクトが見つかりませんでした");
+            }
+        }
+        ui_manager = FindObjectOfType<UI_R_Manager>();
     }
 
     private void OnCollisionEnter(Collision gl)
     {
-        if (gl.gameObject.CompareTag("Player"))
+        if (gl.gameObject.CompareTag(goalTag))
         {
             //シャリとネタの中心点の距離を捕る
             float distance = Vector3.Distance(transform.position, goal.position);
