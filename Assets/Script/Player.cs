@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     Rigidbody rb;
     public Image GaugeImage; // ゲージ画像アタッチ
     public Arrow arw;
+    public string ArrowTag = "Arrow"; // アローのターゲットタグ
     public GamePadCommand command;
     public Vector3 velocity;
     private float MaxPower = 20f;
@@ -33,6 +34,18 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (arw == null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag(ArrowTag);
+            if (player != null)
+            {
+                arw = player.GetComponent<Arrow>();
+            }
+            else
+            {
+                Debug.LogWarning("オブジェクトが見つかりませんでした");
+            }
+        }
         rb = GetComponent<Rigidbody>();
         command = new GamePadCommand();
         isShot = false;
