@@ -32,19 +32,27 @@ public enum review
 
 public class UI_R_Manager : MonoBehaviour
 {
-
+    bool OneCount;
     public int Num;             //変数は仮。評価によって入れる数字を変える（マーベラスなら0,完璧なら1など）
     public int StageNumber;     //ステージの番号を入れる変数
 
     public GameObject stage_object = null;  //Textオブジェクト
 
-    public Canvas canvas;   //キャンバス
+    //キャンバス(それぞれの評価)
+    public Canvas Bad;
+    public Canvas Nomal;
+    public Canvas Good;
+    public Canvas Perfect;
 
 
     void Start()
     {
+        OneCount = true;
         //最初は表示しないようにキャンバスの表示をオフ
-        //canvas.enabled = false;
+        Bad.enabled = false;
+        Nomal.enabled = false;
+        Good.enabled = false;
+        Perfect.enabled = false;
     }
 
     void Update()
@@ -67,23 +75,29 @@ public class UI_R_Manager : MonoBehaviour
         //}
 
 
-
-        //評価によって演出を変える
-        switch (Num)
+        if (OneCount)
         {
-            case (int)review.Bad:
-                break;
+            //評価によって演出を変える
+            switch (Num)
+            {
+                case (int)review.Bad:
+                    Bad.enabled = !Bad.enabled;
+                    break;
 
-            case (int)review.Nomal:
-                break;
+                case (int)review.Nomal:
+                    Nomal.enabled = !Nomal.enabled;
+                    break;
 
-            case (int)review.Good:
-                break;
+                case (int)review.Good:
+                    Good.enabled = !Good.enabled;
+                    break;
 
-            case (int)review.Perfect: 
-                break;
+                case (int)review.Perfect:
+                    Perfect.enabled = !Perfect.enabled;
+                    break;
+            }
+            OneCount = false;
         }
-
     }
 
     public void GetNum(int Point)
