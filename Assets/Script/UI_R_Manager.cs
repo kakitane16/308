@@ -44,7 +44,7 @@ public class UI_R_Manager : MonoBehaviour
     void Start()
     {
         //最初は表示しないようにキャンバスの表示をオフ
-        canvas.enabled = false;
+        //canvas.enabled = false;
     }
 
     void Update()
@@ -54,15 +54,15 @@ public class UI_R_Manager : MonoBehaviour
 
         //ステージ名の表示
         if (StageNumber == 0) { stage_text.text = "000000"/*仮のステージ名*/; }
-        if (StageNumber == 1) { stage_text.text = "111111"/*仮のステージ名*/; }
-
-
+        if (StageNumber == 1) { stage_text.text = "ステージ１"/*仮のステージ名*/; }
 
         //スペースキーを押したらUI表示（今は客が踊りだす等の演出イベントが実行の代わり）
-        if (Keyboard.current.spaceKey.wasReleasedThisFrame)
-        {
-            canvas.enabled = !canvas.enabled;
-        }
+        //if (Keyboard.current.spaceKey.wasReleasedThisFrame)
+        //{
+        //    canvas.enabled = !canvas.enabled;
+        //}
+
+
 
         //評価によって演出を変える
         switch (Num)
@@ -76,12 +76,12 @@ public class UI_R_Manager : MonoBehaviour
             case (int)review.Good:
                 break;
 
-            case (int)review.Perfect:
+            case (int)review.Perfect: 
                 break;
         }
 
     }
-   
+
     public void GetNum(int Point)
     {
         Num = Point;
