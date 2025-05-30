@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    Rigidbody rb;
+    public Rigidbody rb;
     public Image GaugeImage; // ゲージ画像アタッチ
     public Arrow arw;
     public string ArrowTag = "Arrow"; // アローのターゲットタグ
@@ -28,12 +28,14 @@ public class Player : MonoBehaviour
 
     public int GetInputOB;    //使う物を取得　今調整段階なため最初にここに数値を入れれば変わる
                               //ない　０　ゲームパッド　１　キーボード　２
-
+    private float inputBlockTime = 0.1f; // 入力ブロック時間
+    private float sceneStartTime;       // シーンが開始した時間
     private bool IsReturn;
 
     // Start is called before the first frame update
     void Start()
     {
+        sceneStartTime = Time.time;
         if (arw == null)
         {
             GameObject player = GameObject.FindGameObjectWithTag(ArrowTag);
@@ -61,6 +63,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        // シーン切り替え直後の1秒間は入力を受け付けない
+        if (Time.time - sceneStartTime < inputBlockTime)
+            return;
         //打ち出すまでの間だけ入る
         if (!isShot)
         {
@@ -115,25 +120,16 @@ public class Player : MonoBehaviour
         {
             Debug.Log("スペースキーが押されているよ");
             //最大値まで戻る場合
-            if (forceStrength < MaxPower/* && !IsReturn*/)
+            if (forceStrength < MaxPower)
             {
                 forceStrength += shotpower;
             }
-            else if(forceStrength >=  MaxPower/* && !IsReturn*/)
+            else if(forceStrength >=  MaxPower)
             {
                 //最大値に達した
                 IsReturn = true;
                 forceStrength = 0.0f;
             }
-            //最小値まで戻る場合
-            //if(forceStrength > MinPower && IsReturn)
-            //{
-            //    forceStrength -= shotpower;
-            //}
-            //else if (forceStrength <= MinPower)
-            //{
-            //    IsReturn = false;
-            //}
         }
         //打ち出し
         if (command.WasBbutton(GetInputOB))
@@ -174,11 +170,5 @@ public class Player : MonoBehaviour
         // アローを非表示にする
         arw.gameObject.SetActive(false);
         forceStrength = 0f; // 溜めリセット
-    }
-
-    //タイトルから出た瞬間に打ち出されるためどうにかしたい
-    public void ResetSceneFlag()
-    {
-        sceneJustChanged = false;
     }
 }

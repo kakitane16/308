@@ -12,7 +12,7 @@ public class ScenChangeResult : MonoBehaviour
     public void ClickButtonChangeGame()
     {
         SceneManager.LoadScene("Game");
-        pr.ResetSceneFlag();
+        //pr.ResetSceneFlag();
     }
 
     //クリックするとタイトルシーンへ移動（現状の仮で）
