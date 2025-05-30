@@ -71,6 +71,57 @@ public class GamePadCommand : MonoBehaviour
         return false;
     }
 
+    public bool LeftAction(int ipt)
+    {
+        switch (ipt)
+        {
+            case (int)InputObject.GamePad:
+                if (Gamepad.current != null)
+                {
+                    if (Gamepad.current.leftStick.value.x < deadzone.y)
+                    {
+                        return true;
+                    }
+                }
+                break;
+            case (int)InputObject.KeyBoad:
+                if (Keyboard.current != null)
+                {
+                    if (Keyboard.current.sKey.isPressed)
+                    {
+                        return true;
+                    }
+                }
+                break;
+        }
+        return false;
+    }
+    public bool RightAction(int ipt)
+    {
+        switch (ipt)
+        {
+            case (int)InputObject.GamePad:
+                if (Gamepad.current != null)
+                {
+                    if (Gamepad.current.leftStick.value.x > deadzone.x)
+                    {
+                        return true;
+                    }
+                }
+                break;
+            case (int)InputObject.KeyBoad:
+                if (Keyboard.current != null)
+                {
+                    if (Keyboard.current.sKey.isPressed)
+                    {
+                        return true;
+                    }
+                }
+                break;
+        }
+        return false;
+    }
+
     //Bボタンが押されている時キーボードならspace
     public bool IsBbutton(int ipt)
     {

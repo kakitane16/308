@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     private GamePadCommand inputChecker;
     public Arrow arw;
     public string ArrowTag = "Arrow"; // アローのターゲットタグ
-    public GamePadCommand command;
+    private GamePadCommand command;
     public Vector3 velocity;
     private float MaxPower = 20f;
     private float MinPower = 0.0f;
