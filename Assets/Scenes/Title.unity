@@ -915,6 +915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputDevice: 1
+  score: 0
 --- !u!1001 &755298132
 PrefabInstance:
   m_ObjectHideFlags: 0

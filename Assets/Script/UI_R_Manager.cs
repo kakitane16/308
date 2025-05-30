@@ -49,6 +49,10 @@ public class UI_R_Manager : MonoBehaviour
 
     void Update()
     {
+        //＊＊＊ゲームシーンのスコアを取得＊＊＊＊
+        Num = GameManager.Instance.score;
+
+
         //オブジェクトからTextコンポーネントを取得
         Text stage_text = stage_object.GetComponent<Text>();
 

@@ -1002,6 +1002,8 @@ GameObject:
   - component: {fileID: 1450246045}
   - component: {fileID: 1450246044}
   - component: {fileID: 1450246043}
+  - component: {fileID: 1450246046}
+  - component: {fileID: 1450246047}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1075,6 +1077,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1450246046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450246042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8beb9a589b9ea4fabd40f9bbb49377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1450246047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450246042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65bc39fd9d404574ba0ddd19da6d1402, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputDevice: 1
+  score: 0
 --- !u!1 &1592943472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,7 +1251,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f449f6a4602ac7b41a24ad44db5d0e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pr: {fileID: 0}
 --- !u!95 &1592943478
 Animator:
   serializedVersion: 5
@@ -1232,7 +1259,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1592943472}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: eebeb3394e5b75a40965ce8c8f47aa10, type: 2}
   m_CullingMode: 0
@@ -1543,7 +1570,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1998278111}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: eebeb3394e5b75a40965ce8c8f47aa10, type: 2}
   m_CullingMode: 0
@@ -1568,7 +1595,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f449f6a4602ac7b41a24ad44db5d0e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pr: {fileID: 0}
 --- !u!114 &1998278115
 MonoBehaviour:
   m_ObjectHideFlags: 0
