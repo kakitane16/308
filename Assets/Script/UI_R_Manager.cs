@@ -53,8 +53,8 @@ public class UI_R_Manager : MonoBehaviour
         Text stage_text = stage_object.GetComponent<Text>();
 
         //ステージ名の表示
-        if (StageNumber == 0) { stage_text.text = "000000"/*仮のステージ名*/; }
-        if (StageNumber == 1) { stage_text.text = "ステージ１"/*仮のステージ名*/; }
+        //if (StageNumber == 0) { stage_text.text = "000000"/*仮のステージ名*/; }
+        //if (StageNumber == 1) { stage_text.text = "ステージ１"/*仮のステージ名*/; }
 
         //スペースキーを押したらUI表示（今は客が踊りだす等の演出イベントが実行の代わり）
         //if (Keyboard.current.spaceKey.wasReleasedThisFrame)
