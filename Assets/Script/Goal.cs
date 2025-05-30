@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
@@ -11,6 +12,7 @@ public class Goal : MonoBehaviour
     public string goalTag = "Player"; // ターゲットのタグ
     public float maxScore = 100f;
     public int score;
+    public int scoreRank;
     public float Level;
     private UI_R_Manager ui_manager;
 
@@ -49,26 +51,26 @@ public class Goal : MonoBehaviour
         //判定基準　bad <= 20  Nomal <= 40 Good <= 60  81 <= Perfect <= 100 
         if (score <= 10)
         {
-            //ui_manager.GetNum((int)review.Bad);
+            scoreRank = 0;
             SceneManager.LoadScene(2);
             Debug.Log("bad");
         }
         else if (score <= 60)
         {
-            //ui_manager.GetNum((int)review.Nomal);
+            scoreRank = 1;
             Debug.Log("nomal");
         }
         else if (score <= 80)
         {
-           // ui_manager.GetNum((int)review.Good);
+            scoreRank = 2;
             Debug.Log("good");
         }
         else if (score <= 100)
         {
-           // ui_manager.GetNum((int)review.Perfect);
+            scoreRank = 3;
             Debug.Log("parfect");
         }
 
-       // SceneManager.LoadScene(2);
+        GameManager.Instance.score = scoreRank;
     }
 }

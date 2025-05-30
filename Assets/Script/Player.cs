@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 {
     public Rigidbody rb;
     public Image GaugeImage; // ゲージ画像アタッチ
+    private GamePadCommand inputChecker;
     public Arrow arw;
     public string ArrowTag = "Arrow"; // アローのターゲットタグ
     public GamePadCommand command;
@@ -26,7 +27,7 @@ public class Player : MonoBehaviour
     private float Horizontal; //UIの横の移動値を変更
     private float Move;       //UIの横と高さの値変更幅
 
-    public int GetInputOB;    //使う物を取得　今調整段階なため最初にここに数値を入れれば変わる
+    private int GetInputOB;    //使う物を取得　今調整段階なため最初にここに数値を入れれば変わる
                               //ない　０　ゲームパッド　１　キーボード　２
     private float inputBlockTime = 0.1f; // 入力ブロック時間
     private float sceneStartTime;       // シーンが開始した時間
@@ -36,6 +37,11 @@ public class Player : MonoBehaviour
     void Start()
     {
         sceneStartTime = Time.time;
+        inputChecker = GetComponent<GamePadCommand>();
+        if (inputChecker == null)
+        {
+            inputChecker = gameObject.AddComponent<GamePadCommand>();
+        }
         if (arw == null)
         {
             GameObject player = GameObject.FindGameObjectWithTag(ArrowTag);
@@ -59,6 +65,7 @@ public class Player : MonoBehaviour
         forceStrength = 0.0f;
         Debug.Log(GetInputOB);
         IsReturn = false;
+        GetInputOB = (int)GameManager.Instance.inputDevice;
     }
     // Update is called once per frame
     private void Update()
