@@ -874,6 +874,7 @@ MonoBehaviour:
   goalTag: Player
   maxScore: 100
   score: 0
+  scoreRank: 0
   Level: 100
 --- !u!1 &454576651
 GameObject:
@@ -1725,8 +1726,8 @@ MonoBehaviour:
   g_Target: {fileID: 1612819569}
   g_FocusObject: {fileID: 28911229}
   g_TargetTag: Player
-  g_Offset: {x: 0, y: 5, z: -10}
-  g_Position: {x: 0, y: 20, z: -85}
+  g_Offset: {x: 0, y: 5, z: -12}
+  g_Position: {x: 1, y: 20, z: -85}
   g_Rotation: {x: 0.190809, y: 0, z: 0, w: 0.98162717}
   g_FollowSpeed: 2
   g_MovementThreshold: 0.01
@@ -3073,14 +3074,12 @@ MonoBehaviour:
   GaugeImage: {fileID: 115246903}
   arw: {fileID: 1574056135}
   ArrowTag: Arrow
-  command: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
   RotateSpeed: 2
   shotpower: 0.03
   SAngleY: 0
   forceStrength: 0
   rotateAgl: 0
-  GetInputOB: 2
 --- !u!54 &1612819571
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3113,6 +3112,7 @@ MonoBehaviour:
   goalTag: Player
   maxScore: 100
   score: 0
+  scoreRank: 0
   Level: 100
 --- !u!114 &1612819573
 MonoBehaviour:
@@ -3153,6 +3153,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 270cb972a0dd55e4dbb9401397402ec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  count: 10
+  timeStep: 0.1
+  gravity: {x: 0, y: -9.81, z: 0}
 --- !u!1001 &1621269372
 PrefabInstance:
   m_ObjectHideFlags: 0
