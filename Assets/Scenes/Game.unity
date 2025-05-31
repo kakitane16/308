@@ -865,7 +865,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 440473215}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98f79f324b942224cab43cdcab6742f0, type: 3}
   m_Name: 
@@ -873,9 +873,8 @@ MonoBehaviour:
   goal: {fileID: 1612819569}
   goalTag: Player
   maxScore: 100
-  score: 0
-  scoreRank: 0
-  Level: 100
+  maxDistance: 5
+  levelMultiplier: 1
 --- !u!1 &454576651
 GameObject:
   m_ObjectHideFlags: 0
@@ -3070,7 +3069,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 767cb83cbeffdb2409802a2c06601808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 1612819571}
   GaugeImage: {fileID: 115246903}
   arw: {fileID: 1574056135}
   ArrowTag: Arrow
@@ -3103,17 +3102,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612819565}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98f79f324b942224cab43cdcab6742f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 440473219}
-  goalTag: Player
+  goalTag: Plate
   maxScore: 100
-  score: 0
-  scoreRank: 0
-  Level: 100
+  maxDistance: 5
+  levelMultiplier: 1
 --- !u!114 &1612819573
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,17 +9,13 @@ using UnityEngine.SocialPlatforms.Impl;
 public class Goal : MonoBehaviour
 {
     public Transform goal;
-    public string goalTag = "Player"; // ターゲットのタグ
+    public string goalTag = "Plate";
     public float maxScore = 100f;
-    public int score;
-    public int scoreRank;
-    public float Level;
-    private UI_R_Manager ui_manager;
+    public float maxDistance = 5f; // スコアゼロになる距離
+    public float levelMultiplier = 1f;
 
     private void Start()
     {
-        ui_manager = FindObjectOfType<UI_R_Manager>();
-
         // goal（ターゲットTransform）が未設定なら探す
         if (goal == null)
         {
@@ -33,44 +29,58 @@ public class Goal : MonoBehaviour
                 Debug.LogWarning("オブジェクトが見つかりませんでした");
             }
         }
-        ui_manager = FindObjectOfType<UI_R_Manager>();
     }
 
     private void OnCollisionEnter(Collision gl)
     {
-        if (gl.gameObject.CompareTag(goalTag))
+        if (!gl.gameObject.CompareTag(goalTag))
         {
-            //シャリとネタの中心点の距離を捕る
-            float distance = Vector3.Distance(transform.position, goal.position);
-            //スコアが0以上100以下に設定
-            //値が大きいのでレベルの値を大きくすると引かれる値が大きくなる
-            score = (int)Mathf.Clamp((int)(maxScore - (distance * Level)), 0, maxScore);
-
+            return;
         }
 
-        //判定基準　bad <= 20  Nomal <= 40 Good <= 60  81 <= Perfect <= 100 
+
+        float distance = Vector3.Distance(transform.position, goal.position);
+        int score = CalculateScore(distance);
+        int rank = GetScoreRank(score);
+
+        // スコア保存
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.score = rank;
+        }
+    }
+
+    //playerとgoalの中心点の距離で点数（0~100点）
+    private int CalculateScore(float distance)
+    {
+        float adjustedDistance = distance * levelMultiplier;
+        float normalized = Mathf.Clamp01(1f - (adjustedDistance / maxDistance));
+        return Mathf.RoundToInt(normalized * maxScore);
+    }
+
+    //CaluculateScoreで概算した値を正式なスコアに変換
+    private int GetScoreRank(int score)
+    {
         if (score <= 10)
         {
-            scoreRank = 0;
-            SceneManager.LoadScene(2);
             Debug.Log("bad");
+            return 0;
         }
         else if (score <= 60)
         {
-            scoreRank = 1;
-            Debug.Log("nomal");
+            Debug.Log("normal");
+            return 1;
         }
         else if (score <= 80)
         {
-            scoreRank = 2;
             Debug.Log("good");
+            return 2;
         }
-        else if (score <= 100)
+        else
         {
-            scoreRank = 3;
-            Debug.Log("parfect");
+            Debug.Log("perfect");
+            return 3;
         }
-
-        GameManager.Instance.score = scoreRank;
     }
+
 }

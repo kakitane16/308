@@ -15,7 +15,7 @@ public class ScenChangeResult : MonoBehaviour
     {
         _command = new GamePadCommand();
         GetInputOB = (int)GameManager.Instance.inputDevice;
-        count = 0;
+        count = 1;
     }
     private void Update()
     {
@@ -41,17 +41,5 @@ public class ScenChangeResult : MonoBehaviour
             }
         }
     }
-
-    //クリックするとゲームシーンへ移動
-    //public void ClickButtonChangeGame()
-    //{
-    //    SceneManager.LoadScene("Game");
-    //}
-
-    ////クリックするとタイトルシーンへ移動（現状の仮で）
-    //public void ClickButtonChangeTitle()
-    //{
-    //    SceneManager.LoadScene("Title");
-    //}
 }
 
