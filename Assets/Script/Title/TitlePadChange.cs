@@ -1,64 +1,90 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+
+/// <summary>
+/// ゲームパッドまたはキーボードでタイトル画面のボタン選択を行うスクリプト。
+/// UIタイトルのボタンを上下に移動して、決定ボタンで選択中のボタンの処理を実行します。
+/// </summary>
 
 
 public class TitlePadChange : MonoBehaviour
 {
+    public List<Button> menuButtons; // UIでボタン登録
     private GamePadCommand _command;
     private int GetInputOB;
-    private int count;
-    private const int optionCount = 3; // Game, Manual, Quit
+    private int selectedIndex = 0;
+
+    private float inputCooldown = 0.25f; // 選択移動の受付間隔
+    private float inputCooldownTimer = 0f; 
+
+    private bool confirmButtonReleased = true; // 決定ボタンが離された状態かどうか
+
     private void Start()
     {
         _command = new GamePadCommand();
         GetInputOB = (int)GameManager.Instance.inputDevice;
-        count = 0;
+
+        if (menuButtons.Count > 0)
+        {
+            SelectButton(0); // 最初のボタンを選択状態に
+        }
     }
+
     private void Update()
     {
-        if (_command.UpAction(GetInputOB))
+        // クールダウン中は入力を受け付けないように
+        if (inputCooldownTimer > 0f)
         {
-            count = (count - 1 + optionCount) % optionCount;
-        }
-        if (_command.DownAction(GetInputOB))
-        {
-            count = (count + 1) % optionCount;
+            inputCooldownTimer -= Time.deltaTime;
+            return;
         }
 
-        if (_command.IsBbutton(GetInputOB))
+        // 縦方向の入力を取得
+        float vertical = _command.GetVerticalAxis(GetInputOB);
+
+        if (vertical > 0.5f)
         {
-            switch (count)
-            {
-                case 0:
-                    SceneManager.LoadScene("Game");
-                    break;
-                case 1:
-                    SceneManager.LoadScene("Manual");
-                    break;
-                case 2:
-#if UNITY_EDITOR
-                    UnityEditor.EditorApplication.isPlaying = false;
-#else
-                    Application.Quit();
-#endif
-                    break;
-            }
+            MoveSelection(-1); // 上へ
+            inputCooldownTimer = inputCooldown;
         }
+        else if (vertical < -0.5f)
+        {
+            MoveSelection(1); // 下へ
+            inputCooldownTimer = inputCooldown;
+        }
+
+        HandleDecision();
     }
 
-    //クリックするとゲームシーンへ移動
-    //public void ClickButtonChangeGame()
-    //{
-    //    SceneManager.LoadScene("Game");
-    //}
+    // ====== ボタンインデックスを変更して、選択状態を更新 ======
+    private void MoveSelection(int direction)
+    {
+        selectedIndex = (selectedIndex + direction + menuButtons.Count) % menuButtons.Count;
+        SelectButton(selectedIndex);
+    }
+    // ====== 指定インデックスのボタンを選択状態に ======
+    private void SelectButton(int index)
+    {
+        if (menuButtons != null && menuButtons.Count > 0)
+        {
+            EventSystem.current.SetSelectedGameObject(menuButtons[index].gameObject);
+        }
+    }
+    // ====== 決定ボタンが押されたときに、現在選択中のボタン実行 ======
+    private void HandleDecision()
+    {
+        if (!_command.IsBbutton(GetInputOB))
+        {
+            confirmButtonReleased = true;
+        }
 
-    ////クリックするとタイトルシーンへ移動（現状の仮で）
-    //public void ClickButtonChangeTitle()
-    //{
-    //    SceneManager.LoadScene("Title");
-    //}
+        if (_command.IsBbutton(GetInputOB) && confirmButtonReleased)
+        {
+            confirmButtonReleased = false;
+            menuButtons[selectedIndex].onClick.Invoke();
+        }
+    }
 }
-
