@@ -87,7 +87,7 @@ public class GamePadCommand : MonoBehaviour
             case (int)InputObject.KeyBoad:
                 if (Keyboard.current != null)
                 {
-                    if (Keyboard.current.sKey.isPressed)
+                    if (Keyboard.current.aKey.isPressed)
                     {
                         return true;
                     }
@@ -112,7 +112,7 @@ public class GamePadCommand : MonoBehaviour
             case (int)InputObject.KeyBoad:
                 if (Keyboard.current != null)
                 {
-                    if (Keyboard.current.sKey.isPressed)
+                    if (Keyboard.current.dKey.isPressed)
                     {
                         return true;
                     }
