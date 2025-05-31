@@ -175,4 +175,29 @@ public class GamePadCommand : MonoBehaviour
         }
         return false;
     }
+   
+    public float GetVerticalAxis(int ipt)
+    {
+        switch (ipt)
+        {
+            case (int)InputObject.GamePad:
+                if (Gamepad.current != null)
+                {
+                    return Gamepad.current.leftStick.ReadValue().y;
+                }
+                break;
+            case (int)InputObject.KeyBoad:
+                if (Keyboard.current != null)
+                {
+                    float value = 0f;
+                    if (Keyboard.current.wKey.isPressed) value += 1f;
+                    if (Keyboard.current.sKey.isPressed) value -= 1f;
+                    return value;
+                }
+                break;
+        }
+        return 0f;
+    }
+
 }
+

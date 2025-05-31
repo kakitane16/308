@@ -5,10 +5,15 @@ public class ButtonSize : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     private Vector3 _originalScale;
     [SerializeField] private Vector3 _selectedScale = new Vector3(1.2f, 1.2f, 1.2f);
-    [SerializeField] private float _scaleSpeed = 10f; // 拡大・縮小の速さ
+    [SerializeField] private float _scaleSpeed = 10f;
+
+    // ここにシーン名を入れる
+    [SerializeField] private string sceneToLoad;
 
     private Vector3 _targetScale;
     private bool _isSelected = false;
+
+    public bool IsSelected => _isSelected;  // 外部から選択状態を取得可能に
 
     void Start()
     {
@@ -18,21 +23,23 @@ public class ButtonSize : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     void Update()
     {
-        // 現在のスケールから選択時スケールへ滑らかに移動
         transform.localScale = Vector3.Lerp(transform.localScale, _targetScale, Time.deltaTime * _scaleSpeed);
     }
 
-    // 選択時のスケール
     public void OnSelect(BaseEventData eventData)
     {
         _isSelected = true;
         _targetScale = _selectedScale;
     }
 
-    // 選択外のスケール
     public void OnDeselect(BaseEventData eventData)
     {
         _isSelected = false;
         _targetScale = _originalScale;
+    }
+
+    public string GetSceneName()
+    {
+        return sceneToLoad;
     }
 }
