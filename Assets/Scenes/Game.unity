@@ -1726,7 +1726,7 @@ MonoBehaviour:
   g_FocusObject: {fileID: 28911229}
   g_TargetTag: Player
   g_Offset: {x: 0, y: 5, z: -12}
-  g_Position: {x: 1, y: 20, z: -85}
+  g_Position: {x: 1, y: 20, z: -90}
   g_Rotation: {x: 0.190809, y: 0, z: 0, w: 0.98162717}
   g_FollowSpeed: 2
   g_MovementThreshold: 0.01
