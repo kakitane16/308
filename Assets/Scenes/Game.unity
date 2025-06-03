@@ -818,9 +818,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 1612819569}
+  goalTag: Plate
   maxScore: 100
-  score: 0
-  Level: 100
+  maxDistance: 5
+  levelMultiplier: 1
 --- !u!1 &578269280
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,6 +1157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   g_Target: {fileID: 1612819569}
   g_FocusObject: {fileID: 28911229}
+  g_TargetTag: Player
   g_Offset: {x: 0, y: 5, z: -10}
   g_Position: {x: 0, y: 20, z: -85}
   g_Rotation: {x: 0.190809, y: 0, z: 0, w: 0.98162717}
@@ -1715,7 +1717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c72f97abb71babb4d9a407007f237161, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.38
+      value: 0.14
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c72f97abb71babb4d9a407007f237161, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2199,7 +2201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fac8486b41da065479918e3809b2ff53, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.7
+      value: -25.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fac8486b41da065479918e3809b2ff53, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2338,6 +2340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1612819565}
   ArrowUI: {fileID: 1574056131}
+  ArrowTag: Player
   T_player: {fileID: 1612819569}
 --- !u!1 &1612819565
 GameObject:
@@ -2434,7 +2437,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612819565}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -7.73, y: 16.41, z: -69.68}
+  m_LocalPosition: {x: -9.75, y: 14.28, z: -69.68}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2454,15 +2457,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 767cb83cbeffdb2409802a2c06601808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   GaugeImage: {fileID: 115246903}
   arw: {fileID: 1574056135}
-  command: {fileID: 0}
+  ArrowTag: Arrow
   velocity: {x: 0, y: 0, z: 0}
   RotateSpeed: 2
   shotpower: 0.05
   SAngleY: 0
+  forceStrength: 0
   rotateAgl: 0
-  GetInputOB: 2
 --- !u!54 &1612819571
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2492,9 +2496,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 440473219}
+  goalTag: Plate
   maxScore: 100
-  score: 0
-  Level: 100
+  maxDistance: 5
+  levelMultiplier: 1
 --- !u!114 &1612819573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2616,7 +2621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1388d817613fdbe4692609c496ea0e95, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.7
+      value: -24.89
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1388d817613fdbe4692609c496ea0e95, type: 3}
       propertyPath: m_LocalPosition.y
