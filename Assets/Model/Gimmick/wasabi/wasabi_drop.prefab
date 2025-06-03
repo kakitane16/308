@@ -48,8 +48,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604bbb68b9321d043b86504a868c2638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sushi: {fileID: 2100000, guid: f4df619947b22a640aba182bd5f7236f, type: 2}
-  SushiMesh: {fileID: 1733002559190041388, guid: bf6835c0455ae8b47bb5820db5170c96, type: 3}
+  sourceMaterials:
+  - {fileID: -3898476309407061140, guid: 3f6b9010f9c4b104c9aa053ea3c0721d, type: 3}
+  - {fileID: -410565069647187990, guid: 1388d817613fdbe4692609c496ea0e95, type: 3}
+  - {fileID: -7304979987703377561, guid: fac8486b41da065479918e3809b2ff53, type: 3}
+  targetMaterials:
+  - {fileID: 2100000, guid: f4df619947b22a640aba182bd5f7236f, type: 2}
+  - {fileID: 2100000, guid: 503a31738cbd9d8439661b6b552ba5aa, type: 2}
+  - {fileID: 2100000, guid: 46a8dd5efcaef9044ad827cc1c9df0b0, type: 2}
+  targetMeshes:
+  - {fileID: 1733002559190041388, guid: bf6835c0455ae8b47bb5820db5170c96, type: 3}
+  - {fileID: -5589444630313727633, guid: 665e7657fe06798499792a1d9e77caf3, type: 3}
+  - {fileID: -4999925385747091504, guid: f6d15c92ec1c7764782e719eef6ea252, type: 3}
+  applyToSkinned: 0
 --- !u!54 &5285000205747365904
 Rigidbody:
   m_ObjectHideFlags: 0
