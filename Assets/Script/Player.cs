@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public Rigidbody rb;
     public Image GaugeImage; // ゲージ画像アタッチ
     private GamePadCommand inputChecker;
+    private ArmAnimation arm;
     public Arrow arw;
     public string ArrowTag = "Arrow"; // アローのターゲットタグ
     private GamePadCommand command;
@@ -56,6 +57,8 @@ public class Player : MonoBehaviour
         }
         rb = GetComponent<Rigidbody>();
         command = new GamePadCommand();
+        arm = new ArmAnimation();
+        GetInputOB = (int)GameManager.Instance.inputDevice;
         isShot = false;
         rb.useGravity = false;
         SAngleY = 0;
@@ -65,7 +68,6 @@ public class Player : MonoBehaviour
         forceStrength = 0.0f;
         Debug.Log(GetInputOB);
         IsReturn = false;
-        GetInputOB = (int)GameManager.Instance.inputDevice;
     }
     // Update is called once per frame
     private void Update()
@@ -129,6 +131,7 @@ public class Player : MonoBehaviour
             //最大値まで戻る場合
             if (forceStrength < MaxPower)
             {
+                arm.ArmAnime();
                 forceStrength += shotpower;
             }
             else if(forceStrength >=  MaxPower)
