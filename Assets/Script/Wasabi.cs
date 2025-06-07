@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Wasabi : MonoBehaviour
 {
+
+  
     [Header("判定する元のマテリアル（触れてきたオブジェクトがこのマテリアルを持っていたら）")]
     public Material[] sourceMaterials;
 
@@ -16,6 +18,8 @@ public class Wasabi : MonoBehaviour
     [Header("SkinnedMeshRenderer を使う場合はチェック（MeshFilter か SkinnedMeshRenderer のどちらかに合わせる）")]
     public bool applyToSkinned = false;
 
+    public float G_Weight = 0.7f;
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
@@ -27,6 +31,12 @@ public class Wasabi : MonoBehaviour
         // 触れてきたオブジェクトが持っている「今のマテリアル」を調べる
         Material currentMat = rend.sharedMaterial;
         if (currentMat == null) return;
+
+
+        Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+        // 重量の変更
+        if (rb != null)
+            rb.mass = G_Weight;
 
         // sourceMaterials の中から currentMat と同じものを探す
         int idx = System.Array.IndexOf(sourceMaterials, currentMat);
