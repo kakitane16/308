@@ -22,8 +22,25 @@ public class UI_S_StageSelect : MonoBehaviour
 
     private bool confirmButtonReleased = true; // 決定ボタンが離された状態かどうか
 
+    //=============================================================================================
+    public RectTransform content;       // 動かすUI（Panel_Content）
+    public float pageWidth = 800f;      // 1ページの幅
+    public float slideSpeed = 10f;      // 移動速度
+    private Vector2 targetPosition;     // 移動先の位置
+    private int currentPage = 0;        // 現在のページ
+
+    public int maxPage = 2; // ページ数 - 1（例：3ページなら2）
+    //=============================================================================================
+
+
     private void Start()
     {
+        //=============================================================================================
+
+        targetPosition = content.anchoredPosition;
+        //=============================================================================================
+
+
         _command = new GamePadCommand();
         GetInputOB = (int)GameManager.Instance.inputDevice;
 
@@ -35,6 +52,10 @@ public class UI_S_StageSelect : MonoBehaviour
 
     private void Update()
     {
+        //UI移動========================================================================================================
+        content.anchoredPosition = Vector2.Lerp(content.anchoredPosition, targetPosition, Time.deltaTime * slideSpeed);
+        //======================================================================================================================
+
         // クールダウン中は入力を受け付けないように
         if (inputCooldownTimer > 0f)
         {
@@ -82,4 +103,25 @@ public class UI_S_StageSelect : MonoBehaviour
             menuButtons[selectedIndex].onClick.Invoke();
         }
     }
+
+    //=============================================================================================
+
+    public void SlideLeft()
+    {
+        if (currentPage > 0)
+        {
+            currentPage--;
+            targetPosition = new Vector2(-pageWidth * currentPage, 0);
+        }
+    }
+    public void SlideRight()
+    {
+        if (currentPage < maxPage)
+        {
+            currentPage++;
+            targetPosition = new Vector2(-pageWidth * currentPage, 0);
+        }
+    }
+        //=============================================================================================
+
 }
