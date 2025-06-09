@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine;
 using System.Runtime.CompilerServices;
 using UnityEngine.UI;
+using UnityEditorInternal.VR;
 
 public class Player : MonoBehaviour
 {
@@ -12,13 +13,14 @@ public class Player : MonoBehaviour
     private GamePadCommand inputChecker;
     private ArmAnimation arm;
     public Arrow arw;
+    public Parabola parabola;
     public string ArrowTag = "Arrow"; // アローのターゲットタグ
     private GamePadCommand command;
     public Vector3 velocity;
     private float MaxPower = 20f;
     private float MinPower = 0.0f;
     public float RotateSpeed;
-    private bool isShot;
+    public bool isShot;
     public float shotpower;
     public float SAngleY;
     public float forceStrength;            // 前方向への飛ぶ力
@@ -127,11 +129,14 @@ public class Player : MonoBehaviour
         //打つ時のでかさを貯める
         if (command.IsBbutton(GetInputOB))
         {
+            if (parabola != null)
+            {
+                parabola.ShowParabora();
+            }
             Debug.Log("スペースキーが押されているよ");
             //最大値まで戻る場合
             if (forceStrength < MaxPower)
             {
-                arm.ArmAnime();
                 forceStrength += shotpower;
             }
             else if(forceStrength >=  MaxPower)
@@ -145,6 +150,10 @@ public class Player : MonoBehaviour
         if (command.WasBbutton(GetInputOB))
         {
             PowerShoting();
+            if (parabola != null)
+            {
+                parabola.HideDots();
+            }
         }
     }
 
@@ -159,7 +168,7 @@ public class Player : MonoBehaviour
     //打ち出される角度の可視化（魚のアロー）
     public void UpdateArrow()
     {
-        Vector2 currentPosition = arw.GetComponent<RectTransform>().anchoredPosition;  // 現在の位置を取得
+        Vector2 currentPosition = arw.GetComponent<RectTransform>().anchoredPosition;  //S 現在の位置を取得
         Vector2 offset = new Vector2(Vertical, Horizontal);                            // 追加したいオフセット値
         arw.GetComponent<RectTransform>().anchoredPosition = currentPosition + offset; // 位置を更新
         arw.transform.rotation = Quaternion.Euler(0, 0, rotateAgl);                    //UIの回転

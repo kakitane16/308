@@ -3,70 +3,74 @@ using UnityEngine;
 
 public class Parabola : MonoBehaviour
 {
-    Player player;
-    public GameObject prefab;                 // 配置したいオブジェクト（プレハブ）
-    public int count = 10;                    // 配置する個数
-    public float timeStep = 0.1f;             // シミュレーションの時間ステップ（等間隔）
-    public Vector3 gravity = new Vector3(0, -9.81f, 0); // 重力
+    public GameObject dotPrefab;         // 丸のプレハブ
+    public int dotCount = 30;            // 表示するドット数
+    public float dotSpacing = 0.1f;      // ドット間の時間間隔
+    public Transform playerTransform;   // PlayerのTransform参照（位置、向き）
+    public Rigidbody playerRb;           // PlayerのRigidbody（初速の取得に使う）
 
-    private Vector3 launchVelocity;
-    private List<GameObject> markers = new List<GameObject>();
+    private List<GameObject> dots = new List<GameObject>();
+    public Vector3 initialVelocity;
 
-    // 前回の入力値
-    private float prevForceStrength;
-    private float prevAngleY;
-
-    void Start()
+    private void Start()
     {
-        player = GetComponent<Player>();
-
-        for (int i = 0; i < count; i++)
+        // ドットを生成して非アクティブにする（初期化）
+        for (int i = 0; i < dotCount; i++)
         {
-            GameObject marker = Instantiate(prefab);
-            markers.Add(marker);
-        }
-
-        // 初回に一度更新
-        UpdateMarkers();
-    }
-
-    void Update()
-    {
-        if (player == null) return;
-
-        // 力 or 角度が変わったかを確認
-        if (player.forceStrength != prevForceStrength || player.SAngleY != prevAngleY)
-        {
-            UpdateMarkers();
+            GameObject dot = Instantiate(dotPrefab);
+            dot.SetActive(false);
+            dots.Add(dot);
         }
     }
 
-    void UpdateMarkers()
+    public void ShowParabora()
     {
-        if (player == null || markers.Count == 0) return;
-
-        Vector3 startPos = player.transform.position;
-
-        // Y軸の角度をラジアンに変換して放物線方向に反映（例: 上に打ち上げる角度）
-        float angleRad = player.SAngleY * Mathf.Deg2Rad;
-        Vector3 direction = player.transform.forward;
-        launchVelocity = Quaternion.AngleAxis(player.SAngleY, player.transform.right) * direction * player.forceStrength;
-
-        for (int i = 0; i < count; i++)
-        {
-            float time = timeStep * i;
-            Vector3 pos = SimulatePosition(startPos, launchVelocity, time, gravity);
-            markers[i].transform.position = pos;
-        }
-
-        // 現在の設定を保存
-        prevForceStrength = player.forceStrength;
-        prevAngleY = player.SAngleY;
+        initialVelocity = GetInitialVelocity();
+        ShowPredictionDots(initialVelocity);
     }
 
-    // 放物線の位置を計算
-    Vector3 SimulatePosition(Vector3 initialPosition, Vector3 initialVelocity, float time, Vector3 gravity)
+    // ここでは仮の処理として初速を計算
+    private Vector3 GetInitialVelocity()
     {
-        return initialPosition + initialVelocity * time + 0.5f * gravity * time * time;
+        // 例：Playerの向き（forward）にforceStrengthの力をかける + 上方向にSAngleYの高さで調整
+        float forceStrength = 0f;
+        float angleY = 0f;
+
+        // ここではPlayerのコンポーネントから取得を例示
+        Player player = playerTransform.GetComponent<Player>();
+        if (player != null)
+        {
+            forceStrength = player.forceStrength;
+            angleY = player.SAngleY;
+        }
+
+        Vector3 forward = playerTransform.forward;
+        Vector3 velocity = forward * forceStrength + Vector3.up * angleY;
+        return velocity;
+    }
+
+    private void ShowPredictionDots(Vector3 initialVel)
+    {
+        // 物理の重力加速度（Unityのデフォルト）
+        Vector3 gravity = Physics.gravity;
+
+        for (int i = 0; i < dotCount; i++)
+        {
+            float t = i * dotSpacing;
+
+            // 弾道公式：位置 = 初速 * t + 0.5 * 重力 * t^2 + 発射地点
+            Vector3 pos = playerTransform.position + initialVel * t + 0.5f * gravity * t * t;
+
+            dots[i].SetActive(true);
+            dots[i].transform.position = pos;
+        }
+    }
+
+    public void HideDots()
+    {
+        foreach (var d in dots)
+        {
+            d.SetActive(false);
+        }
     }
 }
