@@ -5,11 +5,23 @@ using UnityEngine;
 using System.Runtime.CompilerServices;
 using UnityEngine.UI;
 using UnityEditorInternal.VR;
+using static UnityEngine.GraphicsBuffer;
 
 public class Player : MonoBehaviour
 {
     public Rigidbody rb;
     public Image GaugeImage; // ゲージ画像アタッチ
+    public Image IconImage; // ゲージアイコン画像
+    public Sprite MaxIcon;
+    public Sprite NormalIcon;
+    public RectTransform iconRectTransform; // アイコン位置
+    public RectTransform gaugeRectTransform; // ゲージ位置
+    public float iconMoveSpeed = 2f;
+    private Vector2 iconStartPos; // アイコンの初期位置
+    private bool isMaxIconActive = false;
+    private bool isMaxIconDelayActive = false; // 最大アイコン維持中フラグ
+    private float maxIconDelayTime = 0.5f;    // 最大アイコン維持時間（秒）
+    private float maxIconTimer = 0f;          // タイマー
     private GamePadCommand inputChecker;
     private ArmAnimation arm;
     public Arrow arw;
@@ -31,7 +43,7 @@ public class Player : MonoBehaviour
     private float Move;       //UIの横と高さの値変更幅
 
     private int GetInputOB;    //使う物を取得　今調整段階なため最初にここに数値を入れれば変わる
-                              //ない　０　ゲームパッド　１　キーボード　２
+                               //ない　０　ゲームパッド　１　キーボード　２
     private float inputBlockTime = 0.1f; // 入力ブロック時間
     private float sceneStartTime;       // シーンが開始した時間
     private bool IsReturn;
@@ -56,6 +68,10 @@ public class Player : MonoBehaviour
             {
                 Debug.LogWarning("オブジェクトが見つかりませんでした");
             }
+        }
+        if (iconRectTransform != null)
+        {
+            iconStartPos = iconRectTransform.anchoredPosition;
         }
         rb = GetComponent<Rigidbody>();
         command = new GamePadCommand();
@@ -85,7 +101,7 @@ public class Player : MonoBehaviour
             UpdateGauge();
         }
     }
-     
+
     private void ShotAngle()
     {
         //角度指定
@@ -93,10 +109,10 @@ public class Player : MonoBehaviour
         {
             if (SAngleY < 10)
             {
-                SAngleY    += 0.5f;
-                rotateAgl  += RotateSpeed; 
-                Vertical    = -Move;
-                Horizontal  = Move;
+                SAngleY += 0.5f;
+                rotateAgl += RotateSpeed;
+                Vertical = -Move;
+                Horizontal = Move;
                 Debug.Log("Wキーが押されているよ");
 
                 UpdateArrow();
@@ -106,10 +122,10 @@ public class Player : MonoBehaviour
         {
             if (SAngleY > 0)
             {
-                SAngleY    -= 0.5f;
-                rotateAgl  -= RotateSpeed;
-                Vertical    = Move;
-                Horizontal  = -Move;
+                SAngleY -= 0.5f;
+                rotateAgl -= RotateSpeed;
+                Vertical = Move;
+                Horizontal = -Move;
                 Debug.Log("Sキーが押されているよ");
 
                 UpdateArrow();
@@ -139,7 +155,7 @@ public class Player : MonoBehaviour
             {
                 forceStrength += shotpower;
             }
-            else if(forceStrength >=  MaxPower)
+            else if (forceStrength >= MaxPower)
             {
                 //最大値に達した
                 IsReturn = true;
@@ -158,12 +174,78 @@ public class Player : MonoBehaviour
     }
 
     //打ち出されるの大きさの可視化（ゲージ）
+    public float iconMoveDistance = 50f;
     public void UpdateGauge()
     {
-        // ゲージ割合
         float GaugeAmount = Mathf.Clamp01(forceStrength / MaxPower);
         GaugeImage.fillAmount = GaugeAmount;
+
+        if (iconRectTransform != null)
+        {
+            float offsetX = iconMoveDistance * GaugeAmount;
+            if (forceStrength == 0f && isMaxIconActive)
+            {
+                offsetX -= 5f;
+                // ガクッと瞬間移動するように位置を直接セット
+                iconRectTransform.anchoredPosition = iconStartPos + new Vector2(offsetX, 0);
+            }
+            else
+            {
+                Vector2 targetPos = iconStartPos + new Vector2(offsetX, 0);
+                iconRectTransform.anchoredPosition = Vector2.Lerp(iconRectTransform.anchoredPosition, targetPos, Time.deltaTime * iconMoveSpeed);
+            }
+        }
+
+        if (GaugeAmount >= 1.0f)
+        {
+            // 最大値に達しているならアイコンをMaxIconにする＆維持タイマーリセット
+            if (!isMaxIconActive)
+            {
+                IconImage.sprite = MaxIcon;
+                isMaxIconActive = true;
+                Debug.Log("MaxIconに切り替えました");
+            }
+            // 維持フラグをオフに
+            isMaxIconDelayActive = false;
+            maxIconTimer = 0f;
+        }
+        else
+        {
+            // 最大値じゃなくなった瞬間に維持フラグをオンしてタイマー開始
+            if (isMaxIconActive && !isMaxIconDelayActive)
+            {
+                isMaxIconDelayActive = true;
+                maxIconTimer = 0f;
+                Debug.Log("最大アイコン維持タイマー開始");
+            }
+
+            if (isMaxIconDelayActive)
+            {
+                maxIconTimer += Time.deltaTime;
+
+                if (maxIconTimer >= maxIconDelayTime)
+                {
+                    // 維持時間が過ぎたらアイコンを元に戻す
+                    IconImage.sprite = NormalIcon;
+                    isMaxIconActive = false;
+                    isMaxIconDelayActive = false;
+                    Debug.Log("NormalIconに戻しました");
+                }
+            }
+            else
+            {
+                // 維持フラグがないなら普通に戻す
+                if (isMaxIconActive)
+                {
+                    IconImage.sprite = NormalIcon;
+                    isMaxIconActive = false;
+                    Debug.Log("NormalIconに戻しました");
+                }
+            }
+        }
     }
+
+
 
     //打ち出される角度の可視化（魚のアロー）
     public void UpdateArrow()
