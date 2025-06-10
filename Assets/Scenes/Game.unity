@@ -2747,13 +2747,15 @@ GameObject:
   - component: {fileID: 1612819569}
   - component: {fileID: 1612819568}
   - component: {fileID: 1612819567}
-  - component: {fileID: 1612819566}
   - component: {fileID: 1612819570}
   - component: {fileID: 1612819571}
   - component: {fileID: 1612819572}
   - component: {fileID: 1612819573}
   - component: {fileID: 1612819574}
   - component: {fileID: 1612819575}
+  - component: {fileID: 1612819566}
+  - component: {fileID: 1612819577}
+  - component: {fileID: 1612819576}
   m_Layer: 0
   m_Name: neta
   m_TagString: Player
@@ -2772,8 +2774,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.0024, z: 0.02}
-  m_Center: {x: 0, y: 0.006, z: 0}
+  m_Size: {x: 0.006547696, y: 0.0013005579, z: 0.01191213}
+  m_Center: {x: -0.000104739964, y: 0.008950274, z: -0.00044709683}
 --- !u!23 &1612819567
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2950,6 +2952,32 @@ MonoBehaviour:
   playerTransform: {fileID: 1612819569}
   playerRb: {fileID: 1612819571}
   initialVelocity: {x: 0, y: 0, z: 0}
+--- !u!65 &1612819576
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612819565}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0072198454, y: 0.0012947273, z: 0.0009351203}
+  m_Center: {x: 0.00000092864036, y: 0.0052466104, z: -0.011331485}
+--- !u!65 &1612819577
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612819565}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.00782272, y: 0.0011064243, z: 0.0015333934}
+  m_Center: {x: 0.00007691473, y: 0.0054976796, z: 0.011224386}
 --- !u!1001 &1621269372
 PrefabInstance:
   m_ObjectHideFlags: 0
