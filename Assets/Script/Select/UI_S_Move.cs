@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
 public class UI_S_Move : MonoBehaviour
@@ -14,15 +15,37 @@ public class UI_S_Move : MonoBehaviour
 
     public int maxPage = 2; // ページ数 - 1（例：3ページなら2）
 
+
+    private GamePadCommand _command;
+    private int GetInputOB;
+    private int count;
+
     void Start()
     {
         targetPosition = content.anchoredPosition;
+
+        _command = new GamePadCommand();
+        GetInputOB = (int)GameManager.Instance.inputDevice;
     }
 
     // Update is called once per frame
     void Update()
     {
         content.anchoredPosition = Vector2.Lerp(content.anchoredPosition, targetPosition, Time.deltaTime * slideSpeed);
+
+        if (_command.IsBbutton(GetInputOB))
+        {
+            switch (currentPage)
+            {
+                case 0:
+                    SceneManager.LoadScene("Title");
+                    break;
+                case 1:
+                    SceneManager.LoadScene("Game");
+                    break;
+            }
+        }
+
     }
     public void SlideLeft()
     {
