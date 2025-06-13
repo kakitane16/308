@@ -919,11 +919,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4fb41d8bae4c5a4192238abecd13c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuButtons: []
-  content: {fileID: 0}
-  pageWidth: 800
-  slideSpeed: 10
-  maxPage: 2
 --- !u!1 &630360303
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,6 +1029,7 @@ MonoBehaviour:
   pageWidth: 1600
   slideSpeed: 10
   maxPage: 2
+  PageCoolTime: 2
 --- !u!4 &679146939
 Transform:
   m_ObjectHideFlags: 0
@@ -1061,12 +1057,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4fb41d8bae4c5a4192238abecd13c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuButtons:
-  - {fileID: 0}
-  content: {fileID: 1079335630}
-  pageWidth: 1600
-  slideSpeed: 10
-  maxPage: 2
 --- !u!1 &764335031
 GameObject:
   m_ObjectHideFlags: 0
@@ -2503,6 +2493,7 @@ MonoBehaviour:
   pageWidth: 800
   slideSpeed: 10
   maxPage: 2
+  PageCoolTime: 0
 --- !u!1 &1610739119
 GameObject:
   m_ObjectHideFlags: 0
@@ -3345,7 +3336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65bc39fd9d404574ba0ddd19da6d1402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputDevice: 2
+  inputDevice: 1
   score: 0
 --- !u!1 &1833675629
 GameObject:
