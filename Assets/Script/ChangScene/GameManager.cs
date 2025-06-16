@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public InputObject inputDevice = InputObject.GamePad; //‰Šú‚Í‚È‚É‚àÚ‘±‚³‚ê‚Ä‚È‚¢
     public int score = 0; //“_”‚ğ•Ô‚·
+    public bool Assist = false;
 
     void Awake()
     {

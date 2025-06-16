@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     public Sprite NormalIcon;
     public RectTransform iconRectTransform; // アイコン位置
     public RectTransform gaugeRectTransform; // ゲージ位置
+    public GameManager manager;
     public float iconMoveSpeed = 2f;
     private Vector2 iconStartPos; // アイコンの初期位置
     private bool isMaxIconActive = false;
@@ -23,20 +24,17 @@ public class Player : MonoBehaviour
     private float maxIconDelayTime = 0.5f;    // 最大アイコン維持時間（秒）
     private float maxIconTimer = 0f;          // タイマー
     private GamePadCommand inputChecker;
-    private ArmAnimation arm;
     public Arrow arw;
     public Parabola parabola;
     public string ArrowTag = "Arrow"; // アローのターゲットタグ
     private GamePadCommand command;
     public Vector3 velocity;
     private float MaxPower = 20f;
-    private float MinPower = 0.0f;
     public float RotateSpeed;
     public bool isShot;
     public float shotpower;
     public float SAngleY;
     public float forceStrength;            // 前方向への飛ぶ力
-    private bool sceneJustChanged = true;  //後で使うから消さないで
     public float rotateAgl;
     private float Vertical;   //UIの高さを変更
     private float Horizontal; //UIの横の移動値を変更
@@ -75,7 +73,6 @@ public class Player : MonoBehaviour
         }
         rb = GetComponent<Rigidbody>();
         command = new GamePadCommand();
-        arm = new ArmAnimation();
         GetInputOB = (int)GameManager.Instance.inputDevice;
         isShot = false;
         rb.useGravity = false;
@@ -86,6 +83,15 @@ public class Player : MonoBehaviour
         forceStrength = 0.0f;
         Debug.Log(GetInputOB);
         IsReturn = false;
+        if (!manager.Assist)
+        {
+            arw.gameObject.SetActive(true);
+        }
+        else
+        {
+            arw.gameObject.SetActive(false);
+        }
+
     }
     // Update is called once per frame
     private void Update()
@@ -145,11 +151,11 @@ public class Player : MonoBehaviour
         //打つ時のでかさを貯める
         if (command.IsBbutton(GetInputOB))
         {
-            if (parabola != null)
+            if (parabola != null && manager.Assist)
             {
                 parabola.ShowParabora();
             }
-            Debug.Log("スペースキーが押されているよ");
+                Debug.Log("スペースキーが押されているよ");
             //最大値まで戻る場合
             if (forceStrength < MaxPower)
             {
