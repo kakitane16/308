@@ -12,6 +12,7 @@ TagManager:
   - fan
   - syari
   - Arrow
+  - DEL_Obje
   layers:
   - Default
   - TransparentFX
