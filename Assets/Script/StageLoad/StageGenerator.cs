@@ -23,8 +23,34 @@ public class StageGenerator : MonoBehaviour
     private int[,] cachedData;
     private Transform stageContainer;
 
+    void Start()
+    {
+        if (csvFile != null)
+        {
+            GenerateFromCSV();
+        }
+        else
+        {
+            Debug.LogWarning("CSVファイルが指定されていません");
+            ClearStage();
+        }
+    }
+
     [ContextMenu("ステージ再生成")]
     public void RegenerateFromContextMenu()
+    {
+        if (csvFile != null)
+        {
+            cachedData = ParseCSV(csvFile);
+            RegenerateStage();
+        }
+        else
+        {
+            Debug.LogWarning("CSVファイルが指定されていません");
+        }
+    }
+
+    public void GenerateFromCSV()
     {
         if (csvFile != null)
         {
@@ -76,7 +102,7 @@ public class StageGenerator : MonoBehaviour
 
         float mapWidth = width * cellSize.x;
         float mapHeight = height * cellSize.y;
-        Vector3 currentCenter = new Vector3(mapWidth / 2f, -mapHeight / 2f, 0);
+        Vector3 currentCenter = new Vector3(mapWidth / 2f, mapHeight / 2f, 0);
         Vector3 finalOffset = (centerTarget - currentCenter) + positionOffset;
 
         for (int y = 0; y < height; y++)
@@ -84,7 +110,7 @@ public class StageGenerator : MonoBehaviour
             for (int x = 0; x < width; x++)
             {
                 int cell = cachedData[y, x];
-                Vector3 pos = new Vector3(x * cellSize.x, -y * cellSize.y, 0) + finalOffset;
+                Vector3 pos = new Vector3(x * cellSize.x, y * cellSize.y, 0) + finalOffset;
 
                 GameObject obj = null;
                 switch (cell)
