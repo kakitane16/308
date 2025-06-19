@@ -46,26 +46,15 @@ public class Player : MonoBehaviour
     private float sceneStartTime;       // シーンが開始した時間
     private bool IsReturn;
 
+    private bool IsReady = false; // 準備完了フラグ
+
     // Start is called before the first frame update
-    void Start()
+    void OnEnable() // OnEnableに変更しました、Start時ではまだ生成されていない可能性があるため
     {
-        sceneStartTime = Time.time;
         inputChecker = GetComponent<GamePadCommand>();
         if (inputChecker == null)
         {
             inputChecker = gameObject.AddComponent<GamePadCommand>();
-        }
-        if (arw == null)
-        {
-            GameObject player = GameObject.FindGameObjectWithTag(ArrowTag);
-            if (player != null)
-            {
-                arw = player.GetComponent<Arrow>();
-            }
-            else
-            {
-                Debug.LogWarning("オブジェクトが見つかりませんでした");
-            }
         }
         if (iconRectTransform != null)
         {
@@ -73,7 +62,6 @@ public class Player : MonoBehaviour
         }
         rb = GetComponent<Rigidbody>();
         command = new GamePadCommand();
-        GetInputOB = (int)GameManager.Instance.inputDevice;
         isShot = false;
         rb.useGravity = false;
         SAngleY = 0;
@@ -83,19 +71,66 @@ public class Player : MonoBehaviour
         forceStrength = 0.0f;
         Debug.Log(GetInputOB);
         IsReturn = false;
-        if (!manager.Assist)
+
+        // 以下は現状の開発環境での動作確認用の仮置きです、プレハブ生成版に開発が切り替わった段階で削除してください
+
+        if (manager == null) return;
+
+        // アシストの有無でアローの表示を切り替え
+        if (!manager.Assist) arw.gameObject.SetActive(true);
+        else arw.gameObject.SetActive(false);
+
+        IsReady = true; // 準備完了フラグを立てる
+
+        sceneStartTime = Time.time;
+
+        GetInputOB = (int)GameManager.Instance.inputDevice; // 入力デバイスの取得(これはあまり関係ないかもしれませんが、Startでは正常に取得できない可能性を危惧して、こちらに移動しました)
+    }
+
+    void LateUpdate()       // オブジェクトの捜索をLateUpdateに移動しました(StartやOnEnableでは正常に取得できなかったため
+                            // 一通り処理が終わった後のLateUpdateで毎フレームチェックする方向にしました)
+                            // PlayerCamera.cs/Goal.cs/Arrow.cs でも同様に移動しました(記載はしませんが、同様の理由です)
+    {
+        if (arw != null && manager != null) return;
+
+        // アローのコンポーネントを取得
+        if (arw == null)
         {
-            arw.gameObject.SetActive(true);
-        }
-        else
-        {
-            arw.gameObject.SetActive(false);
+            GameObject player = GameObject.FindGameObjectWithTag(ArrowTag);
+            if (player != null) arw = player.GetComponent<Arrow>();
         }
 
+        // マネージャーのコンポーネントを取得
+        if (manager == null) manager = GameObject.FindObjectOfType<GameManager>();
+
+        if (manager == null) return;    // 取得に失敗していた場合は弾く
+
+
+        // アシストの有無でアローの表示を切り替え(こちらに移動しました、マネージャーが未設定では取得自体ができないため)
+        if (!manager.Assist) arw.gameObject.SetActive(true);
+        else arw.gameObject.SetActive(false);
+
+        IsReady = true; // 準備完了フラグを立てる
+
+        sceneStartTime = Time.time; // シーン開始時間を記録(こちらに移動しました、準備が未完了なのに処理が走るのを防ぐため)
+
+        GetInputOB = (int)GameManager.Instance.inputDevice; // 入力デバイスの取得(これはあまり関係ないかもしれませんが、Startでは正常に取得できない可能性を危惧して、こちらに移動しました)
     }
+
     // Update is called once per frame
     private void Update()
     {
+        if (!IsReady)
+        {
+            rb.velocity = Vector3.zero;
+            // *** 緊急的な対処 ***
+            // 原因不明の問題の為に、プレハブから生成時に上方への速度が発生してしまっているため
+            // 緊急対処として、準備未完了間は速度を0で初期化する処理を組み込んでいます
+            // この問題が特定でき、解決できた際にこの処理は削除します
+
+            return; // 準備ができていない場合は何もしない
+        }
+
         // シーン切り替え直後の1秒間は入力を受け付けない
         if (Time.time - sceneStartTime < inputBlockTime)
             return;

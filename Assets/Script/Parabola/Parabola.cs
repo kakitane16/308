@@ -12,7 +12,7 @@ public class Parabola : MonoBehaviour
     private List<GameObject> dots = new List<GameObject>();
     public Vector3 initialVelocity;
 
-    private void Start()
+    private void OnEnable()
     {
         // ドットを生成して非アクティブにする（初期化）
         for (int i = 0; i < dotCount; i++)

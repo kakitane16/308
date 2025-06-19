@@ -2053,6 +2053,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputDevice: 1
   score: 0
+  Assist: 0
 --- !u!1 &1592943472
 GameObject:
   m_ObjectHideFlags: 0
@@ -2237,7 +2238,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _selectedScale: {x: 4, y: 4, z: 1.2}
   _scaleSpeed: 10
-  sceneToLoad: 
 --- !u!1001 &1611442577
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2414,6 +2414,10 @@ PrefabInstance:
       propertyPath: bgmClip
       value: 
       objectReference: {fileID: 8300000, guid: 5e793f10ee6c8144eb8143b9d318b57f, type: 3}
+    - target: {fileID: 559078462279151225, guid: 8269404e982de7e418ea3fec33698213, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 656336350792354931, guid: 8269404e982de7e418ea3fec33698213, type: 3}
       propertyPath: m_Name
       value: Scene BGM Setter
@@ -2464,6 +2468,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8269404e982de7e418ea3fec33698213, type: 3}
+--- !u!1 &1762680759 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 656336350792354931, guid: 8269404e982de7e418ea3fec33698213, type: 3}
+  m_PrefabInstance: {fileID: 1762680758}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1762680760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762680759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5239311ac2f352a43a021cc814409b15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resultBGMClips:
+  - {fileID: 8300000, guid: 5e793f10ee6c8144eb8143b9d318b57f, type: 3}
+  - {fileID: 8300000, guid: d7476f05f5ccff944bf67fdfaddd2ecf, type: 3}
+  - {fileID: 8300000, guid: d7476f05f5ccff944bf67fdfaddd2ecf, type: 3}
+  - {fileID: 8300000, guid: 25a137894829902409c1d51b6f885973, type: 3}
 --- !u!1001 &1860126817
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2950,7 +2976,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _selectedScale: {x: 4, y: 4, z: 1.2}
   _scaleSpeed: 10
-  sceneToLoad: 
 --- !u!1 &2027136516
 GameObject:
   m_ObjectHideFlags: 0
