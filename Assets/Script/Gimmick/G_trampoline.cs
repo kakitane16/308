@@ -39,8 +39,8 @@ public class G_trampoline : MonoBehaviour
         Vector3 reflectDir = Vector3.Reflect(playerRb.velocity.normalized, normal);
         Vector3 Pvelocity = reflectDir * playerRb.velocity.magnitude;
         Debug.Log(reflectDir);
-        // ‰º•ûŒü‚Ì”½ŽË‚È‚çˆ—‚ð‚µ‚È‚¢
-        if (reflectDir.y > -0.75f) 
+        // ‹t•ûŒü‚Ì”½ŽË‚È‚çˆ—‚ð‚µ‚È‚¢
+        if (reflectDir.x > 0.0f) 
         {
             IsDown = true;
             return;
