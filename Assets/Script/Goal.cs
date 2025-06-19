@@ -14,21 +14,12 @@ public class Goal : MonoBehaviour
     public float maxDistance = 5f; // スコアゼロになる距離
     public float levelMultiplier = 1f;
 
-    private void Start()
+    void LateUpdate()
     {
-        // goal（ターゲットTransform）が未設定なら探す
-        if (goal == null)
-        {
-            GameObject player = GameObject.FindGameObjectWithTag(goalTag);
-            if (player != null)
-            {
-                goal = player.transform;
-            }
-            else
-            {
-                Debug.LogWarning("オブジェクトが見つかりませんでした");
-            }
-        }
+        if (goal != null) return;
+
+        GameObject player = GameObject.FindGameObjectWithTag(goalTag);
+        if (player != null) goal = player.transform;
     }
 
     private void OnCollisionEnter(Collision gl)

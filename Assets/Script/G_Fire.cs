@@ -9,6 +9,20 @@ public class G_Fire : MonoBehaviour
     public Color G_Color = new Color(0.0f, 0.0f, 0.0f);       // 焼き色マテリアル
     public float G_Weight = 0.7f;
 
+    private Buner burner; // バーナーの参照
+
+    void LateUpdate()
+    {
+        if (burner == null)
+            Destroy(gameObject); // バーナーがない場合は自分自身を削除
+    }
+
+    public void SetBuner(Buner b)
+    {
+        burner = b; // バーナーの参照を設定
+    }
+    // 上記2つはプレハブからの生成時にオブジェクトが残ってしまう問題を解決するために使用
+
     //何かがバーナーにぶつかって来た時に自動で呼ばれる関数
     //otherはぶつかってきた相手例えば寿司とかを表している
     public void OnTriggerEnter(Collider other)

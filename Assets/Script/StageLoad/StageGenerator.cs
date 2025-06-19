@@ -23,8 +23,9 @@ public class StageGenerator : MonoBehaviour
     private int[,] cachedData;
     private Transform stageContainer;
 
-    void Start()
+    void Awake()
     {
+        ClearStage();
         if (csvFile != null)
         {
             GenerateFromCSV();
@@ -32,7 +33,6 @@ public class StageGenerator : MonoBehaviour
         else
         {
             Debug.LogWarning("CSVファイルが指定されていません");
-            ClearStage();
         }
     }
 
@@ -42,7 +42,8 @@ public class StageGenerator : MonoBehaviour
         if (csvFile != null)
         {
             cachedData = ParseCSV(csvFile);
-            RegenerateStage();
+            ClearStage();
+            GenerateStage();
         }
         else
         {
@@ -55,18 +56,12 @@ public class StageGenerator : MonoBehaviour
         if (csvFile != null)
         {
             cachedData = ParseCSV(csvFile);
-            RegenerateStage();
+            GenerateStage();
         }
         else
         {
             Debug.LogWarning("CSVファイルが指定されていません");
         }
-    }
-
-    public void RegenerateStage()
-    {
-        ClearStage();
-        GenerateStage();
     }
 
     private void ClearStage()

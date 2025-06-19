@@ -12,13 +12,14 @@ public class Buner : MonoBehaviour
     public float G_DistanceInRight = 2.0f;  // x方向に出す距離
     public float G_DistanceInUp = 2.0f;  // y方向に出す距離
 
-    void Start()
+    void OnEnable()
     {
         if (G_Target == null) { return; }
         // 位置変更
         Vector3 spawn = transform.position + G_Offset;
         GameObject spawned = Instantiate(
             G_Target, spawn, Quaternion.identity);
+        spawned.GetComponent<G_Fire>().SetBuner(this); // バーナーの参照を設定(残骸対策で必要)
         // 大きさ指定
         spawned.transform.localScale = G_Trans;
 
