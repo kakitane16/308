@@ -9,7 +9,7 @@ public class PlayerCamera : MonoBehaviour
     public Transform g_Target;      // 追従対象
     public Transform g_FocusObject; // 注視対象
     public string g_TargetTag = "Player"; // 追従対象のタグ
-    public Vector3 g_Offset = new Vector3(0, -5, -10);  // カメラ相対位置
+    public Vector3 g_Offset = new Vector3(0.0f, -5.0f, -10.0f);  // カメラ相対位置
     public Vector3 g_Position = new Vector3(0.0f, 20.0f, -85.0f);  // カメラ位置
     public Quaternion g_Rotation = Quaternion.Euler(22.0f, 0.0f, 0.0f);  // カメラ回転
     public float g_FollowSpeed = 2.0f;  // 追従対象に戻るまでの時間
@@ -44,6 +44,7 @@ public class PlayerCamera : MonoBehaviour
         }
         this.transform.position = g_Position;
         this.transform.rotation = g_Rotation;
+        
     }
 
     // 全ての処理がおわった後に処理を行いたいので
