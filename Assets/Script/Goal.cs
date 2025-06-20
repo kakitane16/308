@@ -10,6 +10,7 @@ public class Goal : MonoBehaviour
 {
     public Transform goal;
     public string goalTag = "Plate";
+    public string syari = "Syari";
     public float maxScore = 100f;
     public float maxDistance = 5f; // ÉXÉRÉAÉ[ÉçÇ…Ç»ÇÈãóó£
     public float levelMultiplier = 1f;
@@ -24,12 +25,6 @@ public class Goal : MonoBehaviour
 
     private void OnCollisionEnter(Collision gl)
     {
-        if (!gl.gameObject.CompareTag(goalTag))
-        {
-            return;
-        }
-
-
         float distance = Vector3.Distance(transform.position, goal.position);
         int score = CalculateScore(distance);
         int rank = GetScoreRank(score);

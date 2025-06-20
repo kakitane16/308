@@ -43,23 +43,6 @@ public class G_Fire : MonoBehaviour
             if (renderer != null && G_Color != null )
             {
                 renderer.material.color = G_Color;
-                //this.burnCount++; //触れたらカウントが上がる
-
-                //if(this.burnCount == 1) 
-                //{
-                //    //どちらもちゃんとあるときだけ焼けた見た目になるbutnedMaterialを実行できる
-                //    //一回目の焼き色
-                //    renderer.material = butnedMaterial;
-                //}
-                //else if(this.burnCount == 2) 
-                //{
-                //    //二回目の焦げ色
-                //    renderer.material = OverButnedMaterial;
-                //}
-                //else
-                //{
-                //    //三回目以降何もしないため書かない
-                //}
             }
         }
     }
