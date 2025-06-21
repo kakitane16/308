@@ -4,90 +4,107 @@ using UnityEngine;
 
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class UI_S_Move : MonoBehaviour
 {
     public RectTransform content;       // 動かすUI（Panel_Content）
-    public float pageWidth = 800f;      // 1ページの幅
-    public float slideSpeed = 10f;      // 移動速度
-    private Vector2 targetPosition;     // 移動先の位置
-    private int currentPage = 0;        // 現在のページ
-
-    public int maxPage = 2; // ページ数 - 1（例：3ページなら2）
-
-    public float PageCoolTime;
-
+    public int MaxPage;                 // ページ数 - 1（例：3ページなら2）
+    public float PageWidth;             // 1ページの幅
+    public float SlideSpeed;            // 移動速度
+    public float PageCoolTime;          //ページのクールタイム
+    private Vector2 TargetPosition;     // 移動先の位置
+    private int CurrentPage;            // 現在のページ
+    float PageCoolTimeCount;            //クールタイムカウント用
+    //コントローラー
     private GamePadCommand _command;
     private int GetInputOB;
-    private int count;
+    //矢印の表示管理
+    public Image LeftArrow;
+    public Image RightArrow;
+
 
     void Start()
     {
-        targetPosition = content.anchoredPosition;
+        //canvasのPos
+        TargetPosition = content.anchoredPosition;
 
+        //Padの初期化
         _command = new GamePadCommand();
         GetInputOB = (int)GameManager.Instance.inputDevice;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        content.anchoredPosition = Vector2.Lerp(content.anchoredPosition, targetPosition, Time.deltaTime * slideSpeed);
+        //canvasのPos移動
+        content.anchoredPosition = Vector2.Lerp(content.anchoredPosition, TargetPosition, Time.deltaTime * SlideSpeed);
 
-        if (PageCoolTime >= 2.0f)
+        //コントローラー入力
+        if (PageCoolTimeCount >= 5.0f)
         {
+            //ページの移動
             if (_command.LeftAction(GetInputOB))
             {
-                if (currentPage > 0)
+                if (CurrentPage > 0)
                 {
-                    currentPage--;
-                    targetPosition = new Vector2(-pageWidth * currentPage, 0);
-                    PageCoolTime = 0.0f;
+                    CurrentPage--;
+                    TargetPosition = new Vector2(-PageWidth * CurrentPage, 0);
+                    PageCoolTimeCount = 0.0f;
                 }
             }
             if (_command.RightAction(GetInputOB))
             {
-                if (currentPage < maxPage)
+                if (CurrentPage < MaxPage)
                 {
-                    currentPage++;
-                    targetPosition = new Vector2(-pageWidth * currentPage, 0);
-                    PageCoolTime = 0.0f;
+                    CurrentPage++;
+                    TargetPosition = new Vector2(-PageWidth * CurrentPage, 0);
+                    PageCoolTimeCount = 0.0f;
                 }
             }
 
+            //決定ボタン入力
             if (_command.IsBbutton(GetInputOB))
             {
-                switch (currentPage)
+                switch (CurrentPage)
                 {
-                    case 0:
-                        SceneManager.LoadScene("Title");
-                        break;
-                    case 1:
-                        SceneManager.LoadScene("Game");
-                        break;
+                    case 0: SceneManager.LoadScene("Title"); break;
+                    case 1: SceneManager.LoadScene("Game"); break;
                 }
             }
         }
         else
         {
-            PageCoolTime += 0.5f;
+            //ページ移動のクールタイム
+            PageCoolTimeCount += PageCoolTime / 10; //そのままだと数字が大きすぎるから調整
+        }
+
+        //矢印の表示を管理（例：これ以上左に行けないときに非表示
+        if (CurrentPage == 0) LeftArrow.enabled = false;
+        else if (CurrentPage == MaxPage) RightArrow.enabled = false;
+        else
+        {
+            LeftArrow.enabled = true;
+            RightArrow.enabled = true;
         }
 
     }
-    public void SlideLeft()
-    {
-        if (currentPage > 0)
-        {
-            currentPage--;
-            targetPosition = new Vector2(-pageWidth * currentPage, 0);
-        }
-    }
-    public void SlideRight()
-    {
-        if (currentPage < maxPage)
-        {
-            currentPage++;
-            targetPosition = new Vector2(-pageWidth * currentPage, 0);
-        }
-    }
+
+    //プログラム整理中につき一旦コメントアウト
+    //public void SlideLeft()
+    //{
+    //    if (CurrentPage > 0)
+    //    {
+    //        CurrentPage--;
+    //        TargetPosition = new Vector2(-pageWidth * CurrentPage, 0);
+    //    }
+    //}
+    //public void SlideRight()
+    //{
+    //    if (CurrentPage < MaxPage)
+    //    {
+    //        CurrentPage++;
+    //        TargetPosition = new Vector2(-pageWidth * CurrentPage, 0);
+    //    }
+    //}
 }
