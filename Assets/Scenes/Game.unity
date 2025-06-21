@@ -1320,7 +1320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c13b210bcd2fa6d469b3d65fc1b731b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  g_Target: {fileID: 1612819569}
   g_FocusObject: {fileID: 28911229}
   g_TargetTag: Player
   g_Offset: {x: 0, y: 5, z: -12}
@@ -1727,7 +1726,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -344004081357383697, guid: 9204a4018d9a2554182e96d6ef31a8bb, type: 3}
       propertyPath: m_TagString
-      value: DEL_Obje
+      value: Table
       objectReference: {fileID: 0}
     - target: {fileID: -143727372303999436, guid: 9204a4018d9a2554182e96d6ef31a8bb, type: 3}
       propertyPath: m_TagString
@@ -1764,6 +1763,10 @@ PrefabInstance:
     - target: {fileID: 2020247563201309871, guid: 9204a4018d9a2554182e96d6ef31a8bb, type: 3}
       propertyPath: m_TagString
       value: DEL_Obje
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929640277652407947, guid: 9204a4018d9a2554182e96d6ef31a8bb, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3709504530937756044, guid: 9204a4018d9a2554182e96d6ef31a8bb, type: 3}
       propertyPath: m_TagString
@@ -2665,6 +2668,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goal: {fileID: 1074688876}
   goalTag: Plate
+  syari: Syari
   maxScore: 100
   maxDistance: 5
   levelMultiplier: 1
