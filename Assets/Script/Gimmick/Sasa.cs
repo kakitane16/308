@@ -5,44 +5,34 @@ using UnityEngine;
 //このスクリプトではプレイヤーの値制御を行うため基本的にはUpdateは使わないで行こうかな
 public class Sasa : MonoBehaviour
 {
-    private Player player;
-    private float ShotPower;
+    public float moveMultiplier = 1.0f; // 威力に掛ける倍率（調整用）
+    public Vector3 moveDirection = Vector3.left; // 押し出す方向
 
-    //playerオブジェクトをどれくらい動かしたいか
-    //もしかしたらプレイヤー側に渡すかもなのでpublic(使わないならprivateに切り替えといて
-    public float MoveX; 
-    public float MoveZ;
-
-    private void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        player = GetComponent<Player>();
+        if (other.CompareTag("Player"))
+        {
+            Player player = other.GetComponent<Player>();
+            if (player != null)
+            {
+                //重力を無効化
+                player.rb.useGravity = false;
+                //プレイヤー側の威力を取得
+                float power = player.GetLastShotPower();
+                Debug.Log(power);
+                // moveDirection を正規化して方向だけを取り出し、
+                // プレイヤーの威力 (power) と調整倍率 (moveMultiplier) を掛けて
+                // プレイヤーを移動させるベクトル量を計算している
+                Vector3 moveVector = moveDirection.normalized * power * moveMultiplier;
 
-        //毎回更新をかけるが誤作動しないように初期化をかけて置く
-        ShotPower = 0.0f; 
-        MoveX = 0.0f;
-        MoveZ = 0.0f;
-    }
+                // プレイヤーの位置を移動
+                player.transform.position += moveVector;
 
-    private void OnCollisionEnter(Collision p_collision)
-    {
-        ChangePos();
-    }
+                // 必要ならRigidbodyの速度も初期化
+                player.rb.velocity = Vector3.zero;
 
-    public void ChangePos()
-    {
-        //プレイヤーのforceStrengthは値的に最大値20fで持ってきているため
-        //マップ半分までの座標ということは20fに2.5fを書ければなる
-        //ただし、最小値が0.0f or　2.5fになるためそれよりしたい場合は再設計が必要
-        ShotPower = player.forceStrength * 2.5f;
-
-        //どれぐらいに値が動くか
-        MoveX = ShotPower;
-
-        //プレイヤーの座標をギミック側で更新をかける
-        //最初は最大値の座標にだすことから
-        player.rb.position = new Vector3(MoveX, 0.0f, MoveZ);
-        
-        //笹の挙動では基本的には重力がないため消去
-        player.rb.useGravity = false;
+                Debug.Log($"笹でプレイヤーを移動しました（威力：{power}）");
+            }
+        }
     }
 }

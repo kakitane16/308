@@ -48,6 +48,8 @@ public class Player : MonoBehaviour
 
     private bool IsReady = false; // 準備完了フラグ
 
+    public float lastShotPower;
+
     // Start is called before the first frame update
     void OnEnable() // OnEnableに変更しました、Start時ではまだ生成されていない可能性があるため
     {
@@ -71,6 +73,7 @@ public class Player : MonoBehaviour
         forceStrength = 0.0f;
         Debug.Log(GetInputOB);
         IsReturn = false;
+        lastShotPower = 0.0f;
 
         // 以下は現状の開発環境での動作確認用の仮置きです、プレハブ生成版に開発が切り替わった段階で削除してください
 
@@ -206,6 +209,7 @@ public class Player : MonoBehaviour
         //打ち出し
         if (command.WasBbutton(GetInputOB))
         {
+            lastShotPower = forceStrength;
             PowerShoting();
             if (parabola != null)
             {
@@ -312,5 +316,11 @@ public class Player : MonoBehaviour
         // アローを非表示にする
         arw.gameObject.SetActive(false);
         forceStrength = 0f; // 溜めリセット
+    }
+
+    //ギミック側でショットPowerを使うため
+    public float GetLastShotPower()
+    {
+        return lastShotPower;
     }
 }

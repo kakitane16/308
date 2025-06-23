@@ -1868,7 +1868,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c72f97abb71babb4d9a407007f237161, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.66
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c72f97abb71babb4d9a407007f237161, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2637,6 +2637,7 @@ MonoBehaviour:
   SAngleY: -1.08
   forceStrength: 0
   rotateAgl: 0
+  lastShotPower: 0
   iconMoveDistance: 50
 --- !u!54 &1612819571
 Rigidbody:
@@ -3098,8 +3099,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7f7adc901c33a46ae051eb94d8ef09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveX: 0
-  MoveZ: 0
+  moveMultiplier: 1
+  moveDirection: {x: 0, y: 0, z: 1}
 --- !u!65 &2118458925
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3108,7 +3109,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2118458923}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -3300,7 +3301,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5035072476859193384, guid: 775d27ece6fc4c144b4dba2ca80da8e3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.53
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5035072476859193384, guid: 775d27ece6fc4c144b4dba2ca80da8e3, type: 3}
       propertyPath: m_LocalPosition.y
