@@ -1320,7 +1320,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c13b210bcd2fa6d469b3d65fc1b731b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  g_FocusObject: {fileID: 28911229}
+  g_Target: {fileID: 9203818765287338466, guid: 37a8741a1c759e1489a65834da63e2a8, type: 3}
+  g_FocusObject: {fileID: -8679921383154817045, guid: fe56abbb88e8fde4b80bbb35438594b9, type: 3}
   g_TargetTag: Player
   g_Offset: {x: 0, y: 5, z: -12}
   g_Position: {x: 1, y: 20, z: -90}
@@ -1328,6 +1329,7 @@ MonoBehaviour:
   g_FollowSpeed: 2
   g_MovementThreshold: 0.01
   g_FocusDuration: 0
+  playercamera: {fileID: 0}
 --- !u!114 &992832232
 MonoBehaviour:
   m_ObjectHideFlags: 0
