@@ -19,7 +19,6 @@ public class Sasa : MonoBehaviour
                 player.rb.useGravity = false;
                 //プレイヤー側の威力を取得
                 float power = player.GetLastShotPower();
-                Debug.Log(power);
                 // moveDirection を正規化して方向だけを取り出し、
                 // プレイヤーの威力 (power) と調整倍率 (moveMultiplier) を掛けて
                 // プレイヤーを移動させるベクトル量を計算している
@@ -28,10 +27,9 @@ public class Sasa : MonoBehaviour
                 // プレイヤーの位置を移動
                 player.transform.position += moveVector;
 
+                Debug.Log($"笹でプレイヤーを移動しました（威力：{power}）");
                 // 必要ならRigidbodyの速度も初期化
                 player.rb.velocity = Vector3.zero;
-
-                Debug.Log($"笹でプレイヤーを移動しました（威力：{power}）");
             }
         }
     }
