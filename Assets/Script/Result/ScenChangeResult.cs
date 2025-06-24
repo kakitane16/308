@@ -33,7 +33,7 @@ public class ScenChangeResult : MonoBehaviour
             switch (count)
             {
                 case 0:
-                    SceneManager.LoadScene("Title");
+                    SceneManager.LoadScene("Select");
                     break;
                 case 1:
                     SceneManager.LoadScene("Game");

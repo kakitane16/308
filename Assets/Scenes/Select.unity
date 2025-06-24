@@ -1026,9 +1026,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   content: {fileID: 1079335630}
+  MaxPage: 2
   PageWidth: 1600
   SlideSpeed: 10
-  MaxPage: 2
   PageCoolTime: 1
   LeftArrow: {fileID: 630360305}
   RightArrow: {fileID: 1899766091}
@@ -2492,9 +2492,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   content: {fileID: 0}
+  MaxPage: 0
   PageWidth: 0
   SlideSpeed: 0
-  MaxPage: 0
   PageCoolTime: 0
   LeftArrow: {fileID: 0}
   RightArrow: {fileID: 0}

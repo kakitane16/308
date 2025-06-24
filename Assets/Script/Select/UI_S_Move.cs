@@ -68,8 +68,8 @@ public class UI_S_Move : MonoBehaviour
             {
                 switch (CurrentPage)
                 {
-                    case 0: SceneManager.LoadScene("Title"); break;
-                    case 1: SceneManager.LoadScene("Game"); break;
+                    case 0: SceneManager.LoadScene("Game"); break;
+                    case 1: SceneManager.LoadScene("Title"); break;
                 }
             }
         }
