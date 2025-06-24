@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerCamera : MonoBehaviour
 {
     // グローバル変数
-    private Transform g_Target;      // 追従対象
+    public Transform g_Target;      // 追従対象
     public Transform g_FocusObject; // 注視対象
     public string g_TargetTag = "Player"; // 追従対象のタグ
     public Vector3 g_Offset = new Vector3(0.0f, -5.0f, -10.0f);  // カメラ相対位置
@@ -21,6 +21,7 @@ public class PlayerCamera : MonoBehaviour
     private enum n_CameraState { Idle, Focusing, Following } // カメラの状態
     private n_CameraState state = n_CameraState.Idle;
     private float focusTimer = 0.0f;
+    public GameObject playercamera;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,8 @@ public class PlayerCamera : MonoBehaviour
         this.transform.position = g_Position;
         this.transform.rotation = g_Rotation;
         // Playerタグがついているオブジェクトを追従
-        GameObject playercamera = GameObject.FindGameObjectWithTag(g_TargetTag);
+        playercamera = GameObject.FindGameObjectWithTag(g_TargetTag);
+
         if (playercamera != null)
         {
             g_Target = playercamera.transform;
@@ -38,21 +40,21 @@ public class PlayerCamera : MonoBehaviour
     // 全ての処理がおわった後に処理を行いたいので
     void LateUpdate()
     {
-            // 注視対象がいなかったら処理をしない(追従対象による条件は削除しました、既に判定したのちにこの処理が行われるため)
-      // if (g_FocusObject == null) { return; }
-       // targetの移動量を取得
-       Vector3 movement = g_Target.position - lasttargetpos;
+       if(playercamera == null)
+        {
+            playercamera = GameObject.FindGameObjectWithTag(g_TargetTag);
+            g_Target = playercamera.transform;
+            lasttargetpos = g_Target.position;  // 追従対象の位置を記録
+        }
+
+        // 注視対象がいなかったら処理をしない(追従対象による条件は削除しました、既に判定したのちにこの処理が行われるため)
+        // if (g_FocusObject == null) { return; }
+        // targetの移動量を取得
+        Vector3 movement = g_Target.position - lasttargetpos;
     
        switch (state)
        {
            case n_CameraState.Idle:
-    
-               // Transform Camera = this.transform;
-               // Camera.position = g_Target.TransformPoint(g_Offset); // ネタの後方へ
-               //// Camera.LookAt(g_Target);
-               // Camera.rotation = g_Target.rotation;
-               //     /*Quaternion.Lerp(
-               //     transform.rotation, g_Target.rotation, Time.deltaTime * g_CameraSpeed);*/
     
                if (movement.magnitude > g_MovementThreshold) //動いたら
                {
@@ -90,8 +92,13 @@ public class PlayerCamera : MonoBehaviour
                    g_Timer += Time.deltaTime;
                    if (g_Timer >= g_WaitTime)
                    {
-                       SceneManager.LoadScene(2);
-                   }
+                        // シーン切り替え＆変数初期化
+                        SceneManager.LoadScene(2);
+                        this.transform.position = g_Position;
+                        this.transform.rotation = g_Rotation;
+                        state = n_CameraState.Idle;
+                        g_Timer = 0.0f;
+                    }
                }
                break;
        }
