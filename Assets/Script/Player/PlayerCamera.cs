@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Scene = UnityEngine.SceneManagement.Scene;
 
 public class PlayerCamera : MonoBehaviour
 {
@@ -22,6 +24,7 @@ public class PlayerCamera : MonoBehaviour
     private n_CameraState state = n_CameraState.Idle;
     private float focusTimer = 0.0f;
     public GameObject playercamera;
+    Scene scene;
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +43,7 @@ public class PlayerCamera : MonoBehaviour
     // 全ての処理がおわった後に処理を行いたいので
     void LateUpdate()
     {
-       if(playercamera == null)
+        if (playercamera == null)
         {
             playercamera = GameObject.FindGameObjectWithTag(g_TargetTag);
             g_Target = playercamera.transform;
@@ -93,7 +96,7 @@ public class PlayerCamera : MonoBehaviour
                    if (g_Timer >= g_WaitTime)
                    {
                         // シーン切り替え＆変数初期化
-                        SceneManager.LoadScene(2);
+                        SceneManager.LoadScene("ResultScene");
                         this.transform.position = g_Position;
                         this.transform.rotation = g_Rotation;
                         state = n_CameraState.Idle;
