@@ -224,10 +224,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eaa83fe114da214da5b5703feec1a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  G_Target: {fileID: 4607561393961291857, guid: 33796f864685a3b4a999b433d9b7b53b, type: 3}
+  G_Target: {fileID: 8830808685112642484, guid: ee84a652e171a784d8f35655eb059d06, type: 3}
   G_Appear: 3
-  G_Trans: {x: 1, y: 1, z: 5}
-  G_Offset: {x: -0.2, y: 0, z: -3}
+  G_Trans: {x: 1, y: 1, z: 1}
+  G_Offset: {x: -0.2, y: -0.5, z: 0}
   G_Disappearance: 2
   G_DistanceInRight: 2
   G_DistanceInUp: 2

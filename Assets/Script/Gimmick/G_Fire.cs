@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class G_Fire : MonoBehaviour
 {
-    //例焼けた見た目の素材(マテリアル)をInspectorで設定できるように公開してる物
-    //unityエディター上で寿司が焼けたりする時に表示させたいマテリアルをここにドラック＆ドロップするだけ
-    public Color G_Color = new Color(0.0f, 0.0f, 0.0f);       // 焼き色マテリアル
+    [Header("判定する元のマテリアル（触れてきたオブジェクトがこのマテリアルを持っていたら）")]
+    public Material[] sourceMaterials;
+    [Header("置き換えるマテリアル（sourceMaterials と同じインデックスで対応付け）")]
+    public Material[] targetMaterials;
+    [Header("置き換えるメッシュ（sourceMaterials と同じインデックスで対応付け）")]
+    public Mesh[] targetMeshes;
     public float G_Weight = 0.7f;
 
     private Buner burner; // バーナーの参照
 
     void LateUpdate()
     {
-        if (burner == null)
-            Destroy(gameObject); // バーナーがない場合は自分自身を削除
+        //if (burner == null)
+        //    Destroy(gameObject); // バーナーがない場合は自分自身を削除
     }
 
     public void SetBuner(Buner b)
@@ -33,16 +36,30 @@ public class G_Fire : MonoBehaviour
             //これはバーナーに触れた瞬間(other)上にあるbutnedMaterial(焼けた素材)から
             //Rendererを取り出してrendererに変更するもの
             Renderer renderer = other.GetComponent<Renderer>();
-            Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+            if (renderer == null) return;
+            // 触れてきたオブジェクトが持っている「今のマテリアル」を調べる
+            Material currentMat = renderer.sharedMaterial;
+            if (currentMat == null) return;
 
+            Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+            if (rb == null) return;
             // 重量の変更
-            if (rb != null)
-                rb.mass = G_Weight;
-            //見た目を変える前に、必要なものがちゃんとあるか確認している項目
-            //&&は両方がちゃんとtrue(ある)のときだけ下の処理を実行するという意味
-            if (renderer != null && G_Color != null )
+            rb.mass = G_Weight;
+            // sourceMaterials の中から currentMat と同じものを探す
+            int idx = System.Array.IndexOf(sourceMaterials, currentMat);
+            if (idx < 0 || idx >= targetMaterials.Length || idx >= targetMeshes.Length)
             {
-                renderer.material.color = G_Color;
+                // 対応表にないマテリアルなら何もしない
+                return;
+            }
+
+            // ① マテリアルを置き換え
+            renderer.material = targetMaterials[idx];
+            // ② メッシュを置き換え
+            MeshFilter mf = other.GetComponent<MeshFilter>();
+            if (mf != null)
+            {
+                mf.mesh = targetMeshes[idx];
             }
         }
     }
