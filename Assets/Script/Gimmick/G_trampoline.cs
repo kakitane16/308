@@ -6,12 +6,13 @@ public class G_trampoline : MonoBehaviour
 {
     private bool IsDown;
     public float SpinPower = 20.0f;
+    private Collider collider; 
 
     // Start is called before the first frame update
     void Start()
     {
+        collider = GetComponent<Collider>();
         // istriggerをオンに
-        Collider collider = GetComponent<Collider>();
         collider.isTrigger = true;
     }
 
@@ -39,8 +40,10 @@ public class G_trampoline : MonoBehaviour
         Vector3 reflectDir = Vector3.Reflect(playerRb.velocity.normalized, normal);
         Vector3 Pvelocity = reflectDir * playerRb.velocity.magnitude;
         Debug.Log(reflectDir);
-        // 逆方向の反射なら処理をしない
-        if (reflectDir.x > 0.0f) 
+        Debug.Log(closetPoint);
+
+        // 竹串の上面以外の反射なら処理をしない
+        if (other.transform.position.y + 0.7f < transform.position.y) 
         {
             IsDown = true;
             return;
@@ -52,6 +55,8 @@ public class G_trampoline : MonoBehaviour
             transform.position = closetPoint;
             // 触れてきたオブジェクトに追従
             transform.SetParent(other.transform);
+            // istriggerをオフに
+            collider.isTrigger = false;
 
             // Y軸回転
             Vector3 spin = new Vector3 (0.0f, -300.0f, 0.0f);
