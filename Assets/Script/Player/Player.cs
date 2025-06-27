@@ -47,6 +47,7 @@ public class Player : MonoBehaviour
     private bool IsReturn;
 
     private bool IsReady = false; // 準備完了フラグ
+    private bool b_IsShot = false; //打つ際の段階
 
     // Start is called before the first frame update
     void OnEnable() // OnEnableに変更しました、Start時ではまだ生成されていない可能性があるため
@@ -62,6 +63,7 @@ public class Player : MonoBehaviour
         }
         rb = GetComponent<Rigidbody>();
         command = new GamePadCommand();
+        arw.gameObject.SetActive(true);
         isShot = false;
         rb.useGravity = false;
         SAngleY = 0;
@@ -71,14 +73,12 @@ public class Player : MonoBehaviour
         forceStrength = 0.0f;
         Debug.Log(GetInputOB);
         IsReturn = false;
+        b_IsShot = false;
 
         // 以下は現状の開発環境での動作確認用の仮置きです、プレハブ生成版に開発が切り替わった段階で削除してください
-
         if (manager == null) return;
 
-        // アシストの有無でアローの表示を切り替え
-        if (!manager.Assist) arw.gameObject.SetActive(true);
-        else arw.gameObject.SetActive(false);
+        arw.gameObject.SetActive(false);
 
         IsReady = true; // 準備完了フラグを立てる
 
@@ -105,10 +105,6 @@ public class Player : MonoBehaviour
 
         if (manager == null) return;    // 取得に失敗していた場合は弾く
 
-
-        // アシストの有無でアローの表示を切り替え(こちらに移動しました、マネージャーが未設定では取得自体ができないため)
-        if (!manager.Assist) arw.gameObject.SetActive(true);
-        else arw.gameObject.SetActive(false);
 
         IsReady = true; // 準備完了フラグを立てる
 
@@ -137,9 +133,15 @@ public class Player : MonoBehaviour
         //打ち出すまでの間だけ入る
         if (!isShot)
         {
-            ShotAngle();
-            Shot();
-            UpdateGauge();
+            if (!b_IsShot)
+            {
+                ShotAngle();
+            }
+            else
+            {
+                Shot();
+                UpdateGauge();
+            }
         }
     }
 
@@ -177,6 +179,11 @@ public class Player : MonoBehaviour
             Vertical = 0.0f;
             Horizontal = 0.0f;
         }
+        if(command.WasBbutton(GetInputOB))
+        {
+            b_IsShot = true;
+            arw.gameObject.SetActive(false);
+        }
     }
 
 
@@ -186,11 +193,8 @@ public class Player : MonoBehaviour
         //打つ時のでかさを貯める
         if (command.IsBbutton(GetInputOB))
         {
-            if (parabola != null && manager.Assist)
-            {
-                parabola.ShowParabora();
-            }
-                Debug.Log("スペースキーが押されているよ");
+            parabola.ShowParabora();
+            Debug.Log("スペースキーが押されているよ");
             //最大値まで戻る場合
             if (forceStrength < MaxPower)
             {

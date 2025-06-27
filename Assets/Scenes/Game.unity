@@ -1234,7 +1234,6 @@ GameObject:
   - component: {fileID: 992832229}
   - component: {fileID: 992832231}
   - component: {fileID: 992832228}
-  - component: {fileID: 992832232}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1330,21 +1329,6 @@ MonoBehaviour:
   g_MovementThreshold: 0.01
   g_FocusDuration: 0
   playercamera: {fileID: 0}
---- !u!114 &992832232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 992832227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65bc39fd9d404574ba0ddd19da6d1402, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputDevice: 2
-  score: 0
-  Assist: 1
 --- !u!1 &1074688875 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -9038585923029775698, guid: 9204a4018d9a2554182e96d6ef31a8bb, type: 3}
@@ -2627,7 +2611,7 @@ MonoBehaviour:
   NormalIcon: {fileID: 21300000, guid: ae4405abb819e8449b9dec09b5572857, type: 3}
   iconRectTransform: {fileID: 337808448}
   gaugeRectTransform: {fileID: 1461658122}
-  manager: {fileID: 992832232}
+  manager: {fileID: 0}
   iconMoveSpeed: 3
   arw: {fileID: 1574056135}
   parabola: {fileID: 1612819575}
