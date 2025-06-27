@@ -3371,6 +3371,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5035072476364312883, guid: 775d27ece6fc4c144b4dba2ca80da8e3, type: 3}
+      propertyPath: G_Target
+      value: 
+      objectReference: {fileID: 8830808685112642484, guid: ee84a652e171a784d8f35655eb059d06, type: 3}
+    - target: {fileID: 5035072476364312883, guid: 775d27ece6fc4c144b4dba2ca80da8e3, type: 3}
+      propertyPath: G_Trans.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5035072476364312883, guid: 775d27ece6fc4c144b4dba2ca80da8e3, type: 3}
+      propertyPath: G_Offset.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5035072476364312883, guid: 775d27ece6fc4c144b4dba2ca80da8e3, type: 3}
+      propertyPath: G_Offset.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5035072476859193384, guid: 775d27ece6fc4c144b4dba2ca80da8e3, type: 3}
       propertyPath: m_RootOrder
       value: 4
