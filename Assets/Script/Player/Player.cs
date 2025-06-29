@@ -79,10 +79,6 @@ public class Player : MonoBehaviour
 
         if (manager == null) return;
 
-        // アシストの有無でアローの表示を切り替え
-        if (!manager.Assist) arw.gameObject.SetActive(true);
-        else arw.gameObject.SetActive(false);
-
         IsReady = true; // 準備完了フラグを立てる
 
         sceneStartTime = Time.time;
@@ -107,11 +103,6 @@ public class Player : MonoBehaviour
         if (manager == null) manager = GameObject.FindObjectOfType<GameManager>();
 
         if (manager == null) return;    // 取得に失敗していた場合は弾く
-
-
-        // アシストの有無でアローの表示を切り替え(こちらに移動しました、マネージャーが未設定では取得自体ができないため)
-        if (!manager.Assist) arw.gameObject.SetActive(true);
-        else arw.gameObject.SetActive(false);
 
         IsReady = true; // 準備完了フラグを立てる
 
@@ -189,11 +180,8 @@ public class Player : MonoBehaviour
         //打つ時のでかさを貯める
         if (command.IsBbutton(GetInputOB))
         {
-            if (parabola != null && manager.Assist)
-            {
-                parabola.ShowParabora();
-            }
-                Debug.Log("スペースキーが押されているよ");
+            parabola.ShowParabora();
+            Debug.Log("スペースキーが押されているよ");
             //最大値まで戻る場合
             if (forceStrength < MaxPower)
             {
