@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public InputObject inputDevice = InputObject.GamePad; //初期はなにも接続されてない
     public int score = 0; //点数を返す
+    public string SelectedStageName = "stage001"; // ステージ名（例: stage001）
 
     void Awake()
     {

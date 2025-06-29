@@ -1159,8 +1159,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65bc39fd9d404574ba0ddd19da6d1402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputDevice: 1
+  inputDevice: 2
   score: 0
+  SelectedStageName: stage001
 --- !u!114 &734743135
 MonoBehaviour:
   m_ObjectHideFlags: 0

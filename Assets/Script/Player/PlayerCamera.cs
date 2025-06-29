@@ -28,16 +28,18 @@ public class PlayerCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.transform.position = g_Position;
-        this.transform.rotation = g_Rotation;
-        // Playerタグがついているオブジェクトを追従
-        playercamera = GameObject.FindGameObjectWithTag(g_TargetTag);
-
         if (playercamera != null)
         {
             g_Target = playercamera.transform;
             lasttargetpos = g_Target.position;  // 追従対象の位置を記録
         }
+
+        this.transform.position = g_Position;
+        this.transform.rotation = g_Rotation;
+        // Playerタグがついているオブジェクトを追従
+        playercamera = GameObject.FindGameObjectWithTag(g_TargetTag);
+
+       
     }
     // 全ての処理がおわった後に処理を行いたいので
     void LateUpdate()
@@ -45,8 +47,16 @@ public class PlayerCamera : MonoBehaviour
         if (playercamera == null)
         {
             playercamera = GameObject.FindGameObjectWithTag(g_TargetTag);
-            g_Target = playercamera.transform;
-            lasttargetpos = g_Target.position;  // 追従対象の位置を記録
+            if (playercamera != null)
+            {
+                g_Target = playercamera.transform;
+                lasttargetpos = g_Target.position;
+            }
+            else
+            {
+                // Playerオブジェクトがまだ存在しないなら処理中断
+                return;
+            }
         }
 
         // 注視対象がいなかったら処理をしない(追従対象による条件は削除しました、既に判定したのちにこの処理が行われるため)

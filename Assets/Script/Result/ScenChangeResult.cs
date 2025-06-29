@@ -36,7 +36,7 @@ public class ScenChangeResult : MonoBehaviour
                     SceneManager.LoadScene("Select");
                     break;
                 case 1:
-                    SceneManager.LoadScene("Game");
+                    SceneManager.LoadScene(2);
                     break;
             }
         }

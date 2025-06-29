@@ -66,11 +66,11 @@ public class UI_S_Move : MonoBehaviour
             //決定ボタン入力
             if (_command.IsBbutton(GetInputOB))
             {
-                switch (CurrentPage)
-                {
-                    case 0: SceneManager.LoadScene("Game"); break;
-                    case 1: SceneManager.LoadScene("Title"); break;
-                }
+                // ステージ名をGameManagerに保存
+                int stageIndex = CurrentPage + 1; // stage001～stage015
+                GameManager.Instance.SelectedStageName = $"stage{stageIndex:D3}";
+
+                SceneManager.LoadScene(2); // ステージ読み込み先シーン名
             }
         }
         else

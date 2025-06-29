@@ -26,13 +26,17 @@ public class StageGenerator : MonoBehaviour
     void Awake()
     {
         ClearStage();
+
+        string stageName = GameManager.Instance?.SelectedStageName ?? "stage001";
+        csvFile = Resources.Load<TextAsset>($"CSV/{stageName}");
+
         if (csvFile != null)
         {
             GenerateFromCSV();
         }
         else
         {
-            Debug.LogWarning("CSVファイルが指定されていません");
+            Debug.LogWarning($"CSVファイル '{stageName}' が見つかりませんでした");
         }
     }
 
