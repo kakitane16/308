@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 using UnityEngine;
 using System.Runtime.CompilerServices;
 using UnityEngine.UI;
-using UnityEditorInternal.VR;
 using static UnityEngine.GraphicsBuffer;
 
 public class Player : MonoBehaviour
