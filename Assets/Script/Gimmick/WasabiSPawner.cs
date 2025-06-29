@@ -18,12 +18,28 @@ public class WasabiSPawner : MonoBehaviour
     [Header("ワサビが落下してから消えるまでの時間 (秒)")]
     //「ワサビが生まれてから自動で消えるまでの秒数」を表す
     //inspectorで秒数変更可能
-    public float lifeTime = 3f;
+    public float lifeTime = 3.0f;
+
+    [Header("ワサビが出現するディレイ (秒)")]
+    public float delayTime = 0.0f;
+    float Timer;
 
     private void Start()
     {
-        //起動と同時にループを開始
-        StartCoroutine(SpawnLoop());
+
+    }
+
+    private void Update()
+    {
+        if (Timer > delayTime)
+            return;
+
+            Timer += Time.deltaTime;
+        if (Timer >= delayTime)
+        {
+            // ループ開始
+            StartCoroutine(SpawnLoop());
+        }
     }
 
     private IEnumerator SpawnLoop()
