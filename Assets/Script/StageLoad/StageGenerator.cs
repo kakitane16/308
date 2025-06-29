@@ -23,7 +23,7 @@ public class StageGenerator : MonoBehaviour
     private int[,] cachedData;
     private Transform stageContainer;
 
-    void Awake()
+    void Start()
     {
         ClearStage();
 
