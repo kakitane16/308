@@ -35,10 +35,10 @@ public class G_trampoline : MonoBehaviour
         if (playerRb == null) { return; }
 
         // 反射の計算
-        Vector3 closetPoint = GetComponent<Collider>().ClosestPoint(playerRb.position);
-        Vector3 normal = (playerRb.position - closetPoint).normalized;
-        Vector3 reflectDir = Vector3.Reflect(playerRb.velocity.normalized, normal);
-        Vector3 Pvelocity = reflectDir * playerRb.velocity.magnitude;
+        Vector3 closetPoint = GetComponent<Collider>().ClosestPoint(playerRb.position); // ネタの触れた位置
+        Vector3 normal = (playerRb.position - closetPoint).normalized;  // ベクトル取得
+        Vector3 reflectDir = Vector3.Reflect(playerRb.velocity.normalized, normal); // 反射
+        Vector3 Pvelocity = reflectDir * playerRb.velocity.magnitude; // 新しいベクトル　×　発射の強さ
         Debug.Log(reflectDir);
         Debug.Log(closetPoint);
 
