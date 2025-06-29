@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
     private bool IsReturn;
 
     private bool IsReady = false; // 準備完了フラグ
+    private bool wasShotReady = false;
 
     public float lastShotPower;
 
@@ -72,6 +73,7 @@ public class Player : MonoBehaviour
         forceStrength = 0.0f;
         Debug.Log(GetInputOB);
         IsReturn = false;
+        wasShotReady = false;
         lastShotPower = 0.0f;
 
         // 以下は現状の開発環境での動作確認用の仮置きです、プレハブ生成版に開発が切り替わった段階で削除してください
@@ -130,9 +132,16 @@ public class Player : MonoBehaviour
         //打ち出すまでの間だけ入る
         if (!isShot)
         {
-            ShotAngle();
-            Shot();
-            UpdateGauge();
+            //最初は角度を決めてその後打ち出したい威力のタイミングで放つ
+            if (!wasShotReady)
+            {
+                ShotAngle();
+            }
+            else
+            {
+                Shot();
+                UpdateGauge();
+            }
         }
     }
 
@@ -169,6 +178,10 @@ public class Player : MonoBehaviour
         {
             Vertical = 0.0f;
             Horizontal = 0.0f;
+        }
+        if(command.WasBbutton(GetInputOB))
+        {
+            wasShotReady = true;
         }
     }
 
