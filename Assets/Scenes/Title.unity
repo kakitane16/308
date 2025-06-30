@@ -1072,8 +1072,8 @@ GameObject:
   - component: {fileID: 734743133}
   - component: {fileID: 734743132}
   - component: {fileID: 734743131}
-  - component: {fileID: 734743134}
   - component: {fileID: 734743135}
+  - component: {fileID: 734743136}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1147,7 +1147,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 6.325, y: 13.493, z: -0.203}
---- !u!114 &734743134
+--- !u!114 &734743135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734743130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e8beb9a589b9ea4fabd40f9bbb49377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &734743136
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1162,18 +1174,6 @@ MonoBehaviour:
   inputDevice: 2
   score: 0
   SelectedStageName: stage001
---- !u!114 &734743135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 734743130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e8beb9a589b9ea4fabd40f9bbb49377, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &764986522
 PrefabInstance:
   m_ObjectHideFlags: 0

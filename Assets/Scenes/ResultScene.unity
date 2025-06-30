@@ -1953,7 +1953,6 @@ GameObject:
   - component: {fileID: 1450246044}
   - component: {fileID: 1450246043}
   - component: {fileID: 1450246046}
-  - component: {fileID: 1450246047}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2039,21 +2038,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e8beb9a589b9ea4fabd40f9bbb49377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1450246047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1450246042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65bc39fd9d404574ba0ddd19da6d1402, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputDevice: 1
-  score: 0
-  Assist: 0
 --- !u!1 &1592943472
 GameObject:
   m_ObjectHideFlags: 0
@@ -2238,6 +2222,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _selectedScale: {x: 4, y: 4, z: 1.2}
   _scaleSpeed: 10
+  _pulse: 0.05
+  _pulseSpeed: 4
 --- !u!1001 &1611442577
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2976,6 +2962,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _selectedScale: {x: 4, y: 4, z: 1.2}
   _scaleSpeed: 10
+  _pulse: 0.05
+  _pulseSpeed: 4
 --- !u!1 &2027136516
 GameObject:
   m_ObjectHideFlags: 0
