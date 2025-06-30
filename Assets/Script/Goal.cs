@@ -62,22 +62,22 @@ public class Goal : MonoBehaviour
         if (score <= 10)
         {
             Debug.Log("bad");
-            return 0;
+            return (int)review.Bad;
         }
         else if (score <= 60)
         {
             Debug.Log("normal");
-            return 1;
+            return (int)review.Nomal;
         }
         else if (score <= 80)
         {
             Debug.Log("good");
-            return 2;
+            return (int)review.Good;
         }
         else
         {
             Debug.Log("perfect");
-            return 3;
+            return (int)review.Perfect;
         }
     }
 
