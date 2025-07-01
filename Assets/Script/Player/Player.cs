@@ -136,6 +136,8 @@ public class Player : MonoBehaviour
             if (!wasShotReady)
             {
                 ShotAngle();
+                forceStrength = MaxPower;
+                parabola.ShowParabora();
             }
             else
             {
