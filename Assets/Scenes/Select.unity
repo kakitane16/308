@@ -687,6 +687,7 @@ GameObject:
   - component: {fileID: 236242413}
   - component: {fileID: 236242412}
   - component: {fileID: 236242415}
+  - component: {fileID: 236242416}
   m_Layer: 5
   m_Name: ButtonRight
   m_TagString: Untagged
@@ -722,7 +723,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 236242410}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -816,9 +817,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 236242410}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3941233710e28444a9202c0587613123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectedScale: {x: 1.2, y: 1.2, z: 1.2}
+  _scaleSpeed: 10
+  _pulse: 0.05
+  _pulseSpeed: 4
+--- !u!114 &236242416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236242410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4740a1bb942d204c9435207171f464d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _selectedScale: {x: 1.2, y: 1.2, z: 1.2}
@@ -4692,6 +4709,7 @@ GameObject:
   - component: {fileID: 1610739122}
   - component: {fileID: 1610739121}
   - component: {fileID: 1610739124}
+  - component: {fileID: 1610739125}
   m_Layer: 5
   m_Name: ButtonLeft
   m_TagString: Untagged
@@ -4727,7 +4745,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1610739119}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -4821,9 +4839,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1610739119}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3941233710e28444a9202c0587613123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectedScale: {x: 1.2, y: 1.2, z: 1.2}
+  _scaleSpeed: 10
+  _pulse: 0.05
+  _pulseSpeed: 4
+--- !u!114 &1610739125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610739119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4740a1bb942d204c9435207171f464d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _selectedScale: {x: 1.2, y: 1.2, z: 1.2}
