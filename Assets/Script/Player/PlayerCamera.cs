@@ -7,8 +7,8 @@ using Scene = UnityEngine.SceneManagement.Scene;
 public class PlayerCamera : MonoBehaviour
 {
     // グローバル変数
-    public Transform g_Target;      // 追従対象
-    public Transform g_FocusObject; // 注視対象
+    private Transform g_Target;      // 追従対象
+    private Transform g_FocusObject; // 注視対象
     public string g_TargetTag = "Player"; // 追従対象のタグ
     public Vector3 g_Offset = new Vector3(0.0f, -5.0f, -10.0f);  // カメラ相対位置
     public Vector3 g_Position = new Vector3(0.0f, 20.0f, -85.0f);  // カメラ位置
@@ -22,12 +22,15 @@ public class PlayerCamera : MonoBehaviour
     private enum n_CameraState { Idle, Focusing, Following } // カメラの状態
     private n_CameraState state = n_CameraState.Idle;
     private float focusTimer = 0.0f;
-    public GameObject playercamera;
+    private GameObject playercamera;
     Scene scene;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Playerタグがついているオブジェクトを追従
+        playercamera = GameObject.FindGameObjectWithTag(g_TargetTag);
+
         if (playercamera != null)
         {
             g_Target = playercamera.transform;
@@ -35,11 +38,7 @@ public class PlayerCamera : MonoBehaviour
         }
 
         this.transform.position = g_Position;
-        this.transform.rotation = g_Rotation;
-        // Playerタグがついているオブジェクトを追従
-        playercamera = GameObject.FindGameObjectWithTag(g_TargetTag);
-
-       
+        this.transform.rotation = g_Rotation;      
     }
     // 全ての処理がおわった後に処理を行いたいので
     void LateUpdate()
