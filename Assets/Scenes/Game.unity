@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -696,6 +696,8 @@ GameObject:
   m_Component:
   - component: {fileID: 454576653}
   - component: {fileID: 454576652}
+  - component: {fileID: 454576654}
+  - component: {fileID: 454576655}
   m_Layer: 0
   m_Name: Spot Light (2)
   m_TagString: Untagged
@@ -714,9 +716,9 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 0.9718344, g: 1, b: 0.7018868, a: 1}
-  m_Intensity: 3
-  m_Range: 50
+  m_Color: {r: 1, g: 1, b: 0.6627451, a: 1}
+  m_Intensity: 5
+  m_Range: 60
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -773,13 +775,39 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454576651}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -2.53, y: 40.3, z: -67.99}
+  m_LocalPosition: {x: 0.6, y: 54.4, z: -67.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &454576654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454576651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6817c8f105218a4999e2c145b8adf08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &454576655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454576651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f63a494f81f334e48a6d847dda0038b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colors:
+  - {r: 1, g: 0, b: 0.93903685, a: 0}
 --- !u!1 &685504711 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2615453208677245630, guid: 9204a4018d9a2554182e96d6ef31a8bb, type: 3}
@@ -903,6 +931,8 @@ GameObject:
   m_Component:
   - component: {fileID: 908290784}
   - component: {fileID: 908290783}
+  - component: {fileID: 908290785}
+  - component: {fileID: 908290786}
   m_Layer: 0
   m_Name: Spot Light (1)
   m_TagString: Untagged
@@ -921,7 +951,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 0.9928543, g: 1, b: 0.66415095, a: 1}
+  m_Color: {r: 1, g: 1, b: 0.66415095, a: 1}
   m_Intensity: 3
   m_Range: 50
   m_SpotAngle: 30
@@ -979,14 +1009,40 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 908290782}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 20.4, y: 39.7, z: -65.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &908290785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908290782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6817c8f105218a4999e2c145b8adf08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &908290786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908290782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f63a494f81f334e48a6d847dda0038b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colors:
+  - {r: 0, g: 0.97115946, b: 1, a: 0}
 --- !u!1 &918792583
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,6 +1053,8 @@ GameObject:
   m_Component:
   - component: {fileID: 918792585}
   - component: {fileID: 918792584}
+  - component: {fileID: 918792586}
+  - component: {fileID: 918792587}
   m_Layer: 0
   m_Name: Spot Light
   m_TagString: Untagged
@@ -1074,13 +1132,39 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 918792583}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -21.67, y: 56.8, z: -65.76}
+  m_LocalPosition: {x: -21.67, y: 55.4, z: -65.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &918792586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918792583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6817c8f105218a4999e2c145b8adf08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &918792587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918792583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f63a494f81f334e48a6d847dda0038b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colors:
+  - {r: 0, g: 1, b: 0.032736063, a: 0}
 --- !u!1 &928509880
 GameObject:
   m_ObjectHideFlags: 0
@@ -1263,6 +1347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c13b210bcd2fa6d469b3d65fc1b731b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  g_Target: {fileID: 0}
   g_FocusObject: {fileID: 28911229}
   g_TargetTag: Player
   g_Offset: {x: 0, y: 5, z: -12}
@@ -1271,6 +1356,7 @@ MonoBehaviour:
   g_FollowSpeed: 2
   g_MovementThreshold: 0.01
   g_FocusDuration: 0
+  playercamera: {fileID: 0}
 --- !u!114 &992832232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1285,15 +1371,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputDevice: 2
   score: 0
-  Assist: 1
+  SelectedStageName: stage001
 --- !u!1 &1074688875 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -9038585923029775698, guid: 9204a4018d9a2554182e96d6ef31a8bb, type: 3}
-  m_PrefabInstance: {fileID: 1136434757}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1074688876 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -2036410469228376182, guid: 9204a4018d9a2554182e96d6ef31a8bb, type: 3}
   m_PrefabInstance: {fileID: 1136434757}
   m_PrefabAsset: {fileID: 0}
 --- !u!64 &1074688877
@@ -2610,8 +2691,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98f79f324b942224cab43cdcab6742f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goal: {fileID: 1074688876}
-  goalTag: Plate
   syari: Syari
   maxScore: 100
   maxDistance: 5
@@ -2910,6 +2989,7 @@ MonoBehaviour:
   offset: {x: 0.55, y: -3, z: 0}
   offset_rotate: {x: 90, y: 0, z: 0}
   lifeTime: 3
+  delayTime: 0
 --- !u!4 &1646669917 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c72f97abb71babb4d9a407007f237161, type: 3}
@@ -3120,7 +3200,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2134185984
 GameObject:
@@ -3244,7 +3324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8362709343897795406, guid: 7bcabaadf3a7e6644a1c686b3ab7fe61, type: 3}
       propertyPath: m_RootOrder
-      value: 26
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8362709343897795406, guid: 7bcabaadf3a7e6644a1c686b3ab7fe61, type: 3}
       propertyPath: m_LocalPosition.x
