@@ -4,7 +4,7 @@ using UnityEditor;
 #endif
 using UnityEngine;
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class StageGenerator : MonoBehaviour
 {
     [Header("CSVファイル")]
@@ -40,20 +40,20 @@ public class StageGenerator : MonoBehaviour
         }
     }
 
-    [ContextMenu("ステージ再生成")]
-    public void RegenerateFromContextMenu()
-    {
-        if (csvFile != null)
-        {
-            cachedData = ParseCSV(csvFile);
-            ClearStage();
-            GenerateStage();
-        }
-        else
-        {
-            Debug.LogWarning("CSVファイルが指定されていません");
-        }
-    }
+    //[ContextMenu("ステージ再生成")]
+    //public void RegenerateFromContextMenu()
+    //{
+    //    if (csvFile != null)
+    //    {
+    //        cachedData = ParseCSV(csvFile);
+    //        ClearStage();
+    //        GenerateStage();
+    //    }
+    //    else
+    //    {
+    //        Debug.LogWarning("CSVファイルが指定されていません");
+    //    }
+    //}
 
     public void GenerateFromCSV()
     {
