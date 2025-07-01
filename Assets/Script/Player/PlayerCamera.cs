@@ -14,7 +14,7 @@ public class PlayerCamera : MonoBehaviour
     public Vector3 g_Position = new Vector3(0.0f, 20.0f, -85.0f);  // カメラ位置
     public Quaternion g_Rotation = Quaternion.Euler(22.0f, 0.0f, 0.0f);  // カメラ回転
     public float g_FollowSpeed = 2.0f;  // 追従対象に戻るまでの時間
-    public float g_MovementThreshold = 0.01f; // 処理を行うために必要な追従対象の移動量
+    private float g_MovementThreshold = 0.01f; // 処理を行うために必要な追従対象の移動量
     public float g_FocusDuration = 2.0f;   // 注視時間（秒）
     private float g_WaitTime = 5.0f;         // 待ち時間（秒）
     private float g_Timer = 0.0f;            // 経過時間
@@ -37,8 +37,9 @@ public class PlayerCamera : MonoBehaviour
             lasttargetpos = g_Target.position;  // 追従対象の位置を記録
         }
 
+        // 変数初期化
         this.transform.position = g_Position;
-        this.transform.rotation = g_Rotation;      
+        this.transform.rotation = g_Rotation;
     }
     // 全ての処理がおわった後に処理を行いたいので
     void LateUpdate()
@@ -67,7 +68,7 @@ public class PlayerCamera : MonoBehaviour
        {
            case n_CameraState.Idle:
     
-               if (movement.magnitude > g_MovementThreshold) //動いたら
+               if (movement.magnitude > 0.01f) //動いたら
                {
                    state = n_CameraState.Focusing; // 状態遷移
                    focusTimer = g_FocusDuration;   // 注視時間代入
@@ -103,13 +104,9 @@ public class PlayerCamera : MonoBehaviour
                    g_Timer += Time.deltaTime;
                    if (g_Timer >= g_WaitTime)
                    {
-                        // シーン切り替え＆変数初期化
+                        // シーン切り替え
                         SceneManager.LoadScene("ResultScene");
-                        this.transform.position = g_Position;
-                        this.transform.rotation = g_Rotation;
-                        state = n_CameraState.Idle;
-                        g_Timer = 0.0f;
-                    }
+                   }
                }
                break;
        }
