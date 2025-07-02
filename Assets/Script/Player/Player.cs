@@ -48,6 +48,12 @@ public class Player : MonoBehaviour
 
     private bool IsReady = false; // 準備完了フラグ
 
+    //キャラクター
+    [SerializeField]
+    private Transform _unityChan;
+    //キャラクターアニメーター
+    private Animator _unityChanAnimator;
+
     // Start is called before the first frame update
     void OnEnable() // OnEnableに変更しました、Start時ではまだ生成されていない可能性があるため
     {
@@ -81,6 +87,13 @@ public class Player : MonoBehaviour
         else arw.gameObject.SetActive(false);
 
         IsReady = true; // 準備完了フラグを立てる
+
+
+        _unityChanAnimator =
+            _unityChan.GetComponent<Animator>();
+
+        _unityChanAnimator.SetBool("Throwing", false);
+
 
         sceneStartTime = Time.time;
 
@@ -206,6 +219,8 @@ public class Player : MonoBehaviour
         //打ち出し
         if (command.WasBbutton(GetInputOB))
         {
+            _unityChanAnimator.SetBool("Throwing",true);
+           
             PowerShoting();
             if (parabola != null)
             {
