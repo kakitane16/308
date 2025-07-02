@@ -199,5 +199,30 @@ public class GamePadCommand : MonoBehaviour
         return 0f;
     }
 
+    public bool GetEscKey(int ipt)
+    {
+        switch (ipt)
+        {
+            case (int)InputObject.GamePad:
+                if (Gamepad.current != null)
+                {
+                    if (Gamepad.current.startButton.isPressed)
+                    {
+                        return true;
+                    }
+                }
+                break;
+            case (int)InputObject.KeyBoad:
+                if (Keyboard.current != null)
+                {
+                    if (Keyboard.current.escapeKey.isPressed)
+                    {
+                        return true;
+                    }
+                }
+                break;
+        }
+        return false;
+    }
 }
 

@@ -2,12 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class BackTitle : MonoBehaviour
 {
-    public void ClickTitleBackButton()
+    GamePadCommand command;
+    public void Start()
     {
-        SceneManager.LoadScene("Title");
+        command = new GamePadCommand();
     }
-
+    public void Update()
+    {
+        command = new GamePadCommand();
+        if (command.GetEscKey((int)GameManager.Instance.inputDevice))
+        {
+            SceneManager.LoadScene("Title");
+        }
+    }
 }
