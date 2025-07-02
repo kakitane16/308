@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     private float MaxPower = 20f;
     public float RotateSpeed;
     public bool isShot;
-    public float shotpower;
+    private float shotpower;
     public float SAngleY;
     public float forceStrength;            // 前方向への飛ぶ力
     public float rotateAgl;
@@ -75,6 +75,7 @@ public class Player : MonoBehaviour
         IsReturn = false;
         wasShotReady = false;
         lastShotPower = 0.0f;
+        shotpower = 0.08f;
 
         // 以下は現状の開発環境での動作確認用の仮置きです、プレハブ生成版に開発が切り替わった段階で削除してください
 

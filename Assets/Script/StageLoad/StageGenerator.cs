@@ -38,22 +38,20 @@ public class StageGenerator : MonoBehaviour
         {
             Debug.LogWarning($"CSVファイル '{stageName}' が見つかりませんでした");
         }
-    }
 
-    //[ContextMenu("ステージ再生成")]
-    //public void RegenerateFromContextMenu()
-    //{
-    //    if (csvFile != null)
-    //    {
-    //        cachedData = ParseCSV(csvFile);
-    //        ClearStage();
-    //        GenerateStage();
-    //    }
-    //    else
-    //    {
-    //        Debug.LogWarning("CSVファイルが指定されていません");
-    //    }
-    //}
+        //Goalの基準を探す
+        GameManager.Instance.Points = GetCellValue(0, 10); //A１１セル
+        Debug.Log($"CSVセル '{GameManager.Instance.Points}'");
+    }
+    //Goalの判定
+    public int GetCellValue(int x, int y)
+    {
+        if (cachedData != null && y < cachedData.GetLength(0) && x < cachedData.GetLength(1))
+        {
+            return cachedData[y, x];
+        }
+        return -1; // エラー値
+    }
 
     public void GenerateFromCSV()
     {
