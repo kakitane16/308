@@ -50,7 +50,7 @@ public class StageGenerator : MonoBehaviour
         {
             return cachedData[y, x];
         }
-        return -1; // エラー値
+        return 10; // エラー値
     }
 
     public void GenerateFromCSV()
