@@ -39,6 +39,10 @@ public class Goal : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, goal.position);
         int score = CalculateScore(distance);
+
+        //Gimmickによるスコアの更新処理
+        score = GimmickScore(score);
+
         int rank = GetScoreRank(score);
 
         // スコア保存
@@ -54,6 +58,32 @@ public class Goal : MonoBehaviour
         float adjustedDistance = distance * levelMultiplier;
         float normalized = Mathf.Clamp01(1f - (adjustedDistance / maxDistance));
         return Mathf.RoundToInt(normalized * maxScore);
+    }
+
+    private int GimmickScore(int score)
+    {
+        //ステージで評価基準が変わるため
+        //ゲームセレクトからCSV読み込み値はゲームマネージャーに保存
+        //その値を持ってくる
+         int GimmickRank = GameManager.Instance.Points;
+
+        switch (GimmickRank)
+        {
+            //通常のノリだけなのでscore変動なし
+            case 10:
+                return score;
+
+            case 11:
+                break;
+
+            case 12:
+                break;
+
+            case 13:
+                break;
+        }
+
+        return score;
     }
 
     //CaluculateScoreで概算した値を正式なスコアに変換
