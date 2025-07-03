@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     public RectTransform gaugeRectTransform; // ゲージ位置
     public GameManager manager;
     public float iconMoveSpeed = 2f;
+    // ★追加：威力を保持するための変数
+    public float currentPower = 0f;
     private Vector2 iconStartPos; // アイコンの初期位置
     private bool isMaxIconActive = false;
     private bool isMaxIconDelayActive = false; // 最大アイコン維持中フラグ
@@ -308,6 +310,7 @@ public class Player : MonoBehaviour
         Debug.Log("スペースキー or gamepad.b が離されました");
         rb.useGravity = true;
         isShot = true;
+        currentPower = forceStrength;
         // **前方+上方向へ飛ばす(オブジェクトの質量と関係しているためUnity側で計算させている)**
         Vector3 launchForce = transform.forward * forceStrength + Vector3.up * SAngleY;
         rb.AddForce(launchForce, ForceMode.Impulse);
@@ -321,6 +324,6 @@ public class Player : MonoBehaviour
     //ギミック側でショットPowerを使うため
     public float GetLastShotPower()
     {
-        return lastShotPower;
+        return currentPower;
     }
 }
