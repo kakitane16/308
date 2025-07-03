@@ -52,7 +52,6 @@ public class G_Fire : MonoBehaviour
             {
                 Goal goal = player.GetComponent<Goal>();
                 goal.AburiHit = true;
-                Debug.Log(goal.WasabiHit);
             }
                 // sourceMaterials ‚Ì’†‚©‚ç currentMat ‚Æ“¯‚¶‚à‚Ì‚ð’T‚·
                 int idx = System.Array.IndexOf(sourceMaterials, currentMat);
