@@ -45,8 +45,17 @@ public class G_Fire : MonoBehaviour
             if (rb == null) return;
             // 重量の変更
             rb.mass = G_Weight;
-            // sourceMaterials の中から currentMat と同じものを探す
-            int idx = System.Array.IndexOf(sourceMaterials, currentMat);
+
+            // ギミックに触れたという情報をゴールに
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null)
+            {
+                Goal goal = player.GetComponent<Goal>();
+                goal.AburiHit = true;
+                Debug.Log(goal.WasabiHit);
+            }
+                // sourceMaterials の中から currentMat と同じものを探す
+                int idx = System.Array.IndexOf(sourceMaterials, currentMat);
             if (idx < 0 || idx >= targetMaterials.Length || idx >= targetMeshes.Length)
             {
                 // 対応表にないマテリアルなら何もしない

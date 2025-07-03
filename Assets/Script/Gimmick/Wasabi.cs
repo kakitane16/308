@@ -38,6 +38,14 @@ public class Wasabi : MonoBehaviour
         if (rb != null)
             rb.mass = G_Weight;
 
+        // ƒMƒ~ƒbƒN‚ÉG‚ê‚½‚Æ‚¢‚¤î•ñ‚ğƒS[ƒ‹‚É
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            Goal goal = player.GetComponent<Goal>();
+            goal.WasabiHit = true;
+        }
+
         // sourceMaterials ‚Ì’†‚©‚ç currentMat ‚Æ“¯‚¶‚à‚Ì‚ğ’T‚·
         int idx = System.Array.IndexOf(sourceMaterials, currentMat);
         if (idx < 0 || idx >= targetMaterials.Length || idx >= targetMeshes.Length)

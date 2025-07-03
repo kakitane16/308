@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1347,16 +1347,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c13b210bcd2fa6d469b3d65fc1b731b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  g_Target: {fileID: 0}
-  g_FocusObject: {fileID: 28911229}
   g_TargetTag: Player
   g_Offset: {x: 0, y: 5, z: -12}
   g_Position: {x: 1, y: 20, z: -90}
   g_Rotation: {x: 0.190809, y: 0, z: 0, w: 0.98162717}
   g_FollowSpeed: 2
-  g_MovementThreshold: 0.01
   g_FocusDuration: 0
-  playercamera: {fileID: 0}
 --- !u!114 &992832232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1372,6 +1368,7 @@ MonoBehaviour:
   inputDevice: 2
   score: 0
   SelectedStageName: stage001
+  Points: 10
 --- !u!1 &1074688875 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -9038585923029775698, guid: 9204a4018d9a2554182e96d6ef31a8bb, type: 3}
@@ -2657,7 +2654,6 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   RotateSpeed: 2
   isShot: 0
-  shotpower: 0.03
   SAngleY: -1.08
   forceStrength: 0
   rotateAgl: 0
@@ -2695,6 +2691,8 @@ MonoBehaviour:
   maxScore: 100
   maxDistance: 5
   levelMultiplier: 1
+  WasabiHit: 0
+  AburiHit: 0
 --- !u!114 &1612819573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3375,6 +3373,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5035072476364312883, guid: 775d27ece6fc4c144b4dba2ca80da8e3, type: 3}
+      propertyPath: G_Target
+      value: 
+      objectReference: {fileID: 8830808685112642484, guid: ee84a652e171a784d8f35655eb059d06, type: 3}
     - target: {fileID: 5035072476859193384, guid: 775d27ece6fc4c144b4dba2ca80da8e3, type: 3}
       propertyPath: m_RootOrder
       value: 2
