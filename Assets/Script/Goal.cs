@@ -14,6 +14,8 @@ public class Goal : MonoBehaviour
     public float maxScore = 100f;
     public float maxDistance = 5f; // スコアゼロになる距離
     public float levelMultiplier = 1f;
+    public bool WasabiHit = false;
+    public bool AburiHit = false;
 
     void LateUpdate()
     {
@@ -71,15 +73,28 @@ public class Goal : MonoBehaviour
         {
             //通常のノリだけなのでscore変動なし
             case 10:
-                return score;
-
+                break;
+            //ワサビ付きの場合のscore更新処理
+            //当たってない場合はscoreが0
             case 11:
+                if(!WasabiHit)
+                {
+                    score = 0;
+                }
                 break;
-
+            //炙りの場合のscore更新処理
             case 12:
+                if (!AburiHit)
+                {
+                    score = 0;
+                }
                 break;
-
+            //炙りワサビ付きの場合のscore更新処理
             case 13:
+                if (!WasabiHit && !AburiHit)
+                {
+                    score = 0;
+                }
                 break;
         }
 
