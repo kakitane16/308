@@ -8,10 +8,12 @@ public class BackTitle : MonoBehaviour
 {
     GamePadCommand command;
     int change;
+    private bool isEsc = false;
     public void Start()
     {
         command = new GamePadCommand();
         change = 0;//現在の位置　0が上　１が下
+        isEsc = false;
     }
 
     public void Update()
@@ -21,6 +23,11 @@ public class BackTitle : MonoBehaviour
 
         //ESCキーが押されるまでは以下の処理は入らない
         if (command.GetEscKey((int)GameManager.Instance.inputDevice))
+        {
+            isEsc = true;
+        }
+    
+        if(isEsc)
         {
             //上にUI移動
             if (command.UpAction((int)GameManager.Instance.inputDevice))
