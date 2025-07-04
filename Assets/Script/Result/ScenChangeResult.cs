@@ -11,6 +11,9 @@ public class ScenChangeResult : MonoBehaviour
     private int GetInputOB;
     private int count;
 
+    public int Num;             //変数は仮。評価によって入れる数字を変える（マーベラスなら0,完璧なら1など）
+
+
     private void Start()
     {
         _command = new GamePadCommand();
@@ -19,9 +22,12 @@ public class ScenChangeResult : MonoBehaviour
     }
     private void Update()
     {
-        if(_command.LeftAction(GetInputOB))
+        //＊＊＊ゲームシーンのスコアを取得＊＊＊＊
+        Num = GameManager.Instance.score;
+
+        if (_command.LeftAction(GetInputOB))
         {
-           count = 1;
+            count = 1;
         }
         if (_command.RightAction(GetInputOB))
         {
@@ -36,10 +42,17 @@ public class ScenChangeResult : MonoBehaviour
                     SceneManager.LoadScene("Select");
                     break;
                 case 1:
+                    if (Num == (int)review.Perfect)//パーフェクトのためステージを次に進める
+                        GameManager.Instance.stageIndex = GameManager.Instance.stageIndex + 1;
+                    GameManager.Instance.SelectedStageName = $"stage{GameManager.Instance.stageIndex:D3}";
                     SceneManager.LoadScene(2);
                     break;
             }
         }
+    }
+    public void GetNum(int Point)
+    {
+        Num = Point;
     }
 }
 
