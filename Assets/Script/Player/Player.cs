@@ -105,6 +105,8 @@ public class Player : MonoBehaviour
             if (player != null) arw = player.GetComponent<Arrow>();
         }
 
+        arw.gameObject.SetActive(false);
+
         // マネージャーのコンポーネントを取得
         if (manager == null) manager = GameObject.FindObjectOfType<GameManager>();
 
@@ -144,7 +146,7 @@ public class Player : MonoBehaviour
                 forceStrength = MaxPower;
                 parabola.ShowParabora();
             }
-            else if(!b_turn)
+            else if (!b_turn)
             {
                 Shot();
                 UpdateGauge();
@@ -199,7 +201,7 @@ public class Player : MonoBehaviour
             Vertical = 0.0f;
             Horizontal = 0.0f;
         }
-        if(command.WasBbutton(GetInputOB))
+        if (command.WasBbutton(GetInputOB))
         {
             wasShotReady = true;
         }
@@ -226,7 +228,7 @@ public class Player : MonoBehaviour
                 forceStrength = 0.0f;
             }
         }
-        if(command.WasBbutton(GetInputOB))
+        if (command.WasBbutton(GetInputOB))
         {
             b_turn = true;
         }
