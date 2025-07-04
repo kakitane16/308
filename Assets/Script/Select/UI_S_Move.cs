@@ -27,7 +27,15 @@ public class UI_S_Move : MonoBehaviour
     void Start()
     {
         //canvasのPos
-        TargetPosition = content.anchoredPosition;
+       // TargetPosition = content.anchoredPosition;
+
+        if (GameManager.Instance.stageIndex != 0)
+        {
+            CurrentPage = GameManager.Instance.stageIndex - 1;
+            //セレクト画面に戻った時のステージを設定
+            content.anchoredPosition = new Vector2(-PageWidth * CurrentPage, 0);
+            TargetPosition = new Vector2(-PageWidth * CurrentPage, 0);
+        }
 
         //Padの初期化
         _command = new GamePadCommand();
@@ -89,22 +97,4 @@ public class UI_S_Move : MonoBehaviour
         }
 
     }
-
-    //プログラム整理中につき一旦コメントアウト
-    //public void SlideLeft()
-    //{
-    //    if (CurrentPage > 0)
-    //    {
-    //        CurrentPage--;
-    //        TargetPosition = new Vector2(-pageWidth * CurrentPage, 0);
-    //    }
-    //}
-    //public void SlideRight()
-    //{
-    //    if (CurrentPage < MaxPage)
-    //    {
-    //        CurrentPage++;
-    //        TargetPosition = new Vector2(-pageWidth * CurrentPage, 0);
-    //    }
-    //}
 }
