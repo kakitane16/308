@@ -332,16 +332,17 @@ MonoBehaviour:
   gaugeRectTransform: {fileID: 6417316581343898726}
   manager: {fileID: 0}
   iconMoveSpeed: 3
+  currentPower: 0
   arw: {fileID: 0}
   parabola: {fileID: 6417316581122286107}
   ArrowTag: Arrow
   velocity: {x: 0, y: 0, z: 0}
   RotateSpeed: 2
   isShot: 0
-  shotpower: 0.03
   SAngleY: -1.08
   forceStrength: 0
   rotateAgl: 0
+  lastShotPower: 0
   iconMoveDistance: 50
 --- !u!54 &6417316581122286111
 Rigidbody:
@@ -371,11 +372,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98f79f324b942224cab43cdcab6742f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goal: {fileID: 0}
-  goalTag: Plate
+  syari: Syari
   maxScore: 100
   maxDistance: 5
-  levelMultiplier: 1
+  levelMultiplier: 5
+  WasabiHit: 0
+  AburiHit: 0
 --- !u!114 &6417316581122286105
 MonoBehaviour:
   m_ObjectHideFlags: 0
