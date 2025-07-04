@@ -25,7 +25,6 @@ public enum review
 {
     Bad = 0,
     Nomal,
-    Good,
     Perfect 
 }
 
@@ -86,10 +85,6 @@ public class UI_R_Manager : MonoBehaviour
 
                 case (int)review.Nomal:
                     Nomal.enabled = !Nomal.enabled;
-                    break;
-
-                case (int)review.Good:
-                    Good.enabled = !Good.enabled;
                     break;
 
                 case (int)review.Perfect:

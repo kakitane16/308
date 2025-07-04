@@ -67,8 +67,8 @@ public class UI_S_Move : MonoBehaviour
             if (_command.IsBbutton(GetInputOB))
             {
                 // ステージ名をGameManagerに保存
-                int stageIndex = CurrentPage + 1; // stage001～stage015
-                GameManager.Instance.SelectedStageName = $"stage{stageIndex:D3}";
+                GameManager.Instance.stageIndex = CurrentPage + 1; // stage001～stage015
+                GameManager.Instance.SelectedStageName = $"stage{GameManager.Instance.stageIndex:D3}";
 
                 SceneManager.LoadScene(2); // ステージ読み込み先シーン名
             }
