@@ -49,6 +49,7 @@ public class Player : MonoBehaviour
 
     private bool IsReady = false; // 準備完了フラグ
     private bool wasShotReady = false;
+    private bool b_turn = false;
 
     public float lastShotPower;
 
@@ -76,6 +77,7 @@ public class Player : MonoBehaviour
         Debug.Log(GetInputOB);
         IsReturn = false;
         wasShotReady = false;
+        b_turn = false;
         lastShotPower = 0.0f;
         shotpower = 0.08f;
 
@@ -142,10 +144,23 @@ public class Player : MonoBehaviour
                 forceStrength = MaxPower;
                 parabola.ShowParabora();
             }
-            else
+            else if(!b_turn)
             {
                 Shot();
                 UpdateGauge();
+            }
+            else
+            {
+                //打ち出し
+                if (command.IsBbutton(GetInputOB))
+                {
+                    lastShotPower = forceStrength;
+                    PowerShoting();
+                    if (parabola != null)
+                    {
+                        parabola.HideDots();
+                    }
+                }
             }
         }
     }
@@ -211,15 +226,9 @@ public class Player : MonoBehaviour
                 forceStrength = 0.0f;
             }
         }
-        //打ち出し
-        if (command.WasBbutton(GetInputOB))
+        if(command.WasBbutton(GetInputOB))
         {
-            lastShotPower = forceStrength;
-            PowerShoting();
-            if (parabola != null)
-            {
-                parabola.HideDots();
-            }
+            b_turn = true;
         }
     }
 
