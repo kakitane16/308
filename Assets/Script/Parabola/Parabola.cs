@@ -95,11 +95,12 @@ public class Parabola : MonoBehaviour
     // ドットの色をアニメーションさせてから非表示にする
     private IEnumerator AnimateDot(Renderer renderer, int index)
     {
-        float delay = index * 0.05f; // ドットが順に光る演出（後のほど遅く）
+        float delay = index * 0.05f;
         yield return new WaitForSeconds(delay);
 
         float elapsed = 0f;
-        Material mat = renderer.material;
+        Material mat = new Material(renderer.material);  // 新しいマテリアルを作る
+        renderer.material = mat;                         // Rendererに設定
 
         while (elapsed < dotLifeTime)
         {
