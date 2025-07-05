@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,12 @@ public class Parabola : MonoBehaviour
 
     private List<GameObject> dots = new List<GameObject>();
     public Vector3 initialVelocity;
+
+    private List<Coroutine> dotCoroutines = new List<Coroutine>();
+    public Color startColor = Color.white;
+    public Color peakColor = Color.yellow;
+    public Color endColor = Color.clear;
+    public float dotLifeTime = 1.5f;  // ドットが表示されてから消えるまでの時間
 
     private void OnEnable()
     {
@@ -57,12 +64,23 @@ public class Parabola : MonoBehaviour
         for (int i = 0; i < dotCount; i++)
         {
             float t = i * dotSpacing;
-
-            // 弾道公式：位置 = 初速 * t + 0.5 * 重力 * t^2 + 発射地点
             Vector3 pos = playerTransform.position + initialVel * t + 0.5f * gravity * t * t;
 
-            dots[i].SetActive(true);
-            dots[i].transform.position = pos;
+            GameObject dot = dots[i];
+            dot.transform.position = pos;
+            dot.SetActive(true);
+
+            // 前のCoroutineが残っていたら止める
+            if (dotCoroutines.Count > i && dotCoroutines[i] != null)
+                StopCoroutine(dotCoroutines[i]);
+
+            Coroutine c = StartCoroutine(AnimateDot(dot.GetComponent<Renderer>(), i));
+
+            // Coroutineリストに保存
+            if (dotCoroutines.Count > i)
+                dotCoroutines[i] = c;
+            else
+                dotCoroutines.Add(c);
         }
     }
 
@@ -72,5 +90,26 @@ public class Parabola : MonoBehaviour
         {
             d.SetActive(false);
         }
+    }
+
+    // ドットの色をアニメーションさせてから非表示にする
+    private IEnumerator AnimateDot(Renderer renderer, int index)
+    {
+        float delay = index * 0.05f; // ドットが順に光る演出（後のほど遅く）
+        yield return new WaitForSeconds(delay);
+
+        float elapsed = 0f;
+        Material mat = renderer.material;
+
+        while (elapsed < dotLifeTime)
+        {
+            float t = elapsed / dotLifeTime;
+            mat.color = Color.Lerp(startColor, peakColor, t);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        mat.color = endColor;
+        dots[index].SetActive(false);
     }
 }
