@@ -50,6 +50,7 @@ public class Player : MonoBehaviour
     private bool IsReady = false; // 準備完了フラグ
     private bool wasShotReady = false;
     private bool b_turn = false;
+    private bool Changed = false;
 
     public float lastShotPower;
 
@@ -78,6 +79,7 @@ public class Player : MonoBehaviour
         IsReturn = false;
         wasShotReady = false;
         b_turn = false;
+        Changed = false;
         lastShotPower = 0.0f;
         shotpower = 0.08f;
 
@@ -139,12 +141,16 @@ public class Player : MonoBehaviour
         //打ち出すまでの間だけ入る
         if (!isShot)
         {
+            if (Changed && parabola != null)
+            {
+                parabola.ShowParabora();
+                Changed = false;
+            }
             //最初は角度を決めてその後打ち出したい威力のタイミングで放つ
             if (!wasShotReady)
             {
                 ShotAngle();
                 forceStrength = MaxPower;
-                parabola.ShowParabora();
             }
             else if (!b_turn)
             {
@@ -181,6 +187,7 @@ public class Player : MonoBehaviour
                 Debug.Log("Wキーが押されているよ");
 
                 UpdateArrow();
+                Changed = true;
             }
         }
         if (command.DownAction(GetInputOB))
@@ -194,6 +201,7 @@ public class Player : MonoBehaviour
                 Debug.Log("Sキーが押されているよ");
 
                 UpdateArrow();
+                Changed = true;
             }
         }
         if (!command.UpAction(GetInputOB) && !command.DownAction(GetInputOB))
@@ -214,7 +222,6 @@ public class Player : MonoBehaviour
         //打つ時のでかさを貯める
         if (command.IsBbutton(GetInputOB))
         {
-            parabola.ShowParabora();
             Debug.Log("スペースキーが押されているよ");
             //最大値まで戻る場合
             if (forceStrength < MaxPower)
@@ -227,6 +234,7 @@ public class Player : MonoBehaviour
                 IsReturn = true;
                 forceStrength = 0.0f;
             }
+            Changed = true;
         }
         if (command.WasBbutton(GetInputOB))
         {
