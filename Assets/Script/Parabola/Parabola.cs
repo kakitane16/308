@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +13,12 @@ public class Parabola : MonoBehaviour
 
     private List<GameObject> dots = new List<GameObject>();
     public Vector3 initialVelocity;
+
+    private List<Coroutine> dotCoroutines = new List<Coroutine>();
+    public Color startColor = Color.white;
+    public Color peakColor = Color.yellow;
+    public Color endColor = Color.clear;
+    public float dotLifeTime = 1.5f;  // ドットが表示されてから消えるまでの時間
 
     private void OnEnable()
     {
@@ -57,12 +65,27 @@ public class Parabola : MonoBehaviour
         for (int i = 0; i < dotCount; i++)
         {
             float t = i * dotSpacing;
-
-            // 弾道公式：位置 = 初速 * t + 0.5 * 重力 * t^2 + 発射地点
             Vector3 pos = playerTransform.position + initialVel * t + 0.5f * gravity * t * t;
 
-            dots[i].SetActive(true);
-            dots[i].transform.position = pos;
+            GameObject dot = dots[i];
+            dot.transform.position = pos;
+            dot.SetActive(true);
+
+            // 前のCoroutineが残っていたら止める
+            if (dotCoroutines.Count > i && dotCoroutines[i] != null)
+                StopCoroutine(dotCoroutines[i]);
+
+            Coroutine c = StartCoroutine(AnimateDot(dot.GetComponent<Renderer>(),i));
+
+            // Coroutineリストに保存
+            if (dotCoroutines.Count > i)
+            {
+                dotCoroutines[i] = c;
+            }
+            else
+            {
+                dotCoroutines.Add(c);
+            }
         }
     }
 
@@ -71,6 +94,37 @@ public class Parabola : MonoBehaviour
         foreach (var d in dots)
         {
             d.SetActive(false);
+        }
+    }
+
+    // ドットの色をアニメーションさせてから非表示にする
+    private IEnumerator AnimateDot(Renderer renderer, int index)
+    {
+        Material mat = new Material(renderer.material);
+        renderer.material = mat;
+
+        Color[] colors = new Color[] { Color.white, new Color(1f, 0.5f, 0.5f), Color.red, Color.white };
+        int colorIndex = 0;
+        float colorDuration = 0.5f;
+
+        // indexに応じた開始ディレイ（番号が大きいほど遅れてスタート）
+        float initialDelay = index * 0.1f;
+        yield return new WaitForSeconds(initialDelay);
+
+        while (true)
+        {
+            Color from = colors[colorIndex % colors.Length];
+            Color to = colors[(colorIndex + 1) % colors.Length];
+            float t = 0f;
+
+            while (t < colorDuration)
+            {
+                mat.color = Color.Lerp(from, to, t / colorDuration);
+                t += Time.deltaTime;
+                yield return null;
+            }
+
+            colorIndex++;
         }
     }
 }
