@@ -14,10 +14,10 @@ public class G_Fire : MonoBehaviour
 
     private Buner burner; // バーナーの参照
 
+    public GameObject effectPrefab; // 表示させるエフェクトを設定
+
     void LateUpdate()
     {
-        //if (burner == null)
-        //    Destroy(gameObject); // バーナーがない場合は自分自身を削除
     }
 
     public void SetBuner(Buner b)
@@ -53,8 +53,12 @@ public class G_Fire : MonoBehaviour
                 Goal goal = player.GetComponent<Goal>();
                 goal.AburiHit = true;
             }
-                // sourceMaterials の中から currentMat と同じものを探す
-                int idx = System.Array.IndexOf(sourceMaterials, currentMat);
+
+            // エフェクトをプレイヤーの位置に生成
+            GameObject effect = Instantiate(effectPrefab, player.transform.position, Quaternion.identity);
+
+            // sourceMaterials の中から currentMat と同じものを探す
+            int idx = System.Array.IndexOf(sourceMaterials, currentMat);
             if (idx < 0 || idx >= targetMaterials.Length || idx >= targetMeshes.Length)
             {
                 // 対応表にないマテリアルなら何もしない
