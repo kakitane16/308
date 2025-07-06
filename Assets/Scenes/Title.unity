@@ -1580,6 +1580,7 @@ MonoBehaviour:
   inputDevice: 2
   score: 0
   stageIndex: 0
+  clearstate: 0
   SelectedStageName: stage001
   Points: 10
 --- !u!1001 &764986522

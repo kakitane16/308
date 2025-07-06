@@ -26,9 +26,6 @@ public class UI_S_Move : MonoBehaviour
 
     void Start()
     {
-        //canvasのPos
-       // TargetPosition = content.anchoredPosition;
-
         if (GameManager.Instance.stageIndex != 0)
         {
             CurrentPage = GameManager.Instance.stageIndex - 1;
@@ -40,40 +37,46 @@ public class UI_S_Move : MonoBehaviour
         //Padの初期化
         _command = new GamePadCommand();
         GetInputOB = (int)GameManager.Instance.inputDevice;
+
+        //矢印の非表示
+        LeftArrow.enabled = false;
+        RightArrow.enabled = false;
     }
 
 
     void Update()
     {
+
+        int ClearState = GameManager.Instance.clearstate;//クリアしたステージ
+
         //canvasのPos移動
         content.anchoredPosition = Vector2.Lerp(content.anchoredPosition, TargetPosition, Time.deltaTime * SlideSpeed);
 
         //コントローラー入力
         if (PageCoolTimeCount >= 5.0f)
         {
+
             //ページの移動
-            if (_command.LeftAction(GetInputOB))
+            //左に移動
+            if (_command.LeftAction(GetInputOB) && CurrentPage > 0)
             {
-                if (CurrentPage > 0)
-                {
-                    CurrentPage--;
-                    TargetPosition = new Vector2(-PageWidth * CurrentPage, 0);
-                    PageCoolTimeCount = 0.0f;
-                }
+
+                CurrentPage--;
+                TargetPosition = new Vector2(-PageWidth * CurrentPage, 0);
+                PageCoolTimeCount = 0.0f;
             }
-            if (_command.RightAction(GetInputOB))
+            //右に移動
+            if (_command.RightAction(GetInputOB) && CurrentPage < MaxPage && CurrentPage <= (ClearState - 1))
             {
-                if (CurrentPage < MaxPage)
-                {
-                    CurrentPage++;
-                    TargetPosition = new Vector2(-PageWidth * CurrentPage, 0);
-                    PageCoolTimeCount = 0.0f;
-                }
+                CurrentPage++;
+                TargetPosition = new Vector2(-PageWidth * CurrentPage, 0);
+                PageCoolTimeCount = 0.0f;
             }
 
             //決定ボタン入力
-            if (_command.IsBbutton(GetInputOB))
+            if (_command.IsBbutton(GetInputOB) && CurrentPage < MaxPage)
             {
+
                 // ステージ名をGameManagerに保存
                 GameManager.Instance.stageIndex = CurrentPage + 1; // stage001～stage015
                 GameManager.Instance.SelectedStageName = $"stage{GameManager.Instance.stageIndex:D3}";
@@ -87,14 +90,8 @@ public class UI_S_Move : MonoBehaviour
             PageCoolTimeCount += PageCoolTime / 10; //そのままだと数字が大きすぎるから調整
         }
 
-        //矢印の表示を管理（例：これ以上左に行けないときに非表示
-        if (CurrentPage == 0) LeftArrow.enabled = false;
-        else if (CurrentPage == MaxPage) RightArrow.enabled = false;
-        else
-        {
-            LeftArrow.enabled = true;
-            RightArrow.enabled = true;
-        }
-
+        //矢印の表示を管理
+        LeftArrow.enabled = (CurrentPage > 0);
+        RightArrow.enabled = (CurrentPage < MaxPage && (CurrentPage + 1) <= ClearState);
     }
 }

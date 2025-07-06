@@ -17,6 +17,8 @@ public class Goal : MonoBehaviour
     public bool WasabiHit = false;
     public bool AburiHit = false;
 
+    private bool CollisionCheck = false;
+
     void LateUpdate()
     {
         GameObject player = GameObject.FindGameObjectWithTag(goalTag);
@@ -25,6 +27,8 @@ public class Goal : MonoBehaviour
 
     private void OnCollisionEnter(Collision gl)
     {
+        if (CollisionCheck)return;  // 既に加算済みなら何もしない
+
         if (goal == null)
         {
             GameObject player = GameObject.FindGameObjectWithTag(goalTag);
@@ -116,6 +120,11 @@ public class Goal : MonoBehaviour
         }
         else
         {
+            //最新ステージをクリアしたら次のステージが解放されるように
+            int CurrentState = GameManager.Instance.stageIndex;
+            if (GameManager.Instance.clearstate < CurrentState)                GameManager.Instance.clearstate = CurrentState;
+
+            CollisionCheck = true;
             Debug.Log("perfect");
             return (int)review.Perfect;
         }
