@@ -9,11 +9,23 @@ public class BackTitle : MonoBehaviour
     GamePadCommand command;
     int change;
     private bool isEsc = false;
+    private RectTransform imageRect1;
+    private RectTransform imageRect2;
     public void Start()
     {
         command = new GamePadCommand();
         change = 0;//現在の位置　0が上　１が下
-        isEsc = false;
+        isEsc = false;      
+        imageRect1 = transform.Find("M_BackGroundUI/M_CloseUI").GetComponent<RectTransform>();
+        imageRect2 = transform.Find("M_BackGroundUI/M_QuitUI").GetComponent<RectTransform>();
+
+
+        // UI初期化
+        imageRect1.anchoredPosition = new Vector2(0, 100);
+        imageRect1.sizeDelta = new Vector2(500, 150);
+        imageRect2.anchoredPosition = new Vector2(0, -80);
+        imageRect2.sizeDelta = new Vector2(400, 120);
+        change = 0;
     }
 
     public void Update()
@@ -25,6 +37,7 @@ public class BackTitle : MonoBehaviour
         if (command.GetEscKey((int)GameManager.Instance.inputDevice))
         {
             isEsc = true;
+            ShowPanel();
         }
     
         if(isEsc)
@@ -34,6 +47,14 @@ public class BackTitle : MonoBehaviour
             {
                 if (change == 1)
                 {
+                    // ContineuImageの位置とサイズ変更
+                    // 位置を変更
+                    imageRect1.anchoredPosition = new Vector2(0, 100);
+                    // サイズを変更
+                    imageRect1.sizeDelta = new Vector2(500, 150);
+                    //　QuitImageの位置とサイズを変更
+                    imageRect2.anchoredPosition = new Vector2(0, -80);
+                    imageRect2.sizeDelta = new Vector2(400, 120);
                     change = 0;
                 }
             }
@@ -42,6 +63,11 @@ public class BackTitle : MonoBehaviour
             {
                 if (change == 0)
                 {
+                    imageRect2.anchoredPosition = new Vector2(0, -100);
+                    imageRect2.sizeDelta = new Vector2(500, 150);
+
+                    imageRect1.anchoredPosition = new Vector2(0, 80);
+                    imageRect1.sizeDelta = new Vector2(400, 120);
                     change = 1;
                 }
             }
@@ -58,11 +84,31 @@ public class BackTitle : MonoBehaviour
                         break;
                     //下の場合
                     case 1:
+                        HidePanel();
                         break;
                 }
             }
         }
 
         
+    }
+    // 表示関数
+    void ShowPanel()
+    {
+        GameObject obj = GameObject.Find("Menu");
+
+        Transform panel = obj.transform.Find("M_BackGroundUI");
+
+        panel.gameObject.SetActive(true);
+    }
+
+    // 非表示関数
+    void HidePanel()
+    {
+        GameObject obj = GameObject.Find("Menu");
+
+        Transform panel = obj.transform.Find("M_BackGroundUI");
+
+        panel.gameObject.SetActive(false);
     }
 }
