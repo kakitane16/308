@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -74,13 +75,17 @@ public class Parabola : MonoBehaviour
             if (dotCoroutines.Count > i && dotCoroutines[i] != null)
                 StopCoroutine(dotCoroutines[i]);
 
-            Coroutine c = StartCoroutine(AnimateDot(dot.GetComponent<Renderer>(), i));
+            Coroutine c = StartCoroutine(AnimateDot(dot.GetComponent<Renderer>(),i));
 
             // Coroutineリストに保存
             if (dotCoroutines.Count > i)
+            {
                 dotCoroutines[i] = c;
+            }
             else
+            {
                 dotCoroutines.Add(c);
+            }
         }
     }
 
@@ -95,22 +100,31 @@ public class Parabola : MonoBehaviour
     // ドットの色をアニメーションさせてから非表示にする
     private IEnumerator AnimateDot(Renderer renderer, int index)
     {
-        float delay = index * 0.05f;
-        yield return new WaitForSeconds(delay);
+        Material mat = new Material(renderer.material);
+        renderer.material = mat;
 
-        float elapsed = 0f;
-        Material mat = new Material(renderer.material);  // 新しいマテリアルを作る
-        renderer.material = mat;                         // Rendererに設定
+        Color[] colors = new Color[] { Color.white, new Color(1f, 0.5f, 0.5f), Color.red, Color.white };
+        int colorIndex = 0;
+        float colorDuration = 0.5f;
 
-        while (elapsed < dotLifeTime)
+        // indexに応じた開始ディレイ（番号が大きいほど遅れてスタート）
+        float initialDelay = index * 0.1f;
+        yield return new WaitForSeconds(initialDelay);
+
+        while (true)
         {
-            float t = elapsed / dotLifeTime;
-            mat.color = Color.Lerp(startColor, peakColor, t);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
+            Color from = colors[colorIndex % colors.Length];
+            Color to = colors[(colorIndex + 1) % colors.Length];
+            float t = 0f;
 
-        mat.color = endColor;
-        dots[index].SetActive(false);
+            while (t < colorDuration)
+            {
+                mat.color = Color.Lerp(from, to, t / colorDuration);
+                t += Time.deltaTime;
+                yield return null;
+            }
+
+            colorIndex++;
+        }
     }
 }
