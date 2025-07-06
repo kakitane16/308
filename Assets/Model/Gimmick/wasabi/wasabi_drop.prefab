@@ -61,6 +61,8 @@ MonoBehaviour:
   - {fileID: -5589444630313727633, guid: 665e7657fe06798499792a1d9e77caf3, type: 3}
   - {fileID: -4999925385747091504, guid: f6d15c92ec1c7764782e719eef6ea252, type: 3}
   applyToSkinned: 0
+  G_Weight: 0.7
+  effectPrefab: {fileID: 7137151455226902160, guid: 833384e7b2fce8649b50245be3061150, type: 3}
 --- !u!54 &5285000205747365904
 Rigidbody:
   m_ObjectHideFlags: 0

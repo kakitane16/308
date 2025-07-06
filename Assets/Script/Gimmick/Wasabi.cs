@@ -20,6 +20,8 @@ public class Wasabi : MonoBehaviour
 
     public float G_Weight = 0.7f;
 
+    public GameObject effectPrefab; // 表示させるエフェクトを設定
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
@@ -45,6 +47,9 @@ public class Wasabi : MonoBehaviour
             Goal goal = player.GetComponent<Goal>();
             goal.WasabiHit = true;
         }
+
+        // エフェクトをプレイヤーの位置に生成
+        GameObject effect = Instantiate(effectPrefab, player.transform.position, Quaternion.identity);
 
         // sourceMaterials の中から currentMat と同じものを探す
         int idx = System.Array.IndexOf(sourceMaterials, currentMat);
