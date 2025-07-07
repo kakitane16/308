@@ -20,7 +20,7 @@ public class UI_R_Button : MonoBehaviour
     private float inputCooldown = 0.25f; // 選択移動の受付間隔
     private float inputCooldownTimer = 0f;
 
-    private bool confirmButtonReleased = true; // 決定ボタンが離された状態かどうか
+    private bool confirmButtonReleased = true; // 決定ボタンが離された状態かどう
 
     private void Start()
     {

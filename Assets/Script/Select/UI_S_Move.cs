@@ -22,6 +22,8 @@ public class UI_S_Move : MonoBehaviour
     //矢印の表示管理
     public Image LeftArrow;
     public Image RightArrow;
+    //メダルの表示管理
+    public Image[] Medals;
 
 
     void Start()
@@ -41,6 +43,11 @@ public class UI_S_Move : MonoBehaviour
         //矢印の非表示
         LeftArrow.enabled = false;
         RightArrow.enabled = false;
+        //メダルの非表示
+        foreach (var medal in Medals)
+        {
+            medal.enabled = false;
+        }
     }
 
 
@@ -93,5 +100,29 @@ public class UI_S_Move : MonoBehaviour
         //矢印の表示を管理
         LeftArrow.enabled = (CurrentPage > 0);
         RightArrow.enabled = (CurrentPage < MaxPage && (CurrentPage + 1) <= ClearState);
+
+        // メダル表示の管理
+        for(int i = 0; i < Medals.Length;i++)
+        {
+            if(i == CurrentPage && i < GameManager.Instance.clearstate)
+            {
+                Medals[i].enabled = true;
+            }
+            else
+            {
+                Medals[i].enabled = false;
+
+            }
+        }
+
+
+        //if (CurrentPage < GameManager.Instance.clearstate)
+        //{
+        //    Medal.enabled = true;
+        //}
+        //else
+        //{
+        //    Medal.enabled = false;
+        //}
     }
 }
