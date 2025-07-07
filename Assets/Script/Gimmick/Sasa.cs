@@ -11,6 +11,7 @@ public class Sasa : MonoBehaviour
     public Transform targetObject; //t
     public bool DeshiHit = false;
     public Vector3 DeshiPos;
+    public GameObject effectPrefab; // 表示させるエフェクトを設定
 
 
     private void OnTriggerEnter(Collider other)
@@ -38,6 +39,8 @@ public class Sasa : MonoBehaviour
                 // 弟子をスポーン
                 GameObject spawned = Instantiate(
             G_Target, DeshiPos, transform.rotation);
+                // エフェクトをプレイヤーの位置に生成
+                GameObject effect = Instantiate(effectPrefab, player.transform.position, Quaternion.identity);
 
                 // 弟子の方向に向かって移動方向を再計算
                 if (!DeshiHit)

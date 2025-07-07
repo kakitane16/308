@@ -1,5 +1,7 @@
 using UnityEngine;
 
+public GameObject effectPrefab; // 表示させるエフェクトを設定
+
 public class Deshi : MonoBehaviour
 {
     private Vector3 bounceDirection = Vector3.left; // 反射方向
@@ -54,10 +56,15 @@ public class Deshi : MonoBehaviour
                 Debug.Log($"directionToSpawned（威力：{directionToSpawned}）");
                 Vector3 moveVector = directionToSpawned * power * bounceMultiplier;
                 player.rb.AddForce(moveVector, ForceMode.Impulse);
+                // エフェクトをプレイヤーの位置に生成
+                GameObject effect = Instantiate(effectPrefab, player.transform.position, Quaternion.identity);
+
                 // プレイヤーの位置を移動
                 // player.transform.position += moveVector;
 
                 player.rb.velocity = Vector3.zero;
+
+
 
                 Debug.Log($"弟子が跳ね返しました（受け取った威力：{power}）");
             }
