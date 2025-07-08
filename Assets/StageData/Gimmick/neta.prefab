@@ -423,6 +423,10 @@ MonoBehaviour:
   playerTransform: {fileID: 6417316581122286109}
   playerRb: {fileID: 6417316581122286111}
   initialVelocity: {x: 0, y: 0, z: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 1}
+  peakColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  endColor: {r: 0, g: 0, b: 0, a: 0}
+  dotLifeTime: 1.5
 --- !u!65 &6417316581122286082
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -529,7 +533,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 91caf553e5ac97746867ab354897ceae, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -611,7 +615,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -785,7 +789,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: ae4405abb819e8449b9dec09b5572857, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

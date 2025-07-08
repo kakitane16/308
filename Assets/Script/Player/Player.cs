@@ -92,6 +92,8 @@ public class Player : MonoBehaviour
         sceneStartTime = Time.time;
 
         GetInputOB = (int)GameManager.Instance.inputDevice; // 入力デバイスの取得(これはあまり関係ないかもしれませんが、Startでは正常に取得できない可能性を危惧して、こちらに移動しました)
+
+        ResetGauge();
     }
 
     void LateUpdate()       // オブジェクトの捜索をLateUpdateに移動しました(StartやOnEnableでは正常に取得できなかったため
@@ -150,7 +152,8 @@ public class Player : MonoBehaviour
             if (!wasShotReady)
             {
                 ShotAngle();
-                forceStrength = MaxPower;
+                forceStrength = 0f;
+                UpdateGauge();
             }
             else if (!b_turn)
             {
@@ -347,5 +350,23 @@ public class Player : MonoBehaviour
     public float GetLastShotPower()
     {
         return currentPower;
+    }
+
+    private void ResetGauge()
+    {
+        forceStrength = 0f;
+        currentPower = 0f;
+        isMaxIconActive = false;
+        isMaxIconDelayActive = false;
+        maxIconTimer = 0f;
+
+        if (GaugeImage != null)
+            GaugeImage.fillAmount = 0f;                 // ゲージを 0 に
+
+        if (iconRectTransform != null)
+            iconRectTransform.anchoredPosition = iconStartPos;  // アイコンを元位置へ
+
+        if (IconImage != null && NormalIcon != null)
+            IconImage.sprite = NormalIcon;               // 通常アイコンに戻す
     }
 }
