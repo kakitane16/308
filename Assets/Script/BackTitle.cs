@@ -55,22 +55,25 @@ public class BackTitle : MonoBehaviour
                     menuUI.SelectUI(change);
                 }
             }
-        }
             //–––––––––––––Œˆ’èŒã‚Ìˆ—––––––––––––
-          if (command.IsBbutton((int)GameManager.Instance.inputDevice))
-        {
-            switch (change)
+            if (command.IsBbutton((int)GameManager.Instance.inputDevice))
             {
-                //ã‚Ìê‡
-                case 0:
-                    SceneManager.LoadScene("Title");
-                    break;
-                //‰º‚Ìê‡
-                case 1:
-                   menuUI.HidePanel();
-                    break;
+                switch (change)
+                {
+                    //ã‚Ìê‡
+                    case 0:
+                        SceneManager.LoadScene("Title");
+                        isEsc = false;
+                        break;
+                    //‰º‚Ìê‡
+                    case 1:
+                        menuUI.HidePanel();
+                        isEsc = false;
+                        break;
+                }
             }
         }
+          
     }
 
 
