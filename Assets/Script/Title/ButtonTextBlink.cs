@@ -6,8 +6,8 @@ public class ButtonTextBlink : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     [SerializeField] private Graphic targetText;
 
-    private Color _normalColor = Color.white;
-    private Color _highlightColor = Color.black;
+    private Color _normalColor = Color.black;
+    private Color _highlightColor = Color.white;
 
     void Start()
     {
