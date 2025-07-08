@@ -6,7 +6,8 @@ public class G_trampoline : MonoBehaviour
 {
     private bool IsDown;
     public float SpinPower = 20.0f;
-    private Collider collider; 
+    private Collider collider;
+    public GameObject effectPrefab; // 表示させるエフェクトを設定
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +58,9 @@ public class G_trampoline : MonoBehaviour
             transform.SetParent(other.transform);
             // istriggerをオフに
             collider.isTrigger = false;
+            // エフェクトをプレイヤーの位置に生成
+            GameObject effect = Instantiate(effectPrefab, other.transform.position, Quaternion.identity);
+
 
             // Y軸回転
             Vector3 spin = new Vector3 (0.0f, -300.0f, 0.0f);

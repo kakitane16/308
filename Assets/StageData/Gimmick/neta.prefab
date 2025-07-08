@@ -252,7 +252,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6417316581122286081}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.0061, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -268,7 +268,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6417316581122286081}
-  m_Mesh: {fileID: 7647439173923119626, guid: 54d260c7e2d4a724cbe8d30211438d7b, type: 3}
+  m_Mesh: {fileID: 4827150678590445525, guid: 9204a4018d9a2554182e96d6ef31a8bb, type: 3}
 --- !u!23 &6417316581122286083
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -375,7 +375,7 @@ MonoBehaviour:
   syari: Syari
   maxScore: 100
   maxDistance: 5
-  levelMultiplier: 5
+  levelMultiplier: 1.5
   WasabiHit: 0
   AburiHit: 0
 --- !u!114 &6417316581122286105
@@ -423,6 +423,10 @@ MonoBehaviour:
   playerTransform: {fileID: 6417316581122286109}
   playerRb: {fileID: 6417316581122286111}
   initialVelocity: {x: 0, y: 0, z: 0}
+  startColor: {r: 1, g: 1, b: 1, a: 1}
+  peakColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  endColor: {r: 0, g: 0, b: 0, a: 0}
+  dotLifeTime: 1.5
 --- !u!65 &6417316581122286082
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -435,7 +439,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.006547696, y: 0.0013005579, z: 0.01191213}
-  m_Center: {x: -0.000104739964, y: 0.008950274, z: -0.00044709683}
+  m_Center: {x: -0.000104739964, y: 0.0018, z: -0.00044709683}
 --- !u!65 &6417316581122286101
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -447,8 +451,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.00782272, y: 0.0011064243, z: 0.0015333934}
-  m_Center: {x: 0.00007691473, y: 0.0054976796, z: 0.011224386}
+  m_Size: {x: 0.007788134, y: 0.001106424, z: 0.0012074673}
+  m_Center: {x: 0.00005962167, y: -0.0020999997, z: 0.011061433}
 --- !u!65 &6417316581122286100
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -461,7 +465,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.0072198454, y: 0.0012947273, z: 0.0009351203}
-  m_Center: {x: 0.00000092864036, y: 0.0052466104, z: -0.011331485}
+  m_Center: {x: 0.00000092864036, y: -0.0022, z: -0.0108}
 --- !u!1 &6417316581336172174
 GameObject:
   m_ObjectHideFlags: 0

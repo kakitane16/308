@@ -77,6 +77,10 @@ public class Goal : MonoBehaviour
         {
             //通常のノリだけなのでscore変動なし
             case 10:
+                if(WasabiHit || AburiHit)
+                {
+                    score = 0;
+                }
                 break;
             //ワサビ付きの場合のscore更新処理
             //当たってない場合はscoreが0
