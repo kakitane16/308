@@ -40,6 +40,8 @@ public class Player : MonoBehaviour
     private float Vertical;   //UIの高さを変更
     private float Horizontal; //UIの横の移動値を変更
     private float Move;       //UIの横と高さの値変更幅
+    private float forcePower;
+
 
     private int GetInputOB;    //使う物を取得　今調整段階なため最初にここに数値を入れれば変わる
                                //ない　０　ゲームパッド　１　キーボード　２
@@ -51,6 +53,8 @@ public class Player : MonoBehaviour
     private bool wasShotReady = false;
     private bool b_turn = false;
     private bool Changed = false;
+
+    private bool skipFirstShotFrame = false;
 
     public float lastShotPower;
 
@@ -152,13 +156,25 @@ public class Player : MonoBehaviour
             if (!wasShotReady)
             {
                 ShotAngle();
-                forceStrength = 0f;
-                UpdateGauge();
+                forcePower = 0.0f;
+                forceStrength = MaxPower;
             }
             else if (!b_turn)
             {
-                Shot();
-                UpdateGauge();
+                if (skipFirstShotFrame)
+                {
+                    Shot();
+                    forcePower = forceStrength;
+                    UpdateGauge();
+                }
+                else
+                {
+                    // 最初の1フレームはスキップしてフラグONにする
+                    skipFirstShotFrame = true;
+                    forceStrength = 0f;
+                    forcePower = 0f;
+                    UpdateGauge();
+                }
             }
             else
             {
@@ -248,8 +264,8 @@ public class Player : MonoBehaviour
     //打ち出されるの大きさの可視化（ゲージ）
     public float iconMoveDistance = 50f;
     public void UpdateGauge()
-    {
-        float GaugeAmount = Mathf.Clamp01(forceStrength / MaxPower);
+    { 
+        float GaugeAmount = Mathf.Clamp01(forcePower / MaxPower);
         GaugeImage.fillAmount = GaugeAmount;
 
         if (iconRectTransform != null)
