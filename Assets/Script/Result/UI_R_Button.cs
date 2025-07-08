@@ -22,8 +22,23 @@ public class UI_R_Button : MonoBehaviour
 
     private bool confirmButtonReleased = true; // 決定ボタンが離された状態かどう
 
+    public Button buttonLeft;//
+    public Button buttonRight;//対象のボタン
+
+    public Sprite leftSpriteBad;
+    public Sprite leftSpriteNormal;
+    public Sprite leftSpritePerfect;
+
+    public Sprite rightSpriteBad;
+    public Sprite rightSpriteNormal;
+    public Sprite rightSpritePerfect;
+
+
     private void Start()
     {
+        //int score = GameManager.Instance.score;
+        UpdateButtonImage(GameManager.Instance.score);//ランクによってボタンの画像を切り替える
+
         _command = FindObjectOfType<GamePadCommand>();
         GetInputOB = (int)GameManager.Instance.inputDevice;
 
@@ -31,6 +46,7 @@ public class UI_R_Button : MonoBehaviour
         {
             SelectButton(0); // 最初のボタンを選択状態に
         }
+
     }
 
     private void Update()
@@ -81,5 +97,61 @@ public class UI_R_Button : MonoBehaviour
             confirmButtonReleased = false;
             menuButtons[selectedIndex].onClick.Invoke();
         }
+    }
+
+    //スコアによってボタンの表示を切り替える
+    public void UpdateButtonImage(int rank)
+    {
+        Sprite leftSprite;
+        Sprite rightSprite;
+
+        switch(rank)
+        {
+            case (int)review.Bad:
+                leftSprite = leftSpriteBad;
+                rightSprite = rightSpriteBad;
+                break;
+            case (int)review.Nomal:
+                leftSprite = leftSpriteNormal;
+                rightSprite = rightSpriteNormal;
+                break;
+            case (int)review.Perfect:
+                leftSprite = leftSpritePerfect;
+                rightSprite = rightSpritePerfect;
+                break;
+            default:
+                leftSprite = leftSpriteBad;
+                rightSprite = rightSpriteBad;
+                break;
+        }
+
+
+        //if (score <= 10)
+        //{
+        //    leftSprite = leftSpriteBad;
+        //}
+        //else if (score <= 70)
+        //{
+        //    leftSprite = leftSpriteNormal;
+        //}
+        //else
+        //{
+        //    leftSprite = leftSpritePerfect;
+        //}
+        //if (score <= 10)
+        //{
+        //    rightSprite = rightSpriteBad;
+        //}
+        //else if (score <= 70)
+        //{
+        //    rightSprite = rightSpriteNormal;
+        //}
+        //else
+        //{
+        //    rightSprite = rightSpritePerfect;
+        //}
+
+        if (buttonLeft != null) buttonLeft.image.sprite = leftSprite;
+        if (buttonRight != null) buttonRight.image.sprite = rightSprite;
     }
 }

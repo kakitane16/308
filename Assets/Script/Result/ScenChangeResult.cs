@@ -42,7 +42,9 @@ public class ScenChangeResult : MonoBehaviour
                     SceneManager.LoadScene("Select");
                     break;
                 case 1:
-                    if (Num == (int)review.Perfect)//パーフェクトのためステージを次に進める
+                    if (Num == (int)review.Nomal)//Normal時ステージを次に進める
+                        GameManager.Instance.stageIndex = GameManager.Instance.stageIndex + 1;
+                    if (Num == (int)review.Perfect)//Perfect時ステージを次に進める
                         GameManager.Instance.stageIndex = GameManager.Instance.stageIndex + 1;
                     GameManager.Instance.SelectedStageName = $"stage{GameManager.Instance.stageIndex:D3}";
                     SceneManager.LoadScene(2);
