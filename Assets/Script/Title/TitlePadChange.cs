@@ -24,7 +24,7 @@ public class TitlePadChange : MonoBehaviour
 
     private void Start()
     {
-        _command = new GamePadCommand();
+        _command = FindObjectOfType<GamePadCommand>();
         GetInputOB = (int)GameManager.Instance.inputDevice;
 
         if (menuButtons.Count > 0)

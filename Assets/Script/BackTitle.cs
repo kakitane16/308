@@ -16,7 +16,7 @@ public class BackTitle : MonoBehaviour
     private RectTransform imageRect2;
     public void Start()
     {
-        command = new GamePadCommand();
+        command = FindObjectOfType<GamePadCommand>();
         change = 0;//Œ»İ‚ÌˆÊ’u@0‚ªã@‚P‚ª‰º
         isEsc = false;      
 

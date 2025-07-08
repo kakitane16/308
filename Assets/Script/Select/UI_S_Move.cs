@@ -37,7 +37,7 @@ public class UI_S_Move : MonoBehaviour
         }
 
         //Pad‚Ì‰Šú‰»
-        _command = new GamePadCommand();
+        _command = FindObjectOfType<GamePadCommand>();
         GetInputOB = (int)GameManager.Instance.inputDevice;
 
         //–îˆó‚Ì”ñ•\¦

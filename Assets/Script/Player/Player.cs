@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Runtime.CompilerServices;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
+using UnityEditor.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
     public RectTransform iconRectTransform; // アイコン位置
     public RectTransform gaugeRectTransform; // ゲージ位置
     public GameManager manager;
+    public Animator animator;
     public float iconMoveSpeed = 2f;
     // ★追加：威力を保持するための変数
     public float currentPower = 0f;
@@ -70,8 +72,10 @@ public class Player : MonoBehaviour
         {
             iconStartPos = iconRectTransform.anchoredPosition;
         }
+        SetPlayerVisible(false);
+
         rb = GetComponent<Rigidbody>();
-        command = new GamePadCommand();
+        command = FindObjectOfType<GamePadCommand>();
         isShot = false;
         rb.useGravity = false;
         SAngleY = 0;
@@ -153,13 +157,13 @@ public class Player : MonoBehaviour
                 Changed = false;
             }
             //最初は角度を決めてその後打ち出したい威力のタイミングで放つ
-            if (!wasShotReady)
+            if (!wasShotReady && !b_turn)
             {
                 ShotAngle();
                 forcePower = 0.0f;
                 forceStrength = MaxPower;
             }
-            else if (!b_turn)
+            else if (wasShotReady && !b_turn)
             {
                 if (skipFirstShotFrame)
                 {
@@ -176,18 +180,23 @@ public class Player : MonoBehaviour
                     UpdateGauge();
                 }
             }
-            else
+            else if(wasShotReady && b_turn)
             {
                 //打ち出し
                 if (command.IsBbutton(GetInputOB))
                 {
+                    animator = FindObjectOfType<Animator>();
+                    
+                    animator.SetBool("isMove", true);
                     lastShotPower = forceStrength;
                     PowerShoting();
                     if (parabola != null)
                     {
                         parabola.HideDots();
                     }
+                    wasShotReady = false;
                 }
+                //animator.SetBool("isMove", false);
             }
         }
     }
@@ -349,6 +358,9 @@ public class Player : MonoBehaviour
     private void PowerShoting()
     {
         Debug.Log("スペースキー or gamepad.b が離されました");
+        // 見た目を表示
+        SetPlayerVisible(true);
+
         rb.useGravity = true;
         isShot = true;
         currentPower = forceStrength;
@@ -385,4 +397,13 @@ public class Player : MonoBehaviour
         if (IconImage != null && NormalIcon != null)
             IconImage.sprite = NormalIcon;               // 通常アイコンに戻す
     }
+
+    private void SetPlayerVisible(bool visible)
+    {
+        foreach (var renderer in GetComponentsInChildren<Renderer>())
+        {
+            renderer.enabled = visible;
+        }
+    }
+
 }
