@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -402,8 +402,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u958B\u59CB"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 484a4df9777eee1469bbc12b51bf4473, type: 2}
-  m_sharedMaterial: {fileID: 1794251345464744197, guid: 484a4df9777eee1469bbc12b51bf4473, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ac1fc0278453314438f4559777965f00, type: 2}
+  m_sharedMaterial: {fileID: 1887229229276464073, guid: ac1fc0278453314438f4559777965f00, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1715,8 +1715,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u7D42\u4E86"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 484a4df9777eee1469bbc12b51bf4473, type: 2}
-  m_sharedMaterial: {fileID: 1794251345464744197, guid: 484a4df9777eee1469bbc12b51bf4473, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ac1fc0278453314438f4559777965f00, type: 2}
+  m_sharedMaterial: {fileID: 1887229229276464073, guid: ac1fc0278453314438f4559777965f00, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2196,8 +2196,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u64CD\u4F5C\u65B9\u6CD5"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 484a4df9777eee1469bbc12b51bf4473, type: 2}
-  m_sharedMaterial: {fileID: 1794251345464744197, guid: 484a4df9777eee1469bbc12b51bf4473, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ac1fc0278453314438f4559777965f00, type: 2}
+  m_sharedMaterial: {fileID: 1887229229276464073, guid: ac1fc0278453314438f4559777965f00, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
