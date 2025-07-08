@@ -5,7 +5,6 @@ using UnityEngine;
 using System.Runtime.CompilerServices;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
-using UnityEditor.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -18,6 +17,7 @@ public class Player : MonoBehaviour
     public RectTransform gaugeRectTransform; // ゲージ位置
     public GameManager manager;
     public Animator animator;
+    public UI_Tutorial UISetter;
     public float iconMoveSpeed = 2f;
     // ★追加：威力を保持するための変数
     public float currentPower = 0f;
@@ -55,8 +55,14 @@ public class Player : MonoBehaviour
     private bool wasShotReady = false;
     private bool b_turn = false;
     private bool Changed = false;
+    private bool IsTutorial = false;
 
     private bool skipFirstShotFrame = false;
+
+    private bool isTutorialMode = false; //今回のモードはチュートリアルのモードか否か
+    private bool waitAfterTutorial = false;
+    private float tutorialTimer = 0f;
+    private float tutorialWaitTime = 1.0f;
 
     public float lastShotPower;
 
@@ -76,6 +82,8 @@ public class Player : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         command = FindObjectOfType<GamePadCommand>();
+        isTutorialMode = GameManager.Instance.SelectedStageName == "stage001";
+        
         isShot = false;
         rb.useGravity = false;
         SAngleY = 0;
@@ -90,7 +98,7 @@ public class Player : MonoBehaviour
         Changed = false;
         lastShotPower = 0.0f;
         shotpower = 0.08f;
-
+        IsTutorial = true;
         // 以下は現状の開発環境での動作確認用の仮置きです、プレハブ生成版に開発が切り替わった段階で削除してください
 
         if (manager == null) return;
@@ -148,7 +156,145 @@ public class Player : MonoBehaviour
         // シーン切り替え直後の1秒間は入力を受け付けない
         if (Time.time - sceneStartTime < inputBlockTime)
             return;
+        // チュートリアルモード用処理
+        if (isTutorialMode)
+        {
+            TutorialUpdate(); // チュートリアル用の関数
+            return;
+        }
+
+        NormalUpdateLogic();
         //打ち出すまでの間だけ入る
+       
+    }
+
+    private void TutorialUpdate()
+    {
+        if (!isShot)
+        {
+            if (Changed && parabola != null)
+            {
+                parabola.ShowParabora();
+                Changed = false;
+            }
+            //最初は角度を決めてその後打ち出したい威力のタイミングで放つ
+            if (!wasShotReady && !b_turn)
+            {
+                if (IsTutorial)
+                {
+                    UISetter = FindObjectOfType<UI_Tutorial>();
+                    UISetter.ShowPanel();
+                    if (command.IsBbutton(GetInputOB))
+                    {
+                        UISetter.HidePanel();
+                        IsTutorial = false;
+                        tutorialTimer = 0.0f;
+                        waitAfterTutorial = true;
+                    }
+                    return;
+                }
+                if (!TutorialTimer())
+                {
+                    return;
+                }
+
+                ShotAngle();
+                forcePower = 0.0f;
+                forceStrength = MaxPower;
+            }
+            else if (wasShotReady && !b_turn)
+            {
+                if (!IsTutorial)
+                {
+                    UISetter = FindObjectOfType<UI_Tutorial>();
+                    UISetter.ShowPanel();
+                    if (command.IsBbutton(GetInputOB))
+                    {
+                        UISetter.HidePanel();
+                        IsTutorial = true;
+                        tutorialTimer = 0.0f;
+                        waitAfterTutorial = true;
+                    }
+                    return;
+                }
+
+                if (!TutorialTimer())
+                {
+                    return;
+                }
+
+                if (skipFirstShotFrame)
+                {
+                    Shot();
+                    forcePower = forceStrength;
+                    UpdateGauge();
+                }
+                else
+                {
+                    // 最初の1フレームはスキップしてフラグONにする
+                    skipFirstShotFrame = true;
+                    forceStrength = 0f;
+                    forcePower = 0f;
+                    UpdateGauge();
+                }
+            }
+            else if (wasShotReady && b_turn)
+            {
+                if (IsTutorial)
+                {
+                    UISetter = FindObjectOfType<UI_Tutorial>();
+                    UISetter.ShowPanel();
+                    if (command.IsBbutton(GetInputOB))
+                    {
+                        UISetter.HidePanel();
+                        IsTutorial = false;
+                        tutorialTimer = 0.0f;
+                        waitAfterTutorial = true;
+                    }
+                    return;
+                }
+
+                if (!TutorialTimer())
+                {
+                    return;
+                }
+
+                //打ち出し
+                if (command.IsBbutton(GetInputOB))
+                {
+                    animator = FindObjectOfType<Animator>();
+
+                    animator.SetBool("isMove", true);
+                    lastShotPower = forceStrength;
+                    PowerShoting();
+                    if (parabola != null)
+                    {
+                        parabola.HideDots();
+                    }
+                    wasShotReady = false;
+                }
+                //animator.SetBool("isMove", false);
+            }
+        }
+    }
+
+    private bool TutorialTimer()
+    {
+        if (waitAfterTutorial)
+        {
+            tutorialTimer += Time.deltaTime;
+            if (tutorialTimer < tutorialWaitTime)
+            {
+                return false; // まだ待機中
+            }
+            waitAfterTutorial = false; // 待機終了
+        }
+        return true; // 通常処理へ進んでOK
+    }
+
+    private void NormalUpdateLogic()
+    {
+
         if (!isShot)
         {
             if (Changed && parabola != null)
@@ -180,13 +326,13 @@ public class Player : MonoBehaviour
                     UpdateGauge();
                 }
             }
-            else if(wasShotReady && b_turn)
+            else if (wasShotReady && b_turn)
             {
                 //打ち出し
                 if (command.IsBbutton(GetInputOB))
                 {
                     animator = FindObjectOfType<Animator>();
-                    
+
                     animator.SetBool("isMove", true);
                     lastShotPower = forceStrength;
                     PowerShoting();
@@ -200,7 +346,6 @@ public class Player : MonoBehaviour
             }
         }
     }
-
     private void ShotAngle()
     {
         //角度指定

@@ -26,7 +26,7 @@ public class UI_Tutorial : MonoBehaviour
     }
 
     // ï\é¶ä÷êî
-    void ShowPanel()
+    public void ShowPanel()
     {
         GameObject obj = GameObject.Find("Tutorial");
 
@@ -36,7 +36,7 @@ public class UI_Tutorial : MonoBehaviour
     }
 
     // îÒï\é¶ä÷êî
-    void HidePanel()
+    public void HidePanel()
     {
         GameObject obj = GameObject.Find("Tutorial");
 
