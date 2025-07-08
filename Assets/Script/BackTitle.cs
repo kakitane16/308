@@ -26,10 +26,15 @@ public class BackTitle : MonoBehaviour
     public void Update()
     {
         //ゲームパッドやキーボードで同じ処理ができるようなプログラムを取得
-        command = new GamePadCommand();
-
+        // command = new GamePadCommand();
+        Debug.Log("Update");
         //ESCキーが押されるまでは以下の処理は入らない
        if (command.GetEscKey((int)GameManager.Instance.inputDevice))
+        {
+            isEsc = true;
+            menuUI.ShowPanel();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             isEsc = true;
             menuUI.ShowPanel();
@@ -61,12 +66,12 @@ public class BackTitle : MonoBehaviour
                 switch (change)
                 {
                     //上の場合
-                    case 0:
+                    case 1:
                         SceneManager.LoadScene("Title");
                         isEsc = false;
                         break;
                     //下の場合
-                    case 1:
+                    case 0:
                         menuUI.HidePanel();
                         isEsc = false;
                         break;
