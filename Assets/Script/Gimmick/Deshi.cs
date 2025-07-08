@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public GameObject effectPrefab; // 表示させるエフェクトを設定
+
 
 public class Deshi : MonoBehaviour
 {
@@ -8,6 +8,7 @@ public class Deshi : MonoBehaviour
     public float bounceMultiplier = 1.0f; // 調整倍率
     public Vector3 FinishPos;
     public bool Hit = false;
+    public GameObject effectPrefab; // 表示させるエフェクトを設定
     Sasa sasa;
     Player player;
     void Start()
