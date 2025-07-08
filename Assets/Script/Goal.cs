@@ -119,6 +119,10 @@ public class Goal : MonoBehaviour
         }
         else if (score <= 70)
         {
+            //最新ステージをクリアしたら次のステージが解放されるように
+            int CurrentState = GameManager.Instance.stageIndex;
+            if (GameManager.Instance.clearstate < CurrentState) GameManager.Instance.clearstate = CurrentState;
+            CollisionCheck = true;
             Debug.Log("normal");
             return (int)review.Nomal;
         }
@@ -126,8 +130,7 @@ public class Goal : MonoBehaviour
         {
             //最新ステージをクリアしたら次のステージが解放されるように
             int CurrentState = GameManager.Instance.stageIndex;
-            if (GameManager.Instance.clearstate < CurrentState)                GameManager.Instance.clearstate = CurrentState;
-
+            if (GameManager.Instance.clearstate < CurrentState) GameManager.Instance.clearstate = CurrentState;
             CollisionCheck = true;
             Debug.Log("perfect");
             return (int)review.Perfect;
