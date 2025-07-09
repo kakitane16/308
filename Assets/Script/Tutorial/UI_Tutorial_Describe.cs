@@ -14,6 +14,17 @@ public class UI_Tutorial_Describe : MonoBehaviour
         targetImage = GameObject.Find("T_GimmickDescribe").GetComponent<Image>();
         Transform grandParent = transform.parent?.parent;
         tutorial = grandParent.GetComponent<UI_Tutorial>();
+        
+        //***********************************************************************************
+        //古瀬君へ
+        //緊急対応だったためUIの裏に他UIが重なってるので後で消しといて！！！
+        
+        //サイズ
+        targetImage.rectTransform.sizeDelta = new Vector2(1000f, 600f);
+        //位置
+        targetImage.rectTransform.anchoredPosition = new Vector2(0f, 0f);
+        
+        //***********************************************************************************
     }
 
     // Update is called once per frame

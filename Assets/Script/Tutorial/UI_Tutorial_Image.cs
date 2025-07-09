@@ -13,14 +13,13 @@ public class UI_Tutorial_Image : MonoBehaviour
         targetImage = GameObject.Find("T_GimmickImage").GetComponent<Image>();
         Transform grandParent = transform.parent?.parent;
         tutorial = grandParent.GetComponent<UI_Tutorial>();
-
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        SetImageNumber(tutorial.gimmickNum);
+       // SetImageNumber(tutorial.gimmickNum);
     }
     public void SetImageNumber(int number)
     {

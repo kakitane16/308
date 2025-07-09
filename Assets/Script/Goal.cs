@@ -27,7 +27,7 @@ public class Goal : MonoBehaviour
 
     private void OnCollisionEnter(Collision gl)
     {
-        if (CollisionCheck)return;  // Šù‚É‰ÁZÏ‚İ‚È‚ç‰½‚à‚µ‚È‚¢
+       // if (CollisionCheck)return;  // Šù‚É‰ÁZÏ‚İ‚È‚ç‰½‚à‚µ‚È‚¢
 
         if (goal == null)
         {
