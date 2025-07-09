@@ -64,4 +64,17 @@ public class GameManager : MonoBehaviour
             Debug.Log("No clearstate save file found.");
         }
     }
+    public void DeleteClearState()
+    {
+        string path = Application.persistentDataPath + "/clearstate.json";
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+            Debug.Log("clearstate save file deleted.");
+        }
+        else
+        {
+            Debug.Log("No clearstate save file to delete.");
+        }
+    }
 }
