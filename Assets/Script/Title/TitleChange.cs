@@ -11,6 +11,7 @@ public class TitleChange : MonoBehaviour
 
     public void ClickStartButton()
     {
+        GameManager.Instance.LoadClearState();
         SceneManager.LoadScene("Select");
     }
 }

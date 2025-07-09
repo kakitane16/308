@@ -60,6 +60,7 @@ public class ScenChangeResult : MonoBehaviour
                         Debug.Log($"[進行] ステージを進行: {GameManager.Instance.stageIndex}, 評価: {Num}");
                     }
                     GameManager.Instance.SelectedStageName = $"stage{GameManager.Instance.stageIndex:D3}";
+                    GameManager.Instance.SaveClearState();
                     SceneManager.LoadScene(2);
                     break;
             }

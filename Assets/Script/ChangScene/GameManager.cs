@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -27,6 +28,40 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+    [System.Serializable]
+    private class SaveData
+    {
+        public int clearstate;
+    }
+
+    public void SaveClearState()
+    {
+        SaveData data = new SaveData();
+        data.clearstate = this.clearstate;
+
+        string json = JsonUtility.ToJson(data);
+        string path = Application.persistentDataPath + "/clearstate.json";
+        File.WriteAllText(path, json);
+
+        Debug.Log("clearstate saved: " + data.clearstate + " at " + path);
+    }
+
+    public void LoadClearState()
+    {
+        string path = Application.persistentDataPath + "/clearstate.json";
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            SaveData data = JsonUtility.FromJson<SaveData>(json);
+            this.clearstate = data.clearstate;
+
+            Debug.Log("clearstate loaded: " + this.clearstate);
+        }
+        else
+        {
+            Debug.Log("No clearstate save file found.");
         }
     }
 }
