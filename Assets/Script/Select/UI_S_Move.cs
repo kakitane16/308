@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class UI_S_Move : MonoBehaviour
 {
     public RectTransform content;       // 動かすUI（Panel_Content）
-    public int MaxPage;                 // ページ数 - 1（例：3ページなら2）
+   // public int MaxPage;                 // ページ数 - 1（例：3ページなら2）
     public float PageWidth;             // 1ページの幅
     public float SlideSpeed;            // 移動速度
     public float PageCoolTime;          //ページのクールタイム
@@ -24,6 +24,8 @@ public class UI_S_Move : MonoBehaviour
     public Image RightArrow;
     //メダルの表示管理
     public Image[] Medals;
+
+    int MaxPage => GameManager.Instance != null ? GameManager.Instance.MaxPage : 0;  // GameManagerから参照
 
 
     void Start()
@@ -81,12 +83,13 @@ public class UI_S_Move : MonoBehaviour
             }
 
             //決定ボタン入力
-            if (_command.IsBbutton(GetInputOB) && CurrentPage < MaxPage)
+            if (_command.IsBbutton(GetInputOB) && CurrentPage <= MaxPage)
             {
 
                 // ステージ名をGameManagerに保存
-                GameManager.Instance.stageIndex = CurrentPage + 1; // stage001～stage015
+               GameManager.Instance.stageIndex = CurrentPage + 1; // stage001～stage015
                 GameManager.Instance.SelectedStageName = $"stage{GameManager.Instance.stageIndex:D3}";
+                //GameManager.Instance.SelectedStageName = $"stage{(CurrentPage + 1):D3}";
 
                 SceneManager.LoadScene(2); // ステージ読み込み先シーン名
             }

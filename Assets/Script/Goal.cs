@@ -42,6 +42,7 @@ public class Goal : MonoBehaviour
                 return;
             }
         }
+        CollisionCheck = true;
 
         float distance = Vector3.Distance(transform.position, goal.position);
         int score = CalculateScore(distance);
@@ -119,19 +120,11 @@ public class Goal : MonoBehaviour
         }
         else if (score <= 70)
         {
-            //最新ステージをクリアしたら次のステージが解放されるように
-            int CurrentState = GameManager.Instance.stageIndex;
-            if (GameManager.Instance.clearstate < CurrentState) GameManager.Instance.clearstate = CurrentState;
-            CollisionCheck = true;
             Debug.Log("normal");
             return (int)review.Nomal;
         }
         else
         {
-            //最新ステージをクリアしたら次のステージが解放されるように
-            int CurrentState = GameManager.Instance.stageIndex;
-            if (GameManager.Instance.clearstate < CurrentState) GameManager.Instance.clearstate = CurrentState;
-            CollisionCheck = true;
             Debug.Log("perfect");
             return (int)review.Perfect;
         }
