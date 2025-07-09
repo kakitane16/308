@@ -12,19 +12,6 @@ public class UI_Tutorial : MonoBehaviour
     {
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.JoystickButton1))
-        {
-            HidePanel();
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            ShowPanel(1);
-        }
-    }
-
     // ï\é¶ä÷êî
     public void ShowPanel(int setGimmickNum)
     {
