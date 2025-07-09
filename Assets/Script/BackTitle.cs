@@ -61,7 +61,7 @@ public class BackTitle : MonoBehaviour
                 }
             }
             //–––––––––––––Œˆ’èŒã‚Ìˆ—––––––––––––
-            if (command.IsBbutton((int)GameManager.Instance.inputDevice))
+            if (command.WasBbutton((int)GameManager.Instance.inputDevice))
             {
                 switch (change)
                 {
