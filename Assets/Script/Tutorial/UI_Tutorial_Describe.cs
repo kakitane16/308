@@ -7,18 +7,19 @@ public class UI_Tutorial_Describe : MonoBehaviour
 {
 
     private Image targetImage; // UI‚ÌImage
-
+    private UI_Tutorial tutorial;
     // Start is called before the first frame update
     void Start()
     {
         targetImage = GameObject.Find("T_GimmickDescribe").GetComponent<Image>();
-
+        Transform grandParent = transform.parent?.parent;
+        tutorial = grandParent.GetComponent<UI_Tutorial>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        SetDescribeNumber(1);
+        SetDescribeNumber(tutorial.gimmickNum);
     }
     public void SetDescribeNumber(int number)
     {

@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 
 public class UI_Tutorial : MonoBehaviour
 {
-   
-
+    public int gimmickNum;  
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -21,18 +21,20 @@ public class UI_Tutorial : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
-            ShowPanel();
+            ShowPanel(1);
         }
     }
 
     // ï\é¶ä÷êî
-    public void ShowPanel()
+    public void ShowPanel(int setGimmickNum)
     {
+        gimmickNum = setGimmickNum;
         GameObject obj = GameObject.Find("Tutorial");
 
         Transform panel = obj.transform.Find("T_BackGroundUI");
 
         panel.gameObject.SetActive(true);
+
     }
 
     // îÒï\é¶ä÷êî

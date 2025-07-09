@@ -183,7 +183,7 @@ public class Player : MonoBehaviour
                 if (IsTutorial)
                 {
                     UISetter = FindObjectOfType<UI_Tutorial>();
-                    UISetter.ShowPanel();
+                    UISetter.ShowPanel(1);
                     if (command.IsBbutton(GetInputOB))
                     {
                         UISetter.HidePanel();
@@ -207,7 +207,7 @@ public class Player : MonoBehaviour
                 if (!IsTutorial)
                 {
                     UISetter = FindObjectOfType<UI_Tutorial>();
-                    UISetter.ShowPanel();
+                    UISetter.ShowPanel(1);
                     if (command.IsBbutton(GetInputOB))
                     {
                         UISetter.HidePanel();
@@ -243,7 +243,7 @@ public class Player : MonoBehaviour
                 if (IsTutorial)
                 {
                     UISetter = FindObjectOfType<UI_Tutorial>();
-                    UISetter.ShowPanel();
+                    UISetter.ShowPanel(1);
                     if (command.IsBbutton(GetInputOB))
                     {
                         UISetter.HidePanel();

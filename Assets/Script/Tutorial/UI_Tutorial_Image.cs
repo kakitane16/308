@@ -6,18 +6,21 @@ using UnityEngine.UI;
 public class UI_Tutorial_Image : MonoBehaviour
 {
     private Image targetImage; // UI‚ÌImage
-
+    private UI_Tutorial tutorial;
     // Start is called before the first frame update
     void Start()
     {
         targetImage = GameObject.Find("T_GimmickImage").GetComponent<Image>();
+        Transform grandParent = transform.parent?.parent;
+        tutorial = grandParent.GetComponent<UI_Tutorial>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        SetImageNumber(1);
+        SetImageNumber(tutorial.gimmickNum);
     }
     public void SetImageNumber(int number)
     {
