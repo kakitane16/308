@@ -2833,7 +2833,7 @@ GameObject:
   - component: {fileID: 4326284622392080325}
   m_Layer: 0
   m_Name: pCylinder14
-  m_TagString: Untagged
+  m_TagString: Table
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6700,7 +6700,7 @@ GameObject:
   - component: {fileID: 2145975758561534226}
   m_Layer: 0
   m_Name: pCylinder17
-  m_TagString: Untagged
+  m_TagString: Table
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8162,7 +8162,7 @@ GameObject:
   - component: {fileID: 2933244938770280297}
   m_Layer: 0
   m_Name: pCylinder15
-  m_TagString: Untagged
+  m_TagString: Table
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9004,7 +9004,7 @@ GameObject:
   - component: {fileID: 7459707835508030393}
   m_Layer: 0
   m_Name: pCylinder16
-  m_TagString: Untagged
+  m_TagString: Table
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11083,7 +11083,7 @@ GameObject:
   - component: {fileID: 7461033540625953286}
   m_Layer: 0
   m_Name: pCylinder13
-  m_TagString: Untagged
+  m_TagString: Table
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

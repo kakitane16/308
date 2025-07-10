@@ -5,9 +5,13 @@ using UnityEngine;
 public class G_trampoline : MonoBehaviour
 {
     private bool IsDown;
-    public float SpinPower = 20.0f;
+    [Header("回転させる強さの設定")]
+    public float SpinPower = 30.0f; // 回転させる強さ
     private Collider collider;
+    [Header("表示させるエフェクトをここに設定")]
     public GameObject effectPrefab; // 表示させるエフェクトを設定
+    [Header("回転減衰の設定")]
+    public float ChengeAngularDrag = 0.05f; // 回転減衰 
 
     // Start is called before the first frame update
     void Start()
@@ -40,8 +44,11 @@ public class G_trampoline : MonoBehaviour
         Vector3 normal = (playerRb.position - closetPoint).normalized;  // ベクトル取得
         Vector3 reflectDir = Vector3.Reflect(playerRb.velocity.normalized, normal); // 反射
         Vector3 Pvelocity = reflectDir * playerRb.velocity.magnitude; // 新しいベクトル　×　発射の強さ
-        Debug.Log(reflectDir);
-        Debug.Log(closetPoint);
+
+        // 回転減衰を小さくして、回転が止まりにくくする
+        playerRb.angularDrag = ChengeAngularDrag;
+        // XとZの回転を固定（or演算）
+        playerRb.constraints |= RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
         // 竹串の上面以外の反射なら処理をしない
         if (other.transform.position.y + 0.7f < transform.position.y) 
