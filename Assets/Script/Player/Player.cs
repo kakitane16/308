@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         command = FindObjectOfType<GamePadCommand>();
-        isTutorialMode = GameManager.Instance.SelectedStageName == "stage001";
+        isTutorialMode = GameManager.Instance.SelectedStageName == "stage000";
         
         isShot = false;
         rb.useGravity = false;
@@ -267,6 +267,8 @@ public class Player : MonoBehaviour
                     }
                     break;
                 case 6:
+                    //ショットのリセット
+                    ResetShot();
                         // 打ち出し
                      if (command.IsBbutton(GetInputOB))
                      {
@@ -338,6 +340,7 @@ public class Player : MonoBehaviour
             }
             else if (wasShotReady && b_turn)
             {
+                ResetShot();
                 //打ち出し
                 if (command.IsBbutton(GetInputOB))
                 {
@@ -423,6 +426,15 @@ public class Player : MonoBehaviour
         {
             b_turn = true;
             tutorialStep = 5;
+        }
+    }
+
+    private void ResetShot()
+    {
+        if(command.GetAKey(GetInputOB))
+        {
+            b_turn = false;
+            tutorialStep = 4; 
         }
     }
 
