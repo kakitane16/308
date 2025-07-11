@@ -224,5 +224,31 @@ public class GamePadCommand : MonoBehaviour
         }
         return false;
     }
+
+    public bool GetAKey(int ipt)
+    {
+        switch (ipt)
+        {
+            case (int)InputObject.GamePad:
+                if (Gamepad.current != null)
+                {
+                    if (Gamepad.current.aButton.isPressed)
+                    {
+                        return true;
+                    }
+                }
+                break;
+            case (int)InputObject.KeyBoad:
+                if (Keyboard.current != null)
+                {
+                    if (Keyboard.current.zKey.isPressed)
+                    {
+                        return true;
+                    }
+                }
+                break;
+        }
+        return false;
+    }
 }
 
