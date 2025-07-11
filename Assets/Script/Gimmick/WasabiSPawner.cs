@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class WasabiSPawner : MonoBehaviour
@@ -20,30 +21,32 @@ public class WasabiSPawner : MonoBehaviour
     //inspectorで秒数変更可能
     public float lifeTime = 3.0f;
 
-    [Header("ワサビが出現するディレイ (秒)")]
-    public float delayTime = 0.0f;
+    private float delayTime = 1.0f;
     float Timer;
 
     private void Start()
     {
-
+        // 場に出ている全ワサビを取得
+        WasabiSPawner[] wasabies = FindObjectsOfType<WasabiSPawner>();
+        // X座標でソート
+        var sort = wasabies.OrderBy(obj => obj.transform.position.x).ToArray();
+        // 自身は何番目か
+        int index = System.Array.IndexOf(sort, this);
+        // 番数に応じて起動時間変更
+        float delay = index * delayTime;
+        // ループ開始
+        StartCoroutine(SpawnLoop(delay));
     }
 
     private void Update()
     {
-        if (Timer > delayTime)
-            return;
-
-            Timer += Time.deltaTime;
-        if (Timer >= delayTime)
-        {
-            // ループ開始
-            StartCoroutine(SpawnLoop());
-        }
+        
     }
 
-    private IEnumerator SpawnLoop()
+    private IEnumerator SpawnLoop(float delay)
     {
+        yield return new WaitForSeconds(delay);
+
         while (true)
         {
             // ログ：何秒時点で吐き出し始めるか
