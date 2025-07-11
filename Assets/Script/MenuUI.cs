@@ -34,9 +34,10 @@ public class MenuUI : MonoBehaviour
         imageScale = new Vector2( 1000, 150 );
         imageScaleOff = new Vector2( 840, 140 );
         timeCnt = 0;
-        SetAllTextColor(imageRect3, new Color32(0, 0, 0, 255));     // ê‘Ç…
-        SetAllTextColor(imageRect4, new Color32(255, 255, 255, 255));  // óŒÇ…
+        SetAllTextColor(imageRect3, new Color32(0, 0, 0, 255));     
+        SetAllTextColor(imageRect4, new Color32(255, 255, 255, 255)); 
         debugSelect = 0;
+        HidePanel();
     }
 
     // Update is called once per frame
@@ -128,22 +129,20 @@ public class MenuUI : MonoBehaviour
     }
     void SetAllTextColor(TextMeshProUGUI target, Color32 color)
     {
-        target.ForceMeshUpdate();
-        var textInfo = target.textInfo;
+            target.ForceMeshUpdate();
+            var textInfo = target.textInfo;
 
-        for (int i = 0; i < textInfo.characterCount; i++)
-        {
-            var charInfo = textInfo.characterInfo[i];
-            if (!charInfo.isVisible) continue;
+                for (int i = 0; i < textInfo.characterCount; i++)
+                {
+                    var charInfo = textInfo.characterInfo[i];
+                    if (!charInfo.isVisible) continue;
+                    int vertexIndex = charInfo.vertexIndex;
+                    int matIndex = charInfo.materialReferenceIndex;
+                    var colors = textInfo.meshInfo[matIndex].colors32;
 
-            int vertexIndex = charInfo.vertexIndex;
-            int matIndex = charInfo.materialReferenceIndex;
-            var colors = textInfo.meshInfo[matIndex].colors32;
-
-            for (int j = 0; j < 4; j++)
-                colors[vertexIndex + j] = color;
-        }
-
+                    for (int j = 0; j < 4; j++)
+                        colors[vertexIndex + j] = color;
+                 }
         target.UpdateVertexData(TMP_VertexDataUpdateFlags.Colors32);
     }
 }
