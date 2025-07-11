@@ -340,7 +340,6 @@ MonoBehaviour:
   stage_object: {fileID: 2071764582}
   Bad: {fileID: 181290356}
   Nomal: {fileID: 2058807878}
-  Good: {fileID: 1942992126}
   Perfect: {fileID: 1232727956}
 --- !u!4 &476959255
 Transform:
@@ -767,7 +766,6 @@ MonoBehaviour:
   stage_object: {fileID: 0}
   Bad: {fileID: 181290356}
   Nomal: {fileID: 2058807878}
-  Good: {fileID: 1942992126}
   Perfect: {fileID: 1232727956}
 --- !u!114 &582401335
 MonoBehaviour:
@@ -2478,7 +2476,6 @@ MonoBehaviour:
   stage_object: {fileID: 0}
   Bad: {fileID: 181290356}
   Nomal: {fileID: 2058807878}
-  Good: {fileID: 1942992126}
   Perfect: {fileID: 1232727956}
 --- !u!114 &1668708216
 MonoBehaviour:
@@ -3229,7 +3226,6 @@ MonoBehaviour:
   stage_object: {fileID: 0}
   Bad: {fileID: 181290356}
   Nomal: {fileID: 2058807878}
-  Good: {fileID: 1942992126}
   Perfect: {fileID: 1232727956}
 --- !u!114 &2027136519
 MonoBehaviour:
@@ -3553,7 +3549,6 @@ MonoBehaviour:
   stage_object: {fileID: 1998278111}
   Bad: {fileID: 181290356}
   Nomal: {fileID: 2058807878}
-  Good: {fileID: 1942992126}
   Perfect: {fileID: 1232727956}
 --- !u!1 &2089282776
 GameObject:

@@ -30,7 +30,6 @@ public class UI_R_Manager : MonoBehaviour
     //キャンバス(それぞれの評価)
     public Canvas Bad;
     public Canvas Nomal;
-    public Canvas Good;
     public Canvas Perfect;
 
 
@@ -40,7 +39,6 @@ public class UI_R_Manager : MonoBehaviour
         //最初は表示しないようにキャンバスの表示をオフ
         Bad.enabled = false;
         Nomal.enabled = false;
-        Good.enabled = false;
         Perfect.enabled = false;
     }
 
@@ -49,24 +47,38 @@ public class UI_R_Manager : MonoBehaviour
         //＊＊＊ゲームシーンのスコアを取得＊＊＊＊
         Num = GameManager.Instance.score;
 
-        //オブジェクトからTextコンポーネントを取得
-        Text stage_text = stage_object.GetComponent<Text>();
-
         if (OneCount)
         {
+
+            int currentStage = GameManager.Instance.stageIndex;
+
+            if (Num >= (int)review.Nomal)//評価がNomal以上でクリア判定
+            {
+                if (GameManager.Instance.clearstate < currentStage)
+                {
+                    GameManager.Instance.clearstate = currentStage;
+                    GameManager.Instance.SaveClearState(); // 保存
+                }
+            }
+
+            // 一旦全キャンバスを非表示
+            Bad.enabled = false;
+            Nomal.enabled = false;
+            Perfect.enabled = false;
+
             //評価によって演出を変える
             switch (Num)
             {
                 case (int)review.Bad:
-                    Bad.enabled = !Bad.enabled;
+                    Bad.enabled = true;
                     break;
 
                 case (int)review.Nomal:
-                    Nomal.enabled = !Nomal.enabled;
+                    Nomal.enabled = true;
                     break;
 
                 case (int)review.Perfect:
-                    Perfect.enabled = !Perfect.enabled;
+                    Perfect.enabled = true;
                     break;
             }
             OneCount = false;
