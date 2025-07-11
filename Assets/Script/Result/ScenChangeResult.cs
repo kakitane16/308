@@ -61,6 +61,7 @@ public class ScenChangeResult : MonoBehaviour
                     }
                     GameManager.Instance.SelectedStageName = $"stage{GameManager.Instance.stageIndex:D3}";
                     GameManager.Instance.SaveClearState();
+                    GameManager.Instance.Fast = true;
                     SceneManager.LoadScene(2);
                     break;
             }

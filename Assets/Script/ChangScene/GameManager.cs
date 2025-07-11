@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public int stageIndex = 0;
     public int clearstate = 0;
     public int MaxPage = 15;
+    public bool Fast = false; //リトライ時はtrueに切り替え
 
     public string SelectedStageName = "stage001"; // ステージ名（例: stage001）
     

@@ -19,25 +19,33 @@ public class MenuUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        imageRect1 = transform.Find("M_BackGroundUI/M_CloseUI").GetComponent<RectTransform>();
-        imageRect2 = transform.Find("M_BackGroundUI/M_QuitUI").GetComponent<RectTransform>();
-        imageRect3 = transform.Find("M_BackGroundUI/M_QuitUI/QuitTex").GetComponent<TextMeshProUGUI>();
-        imageRect4 = transform.Find("M_BackGroundUI/M_CloseUI/CloseTex").GetComponent<TextMeshProUGUI>();
-        // UI初期化
-        imageRect1.anchoredPosition = new Vector2(0, 100);
-        imageRect1.sizeDelta = new Vector2(1000, 150);   
+        // メニューを一時的に表示
+        GameObject obj = GameObject.Find("Menu");
+        Transform panel = obj.transform.Find("M_BackGroundUI");
+        panel.gameObject.SetActive(true);  // 一時的に ON
 
+        // UI要素取得
+        imageRect1 = GameObject.Find("M_BackGroundUI/M_CloseUI").GetComponent<RectTransform>();
+        imageRect2 = GameObject.Find("M_BackGroundUI/M_QuitUI").GetComponent<RectTransform>();
+        imageRect3 = GameObject.Find("M_BackGroundUI/M_QuitUI/QuitTex").GetComponent<TextMeshProUGUI>();
+        imageRect4 = GameObject.Find("M_BackGroundUI/M_CloseUI/CloseTex").GetComponent<TextMeshProUGUI>();
+
+        // パネルを再度非表示
+        panel.gameObject.SetActive(false);
+
+        // 残り初期化
+        imageRect1.anchoredPosition = new Vector2(0, 100);
+        imageRect1.sizeDelta = new Vector2(1000, 150);
         imageRect2.anchoredPosition = new Vector2(0, -80);
         imageRect2.sizeDelta = new Vector2(840, 140);
-   
-        imagePos = new Vector2( 0, 100 );
-        imageScale = new Vector2( 1000, 150 );
-        imageScaleOff = new Vector2( 840, 140 );
+        imagePos = new Vector2(0, 100);
+        imageScale = new Vector2(1000, 150);
+        imageScaleOff = new Vector2(840, 140);
         timeCnt = 0;
-        SetAllTextColor(imageRect3, new Color32(0, 0, 0, 255));     
-        SetAllTextColor(imageRect4, new Color32(255, 255, 255, 255)); 
+
+        SetAllTextColor(imageRect3, new Color32(0, 0, 0, 255));
+        SetAllTextColor(imageRect4, new Color32(255, 255, 255, 255));
         debugSelect = 0;
-        HidePanel();
     }
 
     // Update is called once per frame

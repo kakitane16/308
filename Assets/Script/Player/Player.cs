@@ -63,6 +63,7 @@ public class Player : MonoBehaviour
     private bool waitAfterTutorial = false;
     private float tutorialTimer = 0f;
     private float tutorialWaitTime = 1.0f;
+    private int tutorialStep = 0;
 
     public float lastShotPower;
 
@@ -157,7 +158,7 @@ public class Player : MonoBehaviour
         if (Time.time - sceneStartTime < inputBlockTime)
             return;
         // チュートリアルモード用処理
-        if (isTutorialMode)
+        if (isTutorialMode && !GameManager.Instance.Fast)
         {
             TutorialUpdate(); // チュートリアル用の関数
             return;
@@ -168,6 +169,11 @@ public class Player : MonoBehaviour
        
     }
 
+    //*********************************************************************
+    /// <summary>
+    /// チュートリアル専用関数一覧
+    /// </summary>
+
     private void TutorialUpdate()
     {
         if (!isShot)
@@ -177,103 +183,105 @@ public class Player : MonoBehaviour
                 parabola.ShowParabora();
                 Changed = false;
             }
-            //最初は角度を決めてその後打ち出したい威力のタイミングで放つ
-            if (!wasShotReady && !b_turn)
+
+            if (waitAfterTutorial)
             {
-                if (IsTutorial)
-                {
-                    UISetter = FindObjectOfType<UI_Tutorial>();
+                if (!TutorialTimer()) return;
+                waitAfterTutorial = false;
+            }
+
+            if (UISetter == null)
+            {
+                UISetter = FindObjectOfType<UI_Tutorial>();
+            }
+
+            switch (tutorialStep)
+            {
+                case 0:
+                    UISetter.ShowPanel(1);
+                    if (command.IsBbutton(GetInputOB))
+                    {
+                        UISetter.HidePanel();
+                        tutorialStep = 1;
+                        waitAfterTutorial = true;
+                        tutorialTimer = 0f;
+                    }
+                    break;
+                case 1:
                     UISetter.ShowPanel(2);
                     if (command.IsBbutton(GetInputOB))
                     {
                         UISetter.HidePanel();
-                        IsTutorial = false;
-                        tutorialTimer = 0.0f;
+                        tutorialStep = 2;
                         waitAfterTutorial = true;
+                        tutorialTimer = 0f;
                     }
-                    return;
-                }
-                if (!TutorialTimer())
-                {
-                    return;
-                }
-
-                ShotAngle();
-                forcePower = 0.0f;
-                forceStrength = MaxPower;
-            }
-            else if (wasShotReady && !b_turn)
-            {
-                if (!IsTutorial)
-                {
-                    UISetter = FindObjectOfType<UI_Tutorial>();
+                    break;
+                case 2:
+                    // 通常プレイに移行
+                    ShotAngle();
+                    forcePower = 0.0f;
+                    forceStrength = MaxPower;
+                    if (command.IsBbutton(GetInputOB))
+                    {
+                        UISetter.HidePanel();
+                        tutorialStep = 3;
+                        waitAfterTutorial = true;
+                        tutorialTimer = 0f;
+                    }
+                    break;
+                case 3:
                     UISetter.ShowPanel(3);
                     if (command.IsBbutton(GetInputOB))
                     {
                         UISetter.HidePanel();
-                        IsTutorial = true;
-                        tutorialTimer = 0.0f;
+                        tutorialStep = 4;
                         waitAfterTutorial = true;
+                        tutorialTimer = 0f;
                     }
-                    return;
-                }
-
-                if (!TutorialTimer())
-                {
-                    return;
-                }
-
-                if (skipFirstShotFrame)
-                {
-                    Shot();
-                    forcePower = forceStrength;
-                    UpdateGauge();
-                }
-                else
-                {
-                    // 最初の1フレームはスキップしてフラグONにする
-                    skipFirstShotFrame = true;
-                    forceStrength = 0f;
-                    forcePower = 0f;
-                    UpdateGauge();
-                }
-            }
-            else if (wasShotReady && b_turn)
-            {
-                if (IsTutorial)
-                {
-                    UISetter = FindObjectOfType<UI_Tutorial>();
+                    break;
+                case 4:
+                    if (skipFirstShotFrame)
+                    {
+                        Shot();
+                        forcePower = forceStrength;
+                        UpdateGauge();
+                    }
+                    else
+                    {
+                        // 最初の1フレームはスキップしてフラグONにする
+                        skipFirstShotFrame = true;
+                        forceStrength = 0f;
+                        forcePower = 0f;
+                        UpdateGauge();
+                    }
+                    break;
+                case 5:
                     UISetter.ShowPanel(4);
                     if (command.IsBbutton(GetInputOB))
                     {
                         UISetter.HidePanel();
-                        IsTutorial = false;
-                        tutorialTimer = 0.0f;
+                        tutorialStep = 6;
                         waitAfterTutorial = true;
+                        tutorialTimer = 0f;
                     }
-                    return;
-                }
+                    break;
+                case 6:
+                        // 打ち出し
+                     if (command.IsBbutton(GetInputOB))
+                     {
+                          animator = FindObjectOfType<Animator>();
 
-                if (!TutorialTimer())
-                {
-                    return;
-                }
-
-                //打ち出し
-                if (command.IsBbutton(GetInputOB))
-                {
-                    animator = FindObjectOfType<Animator>();
-
-                    animator.SetBool("isMove", true);
-                    lastShotPower = forceStrength;
-                    PowerShoting();
-                    if (parabola != null)
-                    {
-                        parabola.HideDots();
-                    }
-                    wasShotReady = false;
-                }
-                //animator.SetBool("isMove", false);
+                          animator.SetBool("isMove", true);
+                        　lastShotPower = forceStrength;
+                        　PowerShoting();
+                        　if (parabola != null)
+                        　{
+                        　    parabola.HideDots();
+                        　}
+                        　wasShotReady = false;
+                     }
+                　break;
             }
         }
     }
@@ -291,6 +299,8 @@ public class Player : MonoBehaviour
         }
         return true; // 通常処理へ進んでOK
     }
+    //*********************************************************************
+
 
     private void NormalUpdateLogic()
     {
@@ -412,6 +422,7 @@ public class Player : MonoBehaviour
         if (command.WasBbutton(GetInputOB))
         {
             b_turn = true;
+            tutorialStep = 5;
         }
     }
 

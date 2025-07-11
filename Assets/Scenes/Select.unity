@@ -487,6 +487,14 @@ MonoBehaviour:
   menuButtons:
   - {fileID: 1610739121}
   - {fileID: 236242412}
+  buttonLeft: {fileID: 0}
+  buttonRight: {fileID: 0}
+  leftSpriteBad: {fileID: 0}
+  leftSpriteNormal: {fileID: 0}
+  leftSpritePerfect: {fileID: 0}
+  rightSpriteBad: {fileID: 0}
+  rightSpriteNormal: {fileID: 0}
+  rightSpritePerfect: {fileID: 0}
 --- !u!1 &138379310
 GameObject:
   m_ObjectHideFlags: 0
@@ -2392,7 +2400,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   content: {fileID: 1079335630}
-  MaxPage: 14
   PageWidth: 1600
   SlideSpeed: 10
   PageCoolTime: 1
