@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Buner : MonoBehaviour
@@ -11,6 +12,7 @@ public class Buner : MonoBehaviour
     public float G_Disappearance = 2.0f; // 消滅時間
     public float G_DistanceInRight = 2.0f;  // x方向に出す距離
     public float G_DistanceInUp = 2.0f;  // y方向に出す距離
+    private float delayTime = 3.0f; // ディレイ
 
     void OnEnable()
     {
@@ -23,13 +25,24 @@ public class Buner : MonoBehaviour
         // 大きさ指定
         spawned.transform.localScale = G_Trans;
 
-        StartCoroutine(ToggleObject(spawned));   // コルーチン起動
+        // 場に出ている全ワサビを取得
+        Buner[] buners = FindObjectsOfType<Buner>();
+        // X座標でソート
+        var sort = buners.OrderBy(obj => obj.transform.position.x).ToArray();
+        // 自身は何番目か
+        int index = System.Array.IndexOf(sort, this);
+        // 番数に応じて起動時間変更
+        float delay = index * delayTime;
+
         Collider collider = GetComponent<BoxCollider>();
         if (collider != null) { collider.isTrigger = true; } // IsTriggerをオン
+
+        StartCoroutine(ToggleObject(spawned, delay));   // コルーチン起動
     }
    
-    IEnumerator ToggleObject(GameObject spawned)
+    IEnumerator ToggleObject(GameObject spawned, float delay)
     {
+        yield return new WaitForSeconds(delay);
         while (true)
         {
             // 出現

@@ -22,7 +22,6 @@ public class WasabiSPawner : MonoBehaviour
     public float lifeTime = 3.0f;
 
     private float delayTime = 1.0f;
-    float Timer;
 
     private void Start()
     {
