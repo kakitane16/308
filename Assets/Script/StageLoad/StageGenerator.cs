@@ -42,6 +42,8 @@ public class StageGenerator : MonoBehaviour
         //Goalの基準を探す
         GameManager.Instance.Points = GetCellValue(0, 10); //A１１セル
         Debug.Log($"CSVセル '{GameManager.Instance.Points}'");
+
+        FindObjectOfType<FinalImage>()?.UpdateImageFromPoints();
     }
     //Goalの判定
     public int GetCellValue(int x, int y)
