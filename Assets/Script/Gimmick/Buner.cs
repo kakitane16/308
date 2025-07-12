@@ -14,7 +14,7 @@ public class Buner : MonoBehaviour
     public float G_DistanceInUp = 2.0f;  // y方向に出す距離
     private float delayTime = 3.0f; // ディレイ
 
-    void OnEnable()
+    void Start()
     {
         if (G_Target == null) { return; }
         // 位置変更
@@ -25,23 +25,24 @@ public class Buner : MonoBehaviour
         // 大きさ指定
         spawned.transform.localScale = G_Trans;
 
+        Collider collider = GetComponent<BoxCollider>();
+        if (collider != null) { collider.isTrigger = true; } // IsTriggerをオン
+
         // 場に出ている全ワサビを取得
         Buner[] buners = FindObjectsOfType<Buner>();
         // X座標でソート
-        var sort = buners.OrderBy(obj => obj.transform.position.x).ToArray();
+        var sort = buners.OrderBy(obj => obj.transform.parent.position.x).ToArray();
         // 自身は何番目か
         int index = System.Array.IndexOf(sort, this);
         // 番数に応じて起動時間変更
         float delay = index * delayTime;
-
-        Collider collider = GetComponent<BoxCollider>();
-        if (collider != null) { collider.isTrigger = true; } // IsTriggerをオン
 
         StartCoroutine(ToggleObject(spawned, delay));   // コルーチン起動
     }
    
     IEnumerator ToggleObject(GameObject spawned, float delay)
     {
+        spawned.SetActive(false);
         yield return new WaitForSeconds(delay);
         while (true)
         {
