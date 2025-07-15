@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Num: 0
-  MaxStageIndex: 15
+  MaxStageIndex: 16
 --- !u!1001 &482490496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -708,8 +708,8 @@ MonoBehaviour:
   - {fileID: 762664706}
   ButtonL: {fileID: 1592943472}
   ButtonR: {fileID: 1998278111}
-  Delay: 1
-  ButtonDelay: 1
+  Delay: 0.5
+  ButtonDelay: 0.7
 --- !u!1 &582401332
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,8 +1020,8 @@ MonoBehaviour:
   - {fileID: 2057043655}
   ButtonL: {fileID: 1592943472}
   ButtonR: {fileID: 1998278111}
-  Delay: 1
-  ButtonDelay: 1
+  Delay: 0.5
+  ButtonDelay: 0.7
 --- !u!1 &796092579
 GameObject:
   m_ObjectHideFlags: 0
@@ -2353,7 +2353,7 @@ MonoBehaviour:
   - {fileID: 561497955}
   ButtonL: {fileID: 1592943472}
   ButtonR: {fileID: 1998278111}
-  Delay: 1
+  Delay: 0.7
   ButtonDelay: 1
 --- !u!1001 &1611442577
 PrefabInstance:
