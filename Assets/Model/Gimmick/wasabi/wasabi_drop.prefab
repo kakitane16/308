@@ -57,7 +57,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 503a31738cbd9d8439661b6b552ba5aa, type: 2}
   - {fileID: 2100000, guid: 46a8dd5efcaef9044ad827cc1c9df0b0, type: 2}
   targetMeshes:
-  - {fileID: 1733002559190041388, guid: bf6835c0455ae8b47bb5820db5170c96, type: 3}
+  - {fileID: 1733002559190041388, guid: bf75c781c5adf484d88972d1a1e5ac0b, type: 3}
   - {fileID: -5589444630313727633, guid: 665e7657fe06798499792a1d9e77caf3, type: 3}
   - {fileID: -4999925385747091504, guid: f6d15c92ec1c7764782e719eef6ea252, type: 3}
   applyToSkinned: 0
