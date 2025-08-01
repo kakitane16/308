@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Runtime.CompilerServices;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
+using Unity.VisualScripting;
 
 public class Player : MonoBehaviour
 {
@@ -55,12 +56,13 @@ public class Player : MonoBehaviour
     private bool wasShotReady = false;
     private bool b_turn = false;
     private bool Changed = false;
-    private bool IsTutorial = false;
+    private bool IsFast = false;
 
     private bool skipFirstShotFrame = false;
 
     private bool isTutorialMode = false; //今回のモードはチュートリアルのモードか否か
     private bool waitAfterTutorial = false;
+    private bool isAction = false;
     private float tutorialTimer = 0f;
     private float tutorialWaitTime = 1.0f;
     private int tutorialStep = 0;
@@ -86,6 +88,7 @@ public class Player : MonoBehaviour
         isTutorialMode = GameManager.Instance.SelectedStageName == "stage000";
         
         isShot = false;
+        isAction = false;
         rb.useGravity = false;
         SAngleY = 0;
         Vertical = 0.0f;
@@ -99,7 +102,7 @@ public class Player : MonoBehaviour
         Changed = false;
         lastShotPower = 0.0f;
         shotpower = 0.08f;
-        IsTutorial = true;
+        IsFast = false;
         // 以下は現状の開発環境での動作確認用の仮置きです、プレハブ生成版に開発が切り替わった段階で削除してください
 
         if (manager == null) return;
@@ -155,8 +158,17 @@ public class Player : MonoBehaviour
         }
 
         // シーン切り替え直後の1秒間は入力を受け付けない
-        if (Time.time - sceneStartTime < inputBlockTime)
-            return;
+        if (Time.time - sceneStartTime < inputBlockTime || command.IsBbutton(GetInputOB))
+        {
+            if (!IsFast)
+            {
+                return;
+            }
+        }
+        else
+        {
+            IsFast = true;
+        }
         // チュートリアルモード用処理
         if (isTutorialMode && !GameManager.Instance.Fast)
         {
@@ -374,6 +386,7 @@ public class Player : MonoBehaviour
 
                 UpdateArrow();
                 Changed = true;
+                isAction = true;
             }
         }
         if (command.DownAction(GetInputOB))
@@ -388,6 +401,7 @@ public class Player : MonoBehaviour
 
                 UpdateArrow();
                 Changed = true;
+                isAction = true;
             }
         }
         if (!command.UpAction(GetInputOB) && !command.DownAction(GetInputOB))
@@ -395,7 +409,7 @@ public class Player : MonoBehaviour
             Vertical = 0.0f;
             Horizontal = 0.0f;
         }
-        if (command.WasBbutton(GetInputOB))
+        if(command.WasBbutton(GetInputOB) && isAction)
         {
             wasShotReady = true;
         }
