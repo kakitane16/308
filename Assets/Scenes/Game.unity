@@ -972,6 +972,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 337553937212705092, guid: 6794f587db43ccf4995702191623340a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 337553937212705096, guid: 6794f587db43ccf4995702191623340a, type: 3}
+      propertyPath: G_Target
+      value: 
+      objectReference: {fileID: 3788463079389098277, guid: 3ed6ed83e14fbef498e6a0b0840ff75d, type: 3}
     - target: {fileID: 607513526926427883, guid: 6794f587db43ccf4995702191623340a, type: 3}
       propertyPath: m_Name
       value: sasa
