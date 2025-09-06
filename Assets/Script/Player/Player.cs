@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     private float maxIconDelayTime = 0.5f;    // 最大アイコン維持時間（秒）
     private float maxIconTimer = 0f;          // タイマー
     private GamePadCommand inputChecker;
+    private MenuUI menu;
     public Arrow arw;
     public Parabola parabola;
     public string ArrowTag = "Arrow"; // アローのターゲットタグ
@@ -85,7 +86,8 @@ public class Player : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         command = FindObjectOfType<GamePadCommand>();
-        isTutorialMode = GameManager.Instance.SelectedStageName == "stage000";
+        menu = FindObjectOfType<MenuUI>();
+        isTutorialMode = GameManager.Instance.SelectedStageName == "stage001";
         
         isShot = false;
         isAction = false;
@@ -146,6 +148,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if(menu.NowEsc)
+        {
+            return;
+        }
         if (!IsReady)
         {
             rb.velocity = Vector3.zero;
@@ -447,6 +453,7 @@ public class Player : MonoBehaviour
     {
         if(command.GetAKey(GetInputOB))
         {
+            forceStrength = 0.0f;
             b_turn = false;
             tutorialStep = 4; 
         }
