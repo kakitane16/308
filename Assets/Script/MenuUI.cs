@@ -16,6 +16,10 @@ public class MenuUI : MonoBehaviour
     public float animSpeed = 0.01f;   // îgÇÃë¨Ç≥
     private float timeCnt;
     int debugSelect;
+    private GamePadCommand command;
+    private int GetInputOB;
+    public bool NowEsc;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +50,10 @@ public class MenuUI : MonoBehaviour
         SetAllTextColor(imageRect3, new Color32(0, 0, 0, 255));
         SetAllTextColor(imageRect4, new Color32(255, 255, 255, 255));
         debugSelect = 0;
+        GetInputOB = (int)GameManager.Instance.inputDevice;
+
+        command = FindObjectOfType<GamePadCommand>();
+        NowEsc = false;
     }
 
     // Update is called once per frame
@@ -54,17 +62,25 @@ public class MenuUI : MonoBehaviour
         imageRect3.ForceMeshUpdate();
         imageRect4.ForceMeshUpdate();
         if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            NowEsc = true;
             ShowPanel();
-
-        if (Input.GetKeyDown(KeyCode.M))
+        }
+        if (command.UpAction(GetInputOB))
+        {
             debugSelect = 0;
-        
-        if (Input.GetKeyDown(KeyCode.N))
+        }
+        if (command.DownAction(GetInputOB))
+        {
             debugSelect = 1;
-
+        }
+        if(command.WasBbutton(GetInputOB))
+        {
+            NowEsc = false;
+        }
         SelectUI(debugSelect);
-
     }
+
     // ï\é¶ä÷êî
     public void ShowPanel()
     {
@@ -78,7 +94,6 @@ public class MenuUI : MonoBehaviour
     // îÒï\é¶ä÷êî
     public void HidePanel()
     {
-    
         GameObject obj = GameObject.Find("Menu");
 
         Transform panel = obj.transform.Find("M_BackGroundUI");
