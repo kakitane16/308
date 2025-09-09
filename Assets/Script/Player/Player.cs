@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         command = FindObjectOfType<GamePadCommand>();
         menu = FindObjectOfType<MenuUI>();
-        isTutorialMode = GameManager.Instance.SelectedStageName == "stage001";
+        isTutorialMode = GameManager.Instance.SelectedStageName == "stage000";
         
         isShot = false;
         isAction = false;
