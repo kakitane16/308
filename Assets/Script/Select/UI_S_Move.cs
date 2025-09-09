@@ -32,10 +32,11 @@ public class UI_S_Move : MonoBehaviour
     {
         if (GameManager.Instance.stageIndex != 0)
         {
-            CurrentPage = GameManager.Instance.stageIndex - 1;
-            //セレクト画面に戻った時のステージを設定
-            content.anchoredPosition = new Vector2(-PageWidth * CurrentPage, 0);
-            TargetPosition = new Vector2(-PageWidth * CurrentPage, 0);
+            // CurrentPageをステージ番号と同じにする
+            CurrentPage = GameManager.Instance.stageIndex;
+            // ページ位置を計算するときだけ -1 する
+            content.anchoredPosition = new Vector2(-PageWidth * (CurrentPage - 1), 0);
+            TargetPosition = new Vector2(-PageWidth * (CurrentPage - 1), 0);
         }
 
         //Padの初期化
@@ -51,6 +52,7 @@ public class UI_S_Move : MonoBehaviour
             medal.enabled = false;
         }
     }
+
 
 
     void Update()
@@ -85,14 +87,12 @@ public class UI_S_Move : MonoBehaviour
             //決定ボタン入力
             if (_command.IsBbutton(GetInputOB) && CurrentPage <= MaxPage)
             {
+                GameManager.Instance.stageIndex = CurrentPage;  // ← +1しない
+                GameManager.Instance.SelectedStageName = $"stage{CurrentPage:D3}";
 
-                // ステージ名をGameManagerに保存
-               GameManager.Instance.stageIndex = CurrentPage + 1; // stage001～stage015
-                GameManager.Instance.SelectedStageName = $"stage{GameManager.Instance.stageIndex:D3}";
-                //GameManager.Instance.SelectedStageName = $"stage{(CurrentPage + 1):D3}";
-
-                SceneManager.LoadScene(2); // ステージ読み込み先シーン名
+                SceneManager.LoadScene(2);
             }
+
         }
         else
         {
