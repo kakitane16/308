@@ -78,6 +78,7 @@ public class MenuUI : MonoBehaviour
         {
             NowEsc = false;
         }
+
         SelectUI(debugSelect);
     }
 
