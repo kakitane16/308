@@ -32,7 +32,7 @@ public class G_trampoline : MonoBehaviour
     {
 
         // 当たったObjectのタグがPlayerではないなら処理をしない
-        if (other.gameObject.tag != "Player") { return; }
+        //if (other.gameObject.tag != "Player") { return; }
 
         // PlayerのRigidbodyを取得
         Rigidbody playerRb = other.attachedRigidbody;
@@ -43,6 +43,8 @@ public class G_trampoline : MonoBehaviour
         Vector3 closetPoint = GetComponent<Collider>().ClosestPoint(playerRb.position); // ネタの触れた位置
         Vector3 normal = (playerRb.position - closetPoint).normalized;  // ベクトル取得
         Vector3 reflectDir = Vector3.Reflect(playerRb.velocity.normalized, normal); // 反射
+        reflectDir.x = Mathf.Abs(reflectDir.x);
+        reflectDir.x = -reflectDir.x;
         Vector3 Pvelocity = reflectDir * playerRb.velocity.magnitude; // 新しいベクトル　×　発射の強さ
 
         // 回転減衰を小さくして、回転が止まりにくくする
