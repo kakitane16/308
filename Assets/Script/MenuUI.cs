@@ -19,6 +19,8 @@ public class MenuUI : MonoBehaviour
     private GamePadCommand command;
     private int GetInputOB;
     public bool NowEsc;
+    private bool Esc;
+    float EscTimer = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +56,7 @@ public class MenuUI : MonoBehaviour
 
         command = FindObjectOfType<GamePadCommand>();
         NowEsc = false;
+        Esc = false;
     }
 
     // Update is called once per frame
@@ -76,7 +79,16 @@ public class MenuUI : MonoBehaviour
         }
         if(command.WasBbutton(GetInputOB))
         {
-            NowEsc = false;
+            Esc = true;
+        }
+        if(Esc)
+        {
+             EscTimer += Time.deltaTime;
+             if (EscTimer < 5.0f)
+             {
+                NowEsc = false;
+                Esc = false;
+             }
         }
 
         SelectUI(debugSelect);
