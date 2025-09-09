@@ -70,6 +70,9 @@ public class Player : MonoBehaviour
 
     public float lastShotPower;
 
+    private bool oldpoint;
+    private bool oldturn;
+
     // Start is called before the first frame update
     void OnEnable() // OnEnableに変更しました、Start時ではまだ生成されていない可能性があるため
     {
@@ -105,6 +108,8 @@ public class Player : MonoBehaviour
         lastShotPower = 0.0f;
         shotpower = 0.08f;
         IsFast = false;
+        oldpoint = false;
+        oldturn = false;
         // 以下は現状の開発環境での動作確認用の仮置きです、プレハブ生成版に開発が切り替わった段階で削除してください
 
         if (manager == null) return;
@@ -150,6 +155,8 @@ public class Player : MonoBehaviour
     {
         if(menu.NowEsc)
         {
+            wasShotReady = oldpoint;
+            b_turn = oldturn;
             return;
         }
         if (!IsReady)
@@ -184,7 +191,8 @@ public class Player : MonoBehaviour
 
         NormalUpdateLogic();
         //打ち出すまでの間だけ入る
-       
+        oldpoint = wasShotReady;
+        oldturn = b_turn;
     }
 
     //*********************************************************************

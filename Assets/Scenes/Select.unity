@@ -5736,6 +5736,7 @@ MonoBehaviour:
   imageRect4: {fileID: 0}
   animScale: 0.1
   animSpeed: 1
+  NowEsc: 0
 --- !u!114 &1228448796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8761,7 +8762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d95d248d8113b24abb2dc6951b1b0e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuUI: {fileID: 0}
+  menuUI: {fileID: 1228448795}
 --- !u!1 &1830533731
 GameObject:
   m_ObjectHideFlags: 0

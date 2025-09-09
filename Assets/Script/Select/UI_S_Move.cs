@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
-
-using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UI_S_Move : MonoBehaviour
@@ -24,6 +24,8 @@ public class UI_S_Move : MonoBehaviour
     public Image RightArrow;
     //メダルの表示管理
     public Image[] Medals;
+
+    public MenuUI menu;
 
     int MaxPage => GameManager.Instance != null ? GameManager.Instance.MaxPage : 0;  // GameManagerから参照
 
@@ -51,13 +53,18 @@ public class UI_S_Move : MonoBehaviour
         {
             medal.enabled = false;
         }
+
+        menu = FindObjectOfType<MenuUI>();
     }
 
 
 
     void Update()
     {
-
+        if (menu.NowEsc)
+        {
+            return;
+        }
         int ClearState = GameManager.Instance.clearstate;//クリアしたステージ
 
         //canvasのPos移動
