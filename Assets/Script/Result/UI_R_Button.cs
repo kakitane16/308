@@ -44,10 +44,31 @@ public class UI_R_Button : MonoBehaviour
 
         if (menuButtons.Count > 0)
         {
-            SelectButton(0); // 最初のボタンを選択状態に
+           // SelectButton(0); // 最初のボタンを選択状態に
+
+            StartCoroutine(SelectFirstButtonNextFrame());
         }
 
     }
+
+    private System.Collections.IEnumerator SelectFirstButtonNextFrame()
+    {
+        yield return null; // EventSystem 初期化待ち
+        yield return null;
+
+        var buttonObj = menuButtons[0].gameObject;
+        SelectButton(0);
+
+        // ButtonSize を直接呼び出す
+        var buttonSize = buttonObj.GetComponent<ButtonSize>();
+        if (buttonSize != null)
+        {
+            buttonSize.OnSelect(new BaseEventData(EventSystem.current));
+        }
+
+        Debug.Log("最初のボタンを選択して OnSelect を発火: " + menuButtons[0].name);
+    }
+
 
     private void Update()
     {
@@ -81,9 +102,15 @@ public class UI_R_Button : MonoBehaviour
     {
         if (menuButtons != null && menuButtons.Count > 0)
         {
-            EventSystem.current.SetSelectedGameObject(menuButtons[index].gameObject);
+            var buttonObj = menuButtons[index].gameObject;
+
+            // 一度選択をクリア
+            EventSystem.current.SetSelectedGameObject(null);
+            // 次のフレームで再選択
+            EventSystem.current.SetSelectedGameObject(buttonObj);
         }
     }
+
     // ====== 決定ボタンが押されたときに、現在選択中のボタン実行 ======
     private void HandleDecision()
     {
@@ -124,32 +151,6 @@ public class UI_R_Button : MonoBehaviour
                 rightSprite = rightSpriteBad;
                 break;
         }
-
-
-        //if (score <= 10)
-        //{
-        //    leftSprite = leftSpriteBad;
-        //}
-        //else if (score <= 70)
-        //{
-        //    leftSprite = leftSpriteNormal;
-        //}
-        //else
-        //{
-        //    leftSprite = leftSpritePerfect;
-        //}
-        //if (score <= 10)
-        //{
-        //    rightSprite = rightSpriteBad;
-        //}
-        //else if (score <= 70)
-        //{
-        //    rightSprite = rightSpriteNormal;
-        //}
-        //else
-        //{
-        //    rightSprite = rightSpritePerfect;
-        //}
 
         if (buttonLeft != null) buttonLeft.image.sprite = leftSprite;
         if (buttonRight != null) buttonRight.image.sprite = rightSprite;
