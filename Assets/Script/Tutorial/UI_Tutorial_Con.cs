@@ -15,20 +15,21 @@ public class UI_Tutorial_Con : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.C))
-        {
-            ShowPanel(1);
-        }
-        if(Input.GetKeyDown(KeyCode.V))
-        {
-            ShowPanel(2);
+        //debugóp
+        //if(Input.GetKeyDown(KeyCode.C))
+        //{
+        //    ShowPanel(1);
+        //}
+        //if(Input.GetKeyDown(KeyCode.V))
+        //{
+        //    ShowPanel(2);
 
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            ShowPanel(3);
+        //}
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    ShowPanel(3);
 
-        }
+        //}
     }
 
     // ï\é¶ä÷êî

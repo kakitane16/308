@@ -49,8 +49,9 @@ public class MenuUI : MonoBehaviour
         imageScaleOff = new Vector2(840, 140);
         timeCnt = 0;
 
+        SetAllTextColor(imageRect4, new Color32(0, 0, 0, 255));
         SetAllTextColor(imageRect3, new Color32(0, 0, 0, 255));
-        SetAllTextColor(imageRect4, new Color32(255, 255, 255, 255));
+        //SetAllTextColor(imageRect3, new Color32(255, 255, 255, 255));
         debugSelect = 0;
         GetInputOB = (int)GameManager.Instance.inputDevice;
 
@@ -125,8 +126,8 @@ public class MenuUI : MonoBehaviour
                 imageRect1.anchoredPosition = new Vector2(0, 100);
                 // サイズを変更
                 AnimUI(imageRect1);
-                SetAllTextColor(imageRect4,new Color32(0,0,0,255));
-                SetAllTextColor(imageRect3, new Color32(255, 255, 255, 255));
+                SetAllTextColor(imageRect4, new Color32(255, 255, 255, 255));
+                SetAllTextColor(imageRect3, new Color32(0, 0, 0, 255));
                 AnimTex(imageRect4);
                 //imageRect1.sizeDelta = new Vector2(500, 150);
                 //　QuitImageの位置とサイズを変更
@@ -139,8 +140,8 @@ public class MenuUI : MonoBehaviour
                 imageRect2.anchoredPosition = new Vector2(0, -100);
                 //imageRect2.sizeDelta = new Vector2(500, 150);
                 AnimUI(imageRect2);
-                SetAllTextColor(imageRect3, new Color32(0, 0, 0, 255));
-                SetAllTextColor(imageRect4, new Color32(255,255,255, 255));
+                SetAllTextColor(imageRect3, new Color32(255,255,255, 255));
+                SetAllTextColor(imageRect4, new Color32(0, 0, 0, 255));
                 AnimTex(imageRect3);
                 imageRect1.anchoredPosition = new Vector2(0, 80);
                // imageRect3.anchoredPosition = new Vector2(0, 80);
