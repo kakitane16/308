@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     public Parabola parabola;
     public string ArrowTag = "Arrow"; // アローのターゲットタグ
     private GamePadCommand command;
+    private ChangePlay playing;
     public Vector3 velocity;
     private float MaxPower = 20f;
     public float RotateSpeed;
@@ -89,6 +90,7 @@ public class Player : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         command = FindObjectOfType<GamePadCommand>();
+        playing = FindObjectOfType<ChangePlay>();
         menu = FindObjectOfType<MenuUI>();
         isTutorialMode = GameManager.Instance.SelectedStageName == "stage000";
         
@@ -137,6 +139,7 @@ public class Player : MonoBehaviour
         }
 
         arw.gameObject.SetActive(false);
+        playing.gameObject.SetActive(false);
 
         // マネージャーのコンポーネントを取得
         if (manager == null) manager = GameObject.FindObjectOfType<GameManager>();
@@ -335,6 +338,8 @@ public class Player : MonoBehaviour
 
         if (!isShot)
         {
+            playing.gameObject.SetActive(true);
+            playing.ChangeUI(0);
             if (Changed && parabola != null)
             {
                 parabola.ShowParabora();
@@ -349,6 +354,7 @@ public class Player : MonoBehaviour
             }
             else if (wasShotReady && !b_turn)
             {
+                playing.ChangeUI(1);
                 if (skipFirstShotFrame)
                 {
                     Shot();
@@ -366,6 +372,7 @@ public class Player : MonoBehaviour
             }
             else if (wasShotReady && b_turn)
             {
+                playing.ChangeUI(2);
                 ResetShot();
                 //打ち出し
                 if (command.IsBbutton(GetInputOB))
@@ -383,6 +390,10 @@ public class Player : MonoBehaviour
                 }
                 //animator.SetBool("isMove", false);
             }
+        }
+        else
+        {
+            playing.ChangeUI(3);
         }
     }
     private void ShotAngle()
