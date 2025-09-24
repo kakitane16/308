@@ -26,8 +26,8 @@ public class FinalImage : MonoBehaviour
         ITA.sprite = Ita;
 
         //ŽõŽi‚Ì•`‰æ
-        RECRUIT.rectTransform.anchoredPosition = new Vector2(600.0f, -350.0f);
-        RECRUIT.rectTransform.sizeDelta = new Vector2(400.0f, 300.0f);
+        RECRUIT.rectTransform.anchoredPosition = new Vector2(600.0f, -380.0f);
+        RECRUIT.rectTransform.sizeDelta = new Vector2(350.0f, 250.0f);
 
         //‚È‚ñ‚ÌŽõŽi‚ð•\Ž¦‚·‚é‚©
         switch (RecruitPoint)
