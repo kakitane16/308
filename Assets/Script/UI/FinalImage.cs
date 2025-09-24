@@ -21,13 +21,13 @@ public class FinalImage : MonoBehaviour
         RecruitPoint = GameManager.Instance.Points;
 
         //”Â‚Ì•`‰æ
-        ITA.rectTransform.anchoredPosition = new Vector2(600.0f, -330.0f);
-        ITA.rectTransform.sizeDelta = new Vector2(550.0f, 400.0f);
+        ITA.rectTransform.anchoredPosition = new Vector2(750.0f, -400.0f);
+        ITA.rectTransform.sizeDelta = new Vector2(450.0f, 290.0f);
         ITA.sprite = Ita;
 
         //ŽõŽi‚Ì•`‰æ
-        RECRUIT.rectTransform.anchoredPosition = new Vector2(600.0f, -380.0f);
-        RECRUIT.rectTransform.sizeDelta = new Vector2(350.0f, 250.0f);
+        RECRUIT.rectTransform.anchoredPosition = new Vector2(750.0f, -430.0f);
+        RECRUIT.rectTransform.sizeDelta = new Vector2(250.0f, 200.0f);
 
         //‚È‚ñ‚ÌŽõŽi‚ð•\Ž¦‚·‚é‚©
         switch (RecruitPoint)

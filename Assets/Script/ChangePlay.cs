@@ -14,7 +14,7 @@ public class ChangePlay : MonoBehaviour
     
     public void ChangeUI(int i)
     {
-        playing.rectTransform.anchoredPosition = new Vector2(600.0f, 350.0f);
+        playing.rectTransform.anchoredPosition = new Vector2(750.0f, 400.0f);
         playing.rectTransform.sizeDelta = new Vector2(500.0f, 300.0f);
         switch (i)
         {
